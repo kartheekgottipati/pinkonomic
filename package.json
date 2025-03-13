@@ -30,7 +30,7 @@
     "@types/react-dom": "^19.0.1",
     "@types/react-scrollspy": "^3.3.9",
     "react-router-devtools": "^1.1.6",
-    "tailwindcss": "^4.0.9",
+    "tailwindcss": "^4.0.14",
     "typescript": "^5.7.2",
     "vite": "^6.2.0",
     "vite-tsconfig-paths": "^5.1.4"
