@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@makotot/ghostui": "^2.0.0",
-    "@react-router/node": "^7.2.0",
+    "@react-router/node": "^7.6.0",
     "@react-router/serve": "^7.2.0",
     "@types/recharts": "^1.8.29",
     "framer-motion": "^12.4.1",
