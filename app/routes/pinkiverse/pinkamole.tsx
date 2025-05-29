@@ -10,10 +10,17 @@ const PinkAMolePage = () => {
       image={pinkAMoleImage}
       platforms="Available on: Telegram"
       playLinks={[
-        { icon: <FaTelegram />, label: "Play on Telegram", href: "https://t.me/pinkamole_bot" },
+        { icon: <FaTelegram />, label: "Play Pink-a-Mole on Telegram", href: "https://t.me/pinkamole_bot" },
       ]}
     />
   );
 };
+
+export function meta() {
+  return [
+    { title: "Pink-a-Mole Game | Pinkonomic" },
+    { name: "description", content: "Play Pink-a-Mole: Whack platypuses, dodge astronauts! Enjoy this chaotic, fun whack-a-mole game in the Pinkiverse on Telegram." }
+  ];
+}
 
 export default PinkAMolePage;

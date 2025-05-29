@@ -8,7 +8,7 @@ const HomeButton = () => (
     whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.95 }}
   >
-    <Link to="/">
+    <Link to="/" aria-label="Go to homepage" title="Go to homepage">
       <FaHome className="text-2xl" />
     </Link>
   </motion.div>

@@ -67,6 +67,8 @@ const Teleport = forwardRef<HTMLDivElement>((props, ref) => (
         <Link
           to={TELEPORT_APP_URL}
           className="inline-flex items-center justify-center w-full px-6 md:px-8 py-3 md:py-4 rounded-lg text-lg md:text-xl font-semibold bg-gradient-to-r from-pink-500 to-blue-500 text-white hover:from-pink-600 hover:to-blue-600 transition-all"
+          aria-label="Open the Teleport App to transfer PINK tokens between Moonbeam and Base"
+          title="Open the Teleport App to transfer PINK tokens between Moonbeam and Base"
         >
           <FaExternalLinkAlt className="mr-2" />
           Open Teleport App

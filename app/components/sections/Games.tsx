@@ -113,6 +113,8 @@ const GameCard = ({ game, index }: { game: any; index: number }) => (
       <Link
         to={game.link}
         className="px-6 md:px-8 py-2 md:py-3 rounded-lg bg-gradient-to-r from-pink-500 to-blue-500 text-white text-sm md:text-md font-semibold hover:shadow-lg transition"
+        aria-label={`Learn more about ${game.name} - ${game.tagline}`}
+        title={`Learn more about ${game.name}`}
       >
         Learn More
       </Link>

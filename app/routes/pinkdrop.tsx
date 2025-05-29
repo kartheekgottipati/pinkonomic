@@ -42,6 +42,7 @@ const PinkDrop = forwardRef<HTMLDivElement>((props, ref) => (
               title="PinkDrop Game"
               className="w-full h-full rounded-3xl"
               style={{ display: "block" }}
+              aria-label="Play PinkDrop blockchain game"
             ></iframe>
 
             {/* ✨ Subtle Glow Behind iFrame */}
@@ -76,3 +77,14 @@ const PinkDrop = forwardRef<HTMLDivElement>((props, ref) => (
 
 PinkDrop.displayName = "PinkDrop";
 export default PinkDrop;
+
+export function meta() {
+  return [
+    { title: "Play PinkDrop | Pinkonomic" },
+    {
+      name: "description",
+      content:
+        "Play PinkDrop, the addictive blockchain game in the Pinkonomic ecosystem. Merge parachains, climb leaderboards, and enjoy the Pinkiverse!",
+    },
+  ];
+}

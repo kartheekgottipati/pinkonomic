@@ -10,10 +10,17 @@ const PinknessOverdrivePage = () => {
       image={pinknessOverdriveImage}
       platforms="Available on: Desktop Browsers Only"
       playLinks={[
-        { icon: <FaGlobe />, label: "Play in Browser", href: "https://pink.racing" },
+        { icon: <FaGlobe />, label: "Play Pinkness Overdrive in Browser", href: "https://pink.racing" },
       ]}
     />
   );
 };
+
+export function meta() {
+  return [
+    { title: "Pinkness Overdrive Game | Pinkonomic" },
+    { name: "description", content: "Play Pinkness Overdrive: Race through snowy terrain, dodge obstacles, and climb the leaderboard in this high-speed Pinkiverse browser game!" }
+  ];
+}
 
 export default PinknessOverdrivePage;

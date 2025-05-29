@@ -139,6 +139,8 @@ const SwapButton = () => {
         onClick={() => setIsOpen((prev) => !prev)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
+        aria-label={isOpen ? "Close swap widget" : "Open swap widget"}
+        title={isOpen ? "Close swap widget" : "Open swap widget"}
       >
         {isOpen ? <FaTimes /> : <><FaExchangeAlt className="mr-2" /> Swap</>}
       </motion.button>

@@ -38,9 +38,10 @@ export const Sidebar: React.FC<NavigationProps> = ({ sections, currentElementInd
             `}
             whileTap={{ scale: 0.95 }}
             onClick={() => handleSectionClick(section.id)}
+            aria-label={`Go to ${section.label} section`}
+            title={`Go to ${section.label} section`}
           >
             {section.icon}
-
             {/* Tooltip - Only visible on hover */}
             <motion.span
               className="absolute left-full ml-4 px-3 py-1 rounded text-xs bg-black/50 backdrop-blur-sm text-white opacity-0 
@@ -76,6 +77,8 @@ export const MobileNav: React.FC<NavigationProps> = ({ sections, currentElementI
             className={`flex flex-col items-center justify-center text-xs p-2 rounded-md transition-all
               ${currentElementIndexInViewport === idx ? "text-pink-500" : "text-white/60 hover:text-white"}`}
             onClick={() => handleSectionClick(section.id)}
+            aria-label={`Go to ${section.label} section`}
+            title={`Go to ${section.label} section`}
           >
             {section.icon}
             <span className="text-[10px] sm:text-xs md:text-sm">{section.label}</span>

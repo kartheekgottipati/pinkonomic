@@ -57,6 +57,8 @@ const Partnerships = forwardRef<HTMLDivElement>((props, ref) => (
             className="relative flex flex-col items-center text-center w-28 md:w-40"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
+            aria-label={`Visit ${partner.name} website`}
+            title={`Visit ${partner.name} website`}
           >
             {/* Glowing Logo */}
             <motion.div 

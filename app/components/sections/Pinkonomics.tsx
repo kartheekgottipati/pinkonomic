@@ -173,6 +173,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-200"
+                  aria-label={`View ${contract.name} on block explorer`}
+                  title={`View ${contract.name} on block explorer`}
                 >
                   <FaExternalLinkAlt size={18} />
                 </a>
@@ -198,6 +200,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-gray-200"
+                  aria-label={`View ${contract.name} on block explorer`}
+                  title={`View ${contract.name} on block explorer`}
                 >
                   <FaExternalLinkAlt size={18} />
                 </a>
@@ -206,7 +210,6 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
         ))}
       </motion.div>
-
       {/* 🚀 External Buttons */}
       <div className="mt-16 w-full flex flex-col md:flex-row md:justify-center gap-4 md:gap-6 px-4">
         {[
@@ -222,8 +225,10 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             className={`w-full md:w-auto px-6 py-3 text-center rounded-lg text-lg font-semibold ${btn.bg} text-white ${btn.bgHover} hover:shadow-xl transition-all flex items-center justify-center space-x-2`}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
+            aria-label={`Visit ${btn.label}`}
+            title={`Visit ${btn.label}`}
           >
-            <span>{btn.label}</span> {/* Removed icon */}
+            <span>{btn.label}</span>
           </motion.a>
         ))}
       </div>

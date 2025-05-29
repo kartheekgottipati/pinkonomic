@@ -21,6 +21,8 @@ import Exchanges from "~/components/sections/Exchanges";
 import NFTSection from "~/components/sections/NFTSection";
 import type { SectionItem } from "~/types";
 
+
+
 const sections: SectionItem[] = [
   { id: "hero", label: "Hero", icon: <FaHome size={20} /> },
   { id: "pinkonomics", label: "Pinkonomics", icon: <FaChartLine size={20} /> },
@@ -41,12 +43,20 @@ export default function Home() {
         <div className="relative overflow-hidden">
           {/* Desktop Sidebar */}
           <div className="lg:block hidden" data-cy="nav-wrapper">
-            <Sidebar sections={sections} currentElementIndexInViewport={currentElementIndexInViewport} />
+            <Sidebar
+              sections={sections}
+              currentElementIndexInViewport={currentElementIndexInViewport}
+              aria-label="Main site navigation"
+            />
           </div>
 
           {/* Mobile Navigation */}
           <div className="lg:hidden fixed top-0 left-0 right-0 z-50" data-cy="nav-wrapper">
-            <MobileNav sections={sections} currentElementIndexInViewport={currentElementIndexInViewport} />
+            <MobileNav
+              sections={sections}
+              currentElementIndexInViewport={currentElementIndexInViewport}
+              aria-label="Mobile site navigation"
+            />
           </div>
 
           {/* Main content area */}
@@ -79,4 +89,11 @@ export default function Home() {
       )}
     </Scrollspy>
   );
+}
+
+export function meta() {
+  return [
+    { title: "Pinkonomic | The PINK Ecosystem Hub" },
+    { name: "description", content: "Discover Pinkonomic: the hub for PINK token, games, NFTs, exchanges, partnerships, and more. Explore the Pinkiverse and join the community!" }
+  ];
 }

@@ -100,6 +100,8 @@ const GameButton = ({ icon, label, href }: { icon: JSX.Element; label: string; h
     className="inline-flex items-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-pink-500 hover:bg-pink-600 text-white font-medium text-sm sm:text-base shadow-md transition-all duration-300"
     whileHover={{ scale: 1.05, boxShadow: "0 0 12px rgba(236, 72, 153, 0.4)" }}
     whileTap={{ scale: 0.95 }}
+    aria-label={`Play ${label}`}
+    title={`Play ${label}`}
   >
     {icon}
     <span className="ml-2">{label}</span>

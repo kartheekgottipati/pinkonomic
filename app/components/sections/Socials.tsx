@@ -54,6 +54,8 @@ const Socials = forwardRef<HTMLDivElement>((props, ref) => (
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+            aria-label={`Join PINK on ${social.name}`}
+            title={`Join PINK on ${social.name}`}
           >
             {/* Social Icon */}
             <Icon className="text-5xl text-white" />

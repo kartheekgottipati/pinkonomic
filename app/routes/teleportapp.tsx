@@ -42,6 +42,7 @@ const TeleportApp = forwardRef<HTMLDivElement>((props, ref) => (
               title="Pink Teleports"
               className="w-full h-full rounded-3xl"
               style={{ display: "block" }}
+              aria-label="Teleport your PINK tokens across chains"
             ></iframe>
 
             {/* 💫 Subtle Glow for Depth */}
@@ -73,6 +74,13 @@ const TeleportApp = forwardRef<HTMLDivElement>((props, ref) => (
     </div>
   </section>
 ));
+
+export function meta() {
+  return [
+    { title: "Teleport $PINK | Pinkonomic" },
+    { name: "description", content: "Teleport your $PINK tokens easily across chains using the Pinkonomic Teleport app. Fast, secure, and seamless cross-chain transfers." }
+  ];
+}
 
 TeleportApp.displayName = "TeleportApp";
 export default TeleportApp;
