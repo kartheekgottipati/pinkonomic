@@ -138,7 +138,7 @@ const GamePortal = ({
 		<motion.div
 			className="absolute inset-0 flex flex-col justify-end bg-gradient-to-b from-transparent to-black p-4 md:p-6 opacity-100 md:opacity-0 group-hover:opacity-100 transition-all"
 		>
-			<h3 className="text-2xl md:text-4xl font-bold text-pink-400">{game.name}</h3>
+			<h2 className="text-2xl md:text-4xl font-bold text-pink-400">{game.name}</h2>
 			<p className="text-sm md:text-lg text-gray-300">{game.tagline}</p>
 
 			{/* 🔗 Play Now Button - Always Visible on Small Screens */}
@@ -147,10 +147,10 @@ const GamePortal = ({
 					<Link
 						to={game.link}
 						className="block w-full px-4 py-2 md:px-6 md:py-3 rounded-lg bg-gradient-to-r from-pink-500 to-blue-500 text-white text-sm md:text-lg font-semibold hover:shadow-lg transition text-center"
-						aria-label={`Learn more about ${game.name} - ${game.tagline}`}
-						title={`Learn more about ${game.name}`}
+						aria-label={`Play ${game.name} now`}
+						title={`Play ${game.name} now`}
 					>
-						Enter the Portal
+						{`Play ${game.name}`}
 					</Link>
 				</motion.div>
 			)}

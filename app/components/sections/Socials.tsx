@@ -4,11 +4,11 @@ import { FaTelegram, FaTwitter, FaReddit, FaDiscord } from "react-icons/fa";
 import { PiWaveSquareBold } from "react-icons/pi";
 
 const socials = [
-  { name: "Telegram", icon: FaTelegram, url: "https://t.me/PINKonomic", color: "bg-blue-500", shadow: "shadow-blue-500/50" },
-  { name: "Twitter (X)", icon: FaTwitter, url: "https://x.com/pinkonomic", color: "bg-gray-800", shadow: "shadow-gray-800/50" },
-  { name: "Reddit", icon: FaReddit, url: "https://www.reddit.com/r/pinkonomic/", color: "bg-orange-500", shadow: "shadow-orange-500/50" },
-  { name: "Warpcast", icon: PiWaveSquareBold, url: "https://warpcast.com/pinkonomic", color: "bg-purple-600", shadow: "shadow-purple-600/50" },
-  { name: "Discord", icon: FaDiscord, url: "https://discord.com/invite/Hn7xKSxZPb", color: "bg-indigo-500", shadow: "shadow-indigo-500/50" },
+  { name: "Telegram", icon: FaTelegram, url: "https://t.me/PINKonomic", color: "bg-blue-700", shadow: "shadow-blue-700/50" },
+  { name: "Twitter (X)", icon: FaTwitter, url: "https://x.com/pinkonomic", color: "bg-gray-900", shadow: "shadow-gray-900/50" },
+  { name: "Reddit", icon: FaReddit, url: "https://www.reddit.com/r/pinkonomic/", color: "bg-[#B80000]", shadow: "shadow-red-900/50" },
+  { name: "Warpcast", icon: PiWaveSquareBold, url: "https://warpcast.com/pinkonomic", color: "bg-purple-900", shadow: "shadow-purple-900/50" },
+  { name: "Discord", icon: FaDiscord, url: "https://discord.com/invite/Hn7xKSxZPb", color: "bg-indigo-900", shadow: "shadow-indigo-900/50" },
 ];
 
 const Socials = forwardRef<HTMLDivElement>((props, ref) => (
@@ -61,7 +61,7 @@ const Socials = forwardRef<HTMLDivElement>((props, ref) => (
             <Icon className="text-5xl text-white" />
 
             {/* Social Name */}
-            <p className="mt-4 text-lg md:text-xl font-semibold">{social.name}</p>
+            <p className="mt-4 text-lg md:text-xl font-semibold text-white">{social.name}</p>
           </motion.a>
         );
       })}

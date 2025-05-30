@@ -165,6 +165,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   onClick={() => copyToClipboard(contract.address)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`Copy ${contract.name} address to clipboard`}
+                  title={`Copy ${contract.name} address to clipboard`}
                 >
                   {copied === contract.address ? <FaCheck size={18} /> : <FaCopy size={18} />}
                 </motion.button>
@@ -192,6 +194,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   onClick={() => copyToClipboard(contract.address)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`Copy ${contract.name} address to clipboard`}
+                  title={`Copy ${contract.name} address to clipboard`}
                 >
                   {copied === contract.address ? <FaCheck size={18} /> : <FaCopy size={18} />}
                 </motion.button>

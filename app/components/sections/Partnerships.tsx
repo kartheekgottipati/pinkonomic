@@ -65,7 +65,11 @@ const Partnerships = forwardRef<HTMLDivElement>((props, ref) => (
               className="w-24 md:w-40 h-24 md:h-40 flex items-center justify-center rounded-full shadow-lg bg-black bg-opacity-60 transition duration-300"
               whileHover={{ scale: 1.1, rotate: 3 }}
             >
-              <img src={partner.image} alt={partner.name} className="w-16 md:w-28 h-16 md:h-28 object-contain" />
+              <img
+                src={partner.image}
+                alt=""
+                className="w-16 md:w-28 h-16 md:h-28 object-contain"
+              />
             </motion.div>
             {/* Partner Name */}
             <p className="text-white text-sm md:text-lg font-medium mt-2 md:mt-3 opacity-80">{partner.name}</p>
