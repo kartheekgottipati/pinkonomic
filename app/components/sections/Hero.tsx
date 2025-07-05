@@ -8,7 +8,7 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
   <section
     id="hero"
     ref={ref}
-    className="relative min-h-screen flex items-center bg-black overflow-hidden"
+    className="relative min-h-screen flex items-center bg-gradient-to-b from-pink-500/10 via-purple-500/5 to-black overflow-hidden"
   >
 
     <div className="absolute inset-0 bg-black -z-10"></div>
@@ -215,14 +215,12 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
                 className="w-[300px] h-[300px] md:w-[380px] md:h-[380px] flex items-center justify-center relative z-10"
                 style={{ transformStyle: "preserve-3d" }}
               >
-
                 <div className="relative w-full h-full">
                   <img
                     src={PinkLogoCircular}
                     alt="PINK Logo"
                     className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(236,72,153,0.6)]"
                   />
-
 
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent rounded-full pointer-events-none"
@@ -238,21 +236,6 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
                   />
                 </div>
               </motion.div>
-
-
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={`ring-${i}`}
-                  className={`absolute rounded-full border ${i === 0 ? 'border-pink-500/40' : i === 1 ? 'border-purple-500/30' : 'border-blue-500/20'}`}
-                  style={{
-                    inset: `${15 + i * 20}%`,
-                    filter: `blur(${i === 0 ? 0 : 1}px)`
-                  }}
-                  animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-                  transition={{ duration: 30 + i * 10, repeat: Infinity, ease: "linear" }}
-                />
-              ))}
-
 
               <motion.div
                 className="absolute text-pink-500 font-bold text-sm z-30"
@@ -284,54 +267,7 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
                   HODL
                 </motion.div>
               </motion.div>
-
-
-              {[...Array(12)].map((_, index) => {
-                const orbitSize = 230 + (index % 4) * 15;
-                const size = 2 + (index % 3) * 2;
-                const speed = 15 + (index % 5) * 8;
-                const delay = index * 0.5;
-                const color = index % 3 === 0
-                  ? "bg-pink-500"
-                  : index % 3 === 1
-                    ? "bg-purple-400"
-                    : "bg-blue-400";
-                const shadowColor = index % 3 === 0
-                  ? "rgba(236, 72, 153, 0.7)"
-                  : index % 3 === 1
-                    ? "rgba(192, 132, 252, 0.7)"
-                    : "rgba(96, 165, 250, 0.7)";
-
-                return (
-                  <motion.div
-                    key={`orbit-dot-${index}`}
-                    className={`absolute rounded-full ${color}`}
-                    style={{
-                      width: `${size}px`,
-                      height: `${size}px`,
-                      top: "50%",
-                      left: "50%",
-                      marginTop: `-${size / 2}px`,
-                      marginLeft: `-${size / 2}px`,
-                      boxShadow: `0 0 ${size * 3}px ${shadowColor}`,
-                      zIndex: 25,
-                      transformOrigin: "center center",
-                      transform: `rotate(${index * 30}deg) translateX(${orbitSize}px)`,
-                    }}
-                    animate={{
-                      rotate: 360
-                    }}
-                    transition={{
-                      duration: speed,
-                      repeat: Infinity,
-                      ease: "linear",
-                      delay
-                    }}
-                  />
-                );
-              })}
             </div>
-
 
             <div className="absolute -inset-10 -z-10 opacity-40">
               {[...Array(12)].map((_, i) => (
