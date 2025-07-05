@@ -144,8 +144,8 @@ const SwapButton = () => {
         aria-label={isOpen ? "Close swap widget" : "Open swap widget"}
         title={isOpen ? "Close swap widget" : "Open swap widget"}
       >
-        {/* Theme-consistent gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-500/80 via-pink-400/70 to-blue-500/70 opacity-80" />
+        {/* Replace gradient with solid background */}
+        <div className="absolute inset-0 bg-pink-500/80 opacity-80" />
         
         {/* Simplified button content */}
         <div className="relative flex items-center justify-center z-10">
