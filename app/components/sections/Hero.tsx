@@ -8,7 +8,7 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
   <section
     id="hero"
     ref={ref}
-    className="relative min-h-screen flex items-center bg-black overflow-hidden"
+    className="relative min-h-screen flex items-center bg-gradient-to-b from-pink-500/10 via-purple-500/5 to-black overflow-hidden"
   >
 
     <div className="absolute inset-0 bg-black -z-10"></div>
