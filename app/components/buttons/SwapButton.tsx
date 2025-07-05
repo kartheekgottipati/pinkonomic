@@ -15,7 +15,6 @@ const SwapButton = () => {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // Define the config object
   const squidConfig = {
     integratorId: import.meta.env.VITE_SQUID_INTEGRATOR_ID,
     "theme": {
@@ -127,7 +126,7 @@ const SwapButton = () => {
     "loadPreviousStateFromLocalStorage": true
   };
 
-  // Construct the iframe src dynamically
+
   const iframeSrc = `https://studio.squidrouter.com/iframe?config=${encodeURIComponent(JSON.stringify(squidConfig))}`;
 
   if (!isMediumOrLarger) return null;
@@ -135,42 +134,77 @@ const SwapButton = () => {
   return (
     <>
       <motion.button
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center px-6 py-3 bg-gradient-to-r from-pink-500 to-blue-500 text-white text-lg font-semibold rounded-lg shadow-lg hover:shadow-pink-400/30 transition-all"
+        className="fixed bottom-6 right-6 z-50 group overflow-hidden flex items-center justify-center px-5 py-2.5 
+                  bg-black/70 backdrop-blur-md border border-pink-500/30 text-white font-medium 
+                  rounded-xl shadow-lg hover:shadow-pink-500/30 transition-all duration-300"
         onClick={() => setIsOpen((prev) => !prev)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.97 }}
         aria-label={isOpen ? "Close swap widget" : "Open swap widget"}
         title={isOpen ? "Close swap widget" : "Open swap widget"}
       >
-        {isOpen ? <FaTimes /> : <><FaExchangeAlt className="mr-2" /> Swap</>}
+
+        <div className="absolute inset-0 bg-pink-500/80 opacity-80" />
+
+
+        <div className="relative flex items-center justify-center z-10">
+          {isOpen ? (
+            <FaTimes className="text-lg" />
+          ) : (
+            <>
+              <FaExchangeAlt className="mr-2 text-sm" />
+              <span className="font-medium">SWAP</span>
+            </>
+          )}
+        </div>
       </motion.button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed bottom-20 right-6 z-50 w-[430px] h-[684px] bg-black bg-opacity-50 backdrop-blur-lg border border-pink-500/20 shadow-lg rounded-lg overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-20 right-6 z-50 w-[430px] h-[684px] bg-black/80 backdrop-blur-xl 
+                      border border-pink-500/30 shadow-2xl rounded-2xl overflow-hidden"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: "spring", damping: 20 }}
           >
+
+            <div className="absolute inset-0 border border-pink-500/30 rounded-2xl z-0" />
+
             {isLoading && !error && (
-              <div className="absolute inset-0 flex items-center justify-center text-white">
-                Loading...
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/80 backdrop-blur-md z-10">
+                <motion.div
+                  className="w-12 h-12 border-4 border-t-pink-500 border-r-transparent border-b-blue-500 border-l-transparent rounded-full"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                />
+                <p className="mt-4 text-gray-300">Loading swap widget...</p>
               </div>
             )}
             {error && (
-              <div className="absolute inset-0 flex items-center justify-center text-white">
-                Error: {error}
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/90 z-10 p-6">
+                <span className="text-pink-500 text-4xl mb-4">!</span>
+                <h3 className="text-xl mb-2">Connection Error</h3>
+                <p className="text-center text-gray-400 mb-4">{error}</p>
+                <button
+                  className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-lg transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close
+                </button>
               </div>
             )}
-            <iframe
-              title="squid_widget"
-              width="100%"
-              height="100%"
-              src={iframeSrc}
-              className="w-full h-full border-none"
-              onLoad={() => setIsLoading(false)}
-            />
+            <div className="relative w-full h-full z-[1]">
+              <iframe
+                title="squid_widget"
+                width="100%"
+                height="100%"
+                src={iframeSrc}
+                className="w-full h-full border-none"
+                onLoad={() => setIsLoading(false)}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

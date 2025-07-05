@@ -1,15 +1,42 @@
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { FaHome } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 
-const HomeButton = () => (
+interface HomeButtonProps {
+  "aria-label"?: string;
+  title?: string;
+}
+
+const HomeButton = (props: HomeButtonProps) => (
   <motion.div
-    className="fixed top-6 left-6 z-50 flex items-center justify-center p-3 bg-gradient-to-r from-pink-500 to-blue-500 text-white rounded-full shadow-lg hover:shadow-pink-400/30 transition-all"
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.95 }}
+    className="fixed top-6 left-6 z-50"
+    initial={{ opacity: 0, x: -10 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.5, ease: "easeOut" }}
   >
-    <Link to="/" aria-label="Go to homepage" title="Go to homepage">
-      <FaHome className="text-2xl" />
+    <Link
+      to="/"
+      aria-label={props["aria-label"] || "Return to homepage"}
+      title={props.title || "Return to homepage"}
+      className="group flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md border border-pink-500/30 
+                 rounded-full text-white hover:bg-black/60 hover:border-pink-500/50 transition-all duration-300"
+    >
+      <motion.div
+        className="text-pink-400 group-hover:text-pink-300"
+        whileHover={{ x: -2 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <FaChevronLeft size={14} />
+      </motion.div>
+
+      <motion.span
+        className="text-sm font-medium opacity-80 group-hover:opacity-100"
+        initial={{ width: 0, opacity: 0 }}
+        animate={{ width: "auto", opacity: 0.8 }}
+        transition={{ duration: 0.3 }}
+      >
+        Home
+      </motion.span>
     </Link>
   </motion.div>
 );

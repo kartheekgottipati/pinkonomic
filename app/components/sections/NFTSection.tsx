@@ -1,75 +1,174 @@
 import { motion } from "framer-motion";
 import { forwardRef } from "react";
-import PinkPassImage from "~/images/pinkpass.avif"; // Ensure correct path
-import PinkPlatypusImage from "~/images/playtypus.png"; // Ensure correct path
+import PinkPassImage from "~/images/pinkpass.avif";
+import PinkPlatypusImage from "~/images/playtypus.png";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { HiSparkles } from "react-icons/hi";
 
-const NFT_COLLECTIONS = [
-    {
-        name: "PINK Pass Collection",
-        description: "Your exclusive access to the PINK ecosystem. Holders enjoy benefits, early access, and more!",
-        image: PinkPassImage,
-        link: "https://opensea.io/collection/pink-pass-1",
-    },
-    {
-        name: "PINK Platypuses",
-        description: "The legendary Platypuses of PINK! A high-utility collection with gaming integrations & community perks.",
-        image: PinkPlatypusImage,
-        link: "https://opensea.io/collection/pink-platypuses",
-    },
+
+interface NFTCollection {
+  name: string;
+  description: string;
+  image: string;
+  link: string;
+  stats?: {
+    items?: number;
+    owners?: number;
+    floorPrice?: string;
+  };
+}
+
+const NFT_COLLECTIONS: NFTCollection[] = [
+  {
+    name: "PINK Pass Collection",
+    description: "Your exclusive access to the PINK ecosystem. Holders enjoy benefits, early access, and more!",
+    image: PinkPassImage,
+    link: "https://opensea.io/collection/pink-pass-1",
+    stats: {
+      items: 777,
+      owners: 450,
+      floorPrice: "0.12 ETH"
+    }
+  },
+  {
+    name: "PINK Platypuses",
+    description: "The legendary Platypuses of PINK! A high-utility collection with gaming integrations & community perks.",
+    image: PinkPlatypusImage,
+    link: "https://opensea.io/collection/pink-platypuses",
+    stats: {
+      items: 5000,
+      owners: 2100,
+      floorPrice: "0.08 ETH"
+    }
+  },
 ];
 
 const NFTSection = forwardRef<HTMLDivElement>((props, ref) => (
-    <section
-        id="nft"
-        ref={ref}
-        className="relative flex flex-col items-center justify-center min-h-screen px-6 md:px-16 py-24 bg-black overflow-hidden"
-    >
-        {/* 🔥 Background Glow */}
-        <div className="absolute inset-0 bg-gradient-to-b from-pink-700/50 to-black opacity-80 -z-10"></div>
+  <section
+    id="nft"
+    ref={ref}
+    className="relative py-24 overflow-hidden bg-black"
+  >
 
-        {/* 🚀 Section Title */}
-        <motion.h2
-            className="text-4xl md:text-5xl font-extrabold uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-blue-400 text-center drop-shadow-xl"
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+    <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] bg-repeat opacity-5 -z-10"></div>
+    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-pink-900/10 via-transparent to-black -z-5"></div>
+
+
+    <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-pink-500/10 blur-[120px]"></div>
+    <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-[100px]"></div>
+
+    <div className="container mx-auto px-4 max-w-6xl">
+
+      <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="inline-block"
         >
-            PINK NFT Collection
-        </motion.h2>
+          <span className="flex items-center justify-center gap-3">
+            <HiSparkles className="text-pink-500 text-3xl" />
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
+              PINK <span className="text-pink-500">NFTs</span>
+            </h2>
+            <HiSparkles className="text-pink-500 text-3xl" />
+          </span>
+          <div className="h-1 w-1/2 bg-gradient-to-r from-pink-500 to-transparent mx-auto mt-3"></div>
+        </motion.div>
 
-        {/* 🎨 NFT Collection Grid */}
-        <div className="relative z-10 mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-6xl">
-            {NFT_COLLECTIONS.map((nft, index) => (
-                <motion.a
-                    key={index}
-                    href={nft.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative block w-full rounded-2xl overflow-hidden shadow-xl border border-pink-500 transition-all hover:scale-105"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
-                    aria-label={`View ${nft.name} NFT collection on OpenSea`}
-                    title={`View ${nft.name} NFT collection on OpenSea`}
-                >
-                    {/* 🖼 NFT Image with Overlay */}
-                    <div className="relative">
-                        <img src={nft.image} alt={nft.name} className="w-full h-[300px] sm:h-[400px] object-cover rounded-2xl" />
-                        <div className="absolute inset-0 bg-black opacity-40 rounded-2xl"></div>
-                    </div>
+        <motion.p
+          className="text-gray-300 mt-6 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+        >
+          Explore our exclusive digital collectibles with real utility in the PINK ecosystem
+        </motion.p>
+      </div>
 
-                    {/* 🔥 Collection Info */}
-                    <div className="absolute bottom-0 w-full px-6 py-4 bg-black/80 text-white backdrop-blur-lg rounded-b-2xl">
-                        <h3 className="text-xl md:text-2xl font-bold text-pink-400">{nft.name}</h3>
-                        <p className="text-sm md:text-base text-gray-300">{nft.description}</p>
-                    </div>
 
-                    {/* ✨ Neon Glow Effect */}
-                    <div className="absolute inset-0 border-4 border-transparent rounded-2xl group-hover:border-pink-500/50 transition-all"></div>
-                </motion.a>
-            ))}
-        </div>
-    </section>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {NFT_COLLECTIONS.map((collection, index) => (
+          <NFTCard key={index} collection={collection} index={index} />
+        ))}
+      </div>
+    </div>
+  </section>
 ));
 
+
+const NFTCard = ({ collection, index }: { collection: NFTCollection; index: number }) => (
+  <motion.div
+    className="bg-gray-900/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-800 hover:border-pink-500/30 transition-all"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7, delay: index * 0.2 }}
+    whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(236, 72, 153, 0.2)" }}
+  >
+
+    <div className="relative h-[280px] overflow-hidden">
+      <motion.img
+        src={collection.image}
+        alt={collection.name}
+        className="w-full h-full object-cover"
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.5 }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+
+
+      <div className="absolute bottom-0 left-0 w-full p-6">
+        <h3 className="text-2xl font-bold text-white">{collection.name}</h3>
+      </div>
+    </div>
+
+
+    <div className="p-6">
+      <p className="text-gray-300 mb-6">{collection.description}</p>
+
+
+      {collection.stats && (
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          {collection.stats.items && (
+            <div className="text-center">
+              <div className="text-xl font-bold text-white">{collection.stats.items.toLocaleString()}</div>
+              <div className="text-xs text-gray-400">Items</div>
+            </div>
+          )}
+
+          {collection.stats.owners && (
+            <div className="text-center">
+              <div className="text-xl font-bold text-white">{collection.stats.owners.toLocaleString()}</div>
+              <div className="text-xs text-gray-400">Owners</div>
+            </div>
+          )}
+
+          {collection.stats.floorPrice && (
+            <div className="text-center">
+              <div className="text-xl font-bold text-white">{collection.stats.floorPrice}</div>
+              <div className="text-xs text-gray-400">Floor Price</div>
+            </div>
+          )}
+        </div>
+      )}
+
+      <motion.a
+        href={collection.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center w-full px-5 py-3 bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-500 hover:to-pink-600 rounded-lg text-white font-medium transition-all"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        View on OpenSea
+        <FaExternalLinkAlt className="ml-2 text-sm" />
+      </motion.a>
+    </div>
+  </motion.div>
+);
+
+NFTSection.displayName = "NFTSection";
 export default NFTSection;
