@@ -20,74 +20,100 @@ const Partnerships = forwardRef<HTMLDivElement>((props, ref) => (
   <section 
     id="partnerships" 
     ref={ref} 
-    className="relative min-h-screen flex flex-col items-center justify-center bg-black/40 text-white py-24 px-6 md:px-12 overflow-hidden"
+    className="relative py-24 bg-black overflow-hidden"
   >
-    {/* 🔥 Background Effects */}
-    {/* <div className="absolute inset-0 bg-gradient-to-b from-pink-700/50 to-black opacity-60 -z-10"></div> */}
-    {/* <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[700px] md:w-[900px] h-[700px] md:h-[900px] bg-pink-500 rounded-full blur-[160px] opacity-30 -z-10"></div> */}
+    {/* Background elements */}
+    <div className="absolute inset-0 bg-gradient-to-b from-gray-950 to-black -z-10"></div>
+    
+    {/* Abstract shapes in background */}
+    <div className="absolute right-0 top-0 w-1/3 h-1/3 bg-pink-500/5 rounded-bl-full blur-3xl -z-5"></div>
+    <div className="absolute left-0 bottom-0 w-1/4 h-1/4 bg-purple-500/5 rounded-tr-full blur-3xl -z-5"></div>
+    
+    <div className="container mx-auto px-4 relative z-10">
+      {/* Section header */}
+      <div className="mb-16">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col items-center"
+        >
+          <div className="inline-flex items-center justify-center px-5 py-1.5 bg-pink-500/10 rounded-full mb-4">
+            <span className="text-sm font-medium text-pink-400">
+              ECOSYSTEM
+            </span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white text-center">
+            Our <span className="text-pink-500">Partners</span>
+          </h2>
+        </motion.div>
+      </div>
 
-    {/* 🏆 Section Title */}
-    <motion.h1 
-      className="text-4xl md:text-5xl font-extrabold tracking-wide uppercase bg-gradient-to-r from-pink-400 to-blue-500 text-transparent bg-clip-text text-center mt-12 md:mt-16"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-    >
-      Our Partners
-    </motion.h1>
-
-    {/* 🌟 Scrolling Partner Showcase with Natural Flow */}
-    <div className="relative w-full max-w-6xl mt-12 md:mt-16 overflow-hidden">
-      {/* ✨ Soft Fading Edge for a Natural Look */}
-      <div className="absolute top-0 left-0 w-16 md:w-24 h-full bg-gradient-to-r from-black via-transparent to-transparent z-10"></div>
-      <div className="absolute top-0 right-0 w-16 md:w-24 h-full bg-gradient-to-l from-black via-transparent to-transparent z-10"></div>
-
-      {/* Moving Partner Logos */}
-      <motion.div
-        className="flex space-x-6 md:space-x-10 items-center w-[300%] md:w-[200%]" // Wider for smooth animation
-        animate={{ x: ["0%", "-50%", "0%"] }} // Moves back and forth naturally
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      {/* Partner showcase - New horizontal layout with logos in row */}
+      <motion.div 
+        className="flex flex-wrap justify-center items-center gap-x-4 gap-y-8 md:gap-x-10 md:gap-y-12"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
       >
-        {partners.concat(partners).map((partner, index) => (
-          <motion.a
-            key={index}
-            href={partner.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex flex-col items-center text-center w-28 md:w-40"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label={`Visit ${partner.name} website`}
-            title={`Visit ${partner.name} website`}
-          >
-            {/* Glowing Logo */}
-            <motion.div 
-              className="w-24 md:w-40 h-24 md:h-40 flex items-center justify-center rounded-full shadow-lg bg-black bg-opacity-60 transition duration-300"
-              whileHover={{ scale: 1.1, rotate: 3 }}
-            >
-              <img
-                src={partner.image}
-                alt=""
-                className="w-16 md:w-28 h-16 md:h-28 object-contain"
-              />
-            </motion.div>
-            {/* Partner Name */}
-            <p className="text-white text-sm md:text-lg font-medium mt-2 md:mt-3 opacity-80">{partner.name}</p>
-          </motion.a>
+        {partners.map((partner, index) => (
+          <PartnerLogoCard key={index} partner={partner} index={index} />
         ))}
       </motion.div>
     </div>
-
-    {/* ✨ Floating Animated Background Text */}
-    <motion.div 
-      className="absolute w-full h-full pointer-events-none flex justify-center items-center opacity-20"
-      animate={{ x: [0, -50, 0], opacity: [0.2, 0.4, 0.2] }}
-      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-    >
-      <span className="text-7xl md:text-9xl font-bold text-gray-500 opacity-5">PARTNERS</span>
-    </motion.div>
   </section>
 ));
+
+// New simplified partner logo card
+const PartnerLogoCard = ({ partner, index }: { partner: { name: string; image: string; link: string }; index: number }) => {
+  // Remove gradient variants and use solid colors instead
+  const variants = [
+    "bg-gray-900 hover:bg-gray-800 hover:border-pink-500/30",
+    "bg-gray-900 hover:bg-gray-800 hover:border-purple-500/30",
+    "bg-gray-900 hover:bg-gray-800 hover:border-blue-500/30",
+  ];
+  
+  const variant = variants[index % variants.length];
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+    >
+      <motion.a
+        href={partner.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`block relative w-[130px] h-[130px] md:w-[160px] md:h-[160px] ${variant} 
+                   rounded-2xl p-0.5 shadow-lg transition-all duration-300`}
+        whileHover={{ scale: 1.05, y: -5 }}
+        whileTap={{ scale: 0.98 }}
+        aria-label={`Visit ${partner.name} website`}
+      >
+        <div className="absolute inset-0 rounded-2xl backdrop-blur-[1px] bg-black/40"></div>
+        
+        <div className="relative h-full rounded-xl flex flex-col items-center justify-center p-4 bg-gray-900/80 border border-white/5">
+          {/* Partner logo */}
+          <div className="w-full h-[70%] flex items-center justify-center mb-2">
+            <img 
+              src={partner.image} 
+              alt=""
+              className="max-w-[80%] max-h-[80%] object-contain filter drop-shadow-lg" 
+            />
+          </div>
+          
+          {/* Partner name */}
+          <p className="text-white text-sm font-medium text-center mt-auto">{partner.name}</p>
+        </div>
+      </motion.a>
+    </motion.div>
+  );
+};
 
 Partnerships.displayName = "Partnerships";
 export default Partnerships;
