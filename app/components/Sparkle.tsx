@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 const Sparkle = () => {
-  // Define sparkles (1 large center, 2 small positioned on the left)
+
   const sparkles = [
     { size: 32, x: 0, y: 0, delay: 0 }, // Large sparkle (center)
     { size: 12, x: -8, y: -8, delay: 0.4 }, // Small sparkle (top-left)
@@ -44,7 +44,7 @@ const Sparkle = () => {
           />
           <defs>
             <radialGradient id="grad1" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#FF33AA" stopOpacity="1" /> 
+              <stop offset="0%" stopColor="#FF33AA" stopOpacity="1" />
               <stop offset="50%" stopColor="#FF0099" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#FF0066" stopOpacity="0.3" />
             </radialGradient>

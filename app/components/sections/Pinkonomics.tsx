@@ -1,13 +1,12 @@
 import { forwardRef, useState } from "react";
 import { motion } from "framer-motion";
-import { FaCopy, FaExternalLinkAlt, FaCheck } from "react-icons/fa";
-import PinkFlame from "~/images/pinkflame.gif";
-import PinkBowtie from "~/images/brandassets/pink_bowtie.png";
+import { FaCopy, FaExternalLinkAlt, FaCheck, FaFire, FaChartLine, FaCoins, FaExclamationCircle } from "react-icons/fa";
+import { HiSparkles } from "react-icons/hi";
 
-// 🔥 Total supply (unchanging)
-const TOTAL_SUPPLY = 2300001221; // 2.3 Billion
 
-// 🔥 Contract addresses
+const TOTAL_SUPPLY = 2300001221;
+
+
 const contractAddresses = [
   {
     name: "PINK on Moonbeam",
@@ -26,11 +25,16 @@ const contractAddresses = [
   },
 ];
 
+
+const externalLinks = [
+  { label: "CoinMarketCap", url: "https://coinmarketcap.com/currencies/pink/" },
+  { label: "Dex Screener", url: "https://dexscreener.com/search?q=pink" },
+  { label: "Burn Tracker", url: "https://moonscan.io/token/0xffffffff30478fafbe935e466da114e14fb3563d?a=0x000000000000000000000000000000000000dead" },
+];
+
 const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
   const [copied, setCopied] = useState<string | null>(null);
-  const [burnedAmount, setBurnedAmount] = useState(87460279.08); // 🔥 Burned PINK
-
-  // 🔥 Calculate Burn Percentage
+  const burnedAmount = 87460279.08;
   const burnPercentage = ((burnedAmount / TOTAL_SUPPLY) * 100).toFixed(2);
 
   const copyToClipboard = (address: string) => {
@@ -43,200 +47,196 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
     <section
       id="pinkonomics"
       ref={ref}
-      className="relative flex flex-col items-center text-white py-24 px-4 md:px-12 bg-black/40"
+      className="relative py-24 bg-black overflow-hidden"
     >
-      {/* 🔥 Background Effects */}
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-pink-700/50 to-black opacity-60 -z-10"></div> */}
-      {/* <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-pink-500 rounded-full blur-[140px] opacity-30 -z-10"></div> */}
 
-      {/* 🎯 Section Title */}
-      <motion.h2
-        className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-pink-400 to-blue-500 text-transparent bg-clip-text text-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        PINKONOMICS
-      </motion.h2>
+      <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] bg-repeat opacity-5 -z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-pink-900/10 via-transparent to-black -z-5"></div>
 
-      {/* 🔥 Burn Tracker */}
-      <div className="relative mt-12 flex flex-col md:flex-row items-center w-full max-w-3xl px-4 md:px-12">
-        {/* 🔥 Animated Pink Flame (Always on the Left) */}
-        <div className="flex-shrink-0 mr-6 mb-6 md:mb-0">
-          <img src={PinkFlame} alt="Burn Animation" className="w-24 h-24 md:w-32 md:h-32 object-contain" /> {/* Adjusted size */}
-        </div>
 
-        {/* 🔥 Burn Amount & Progress Bar */}
-        <div className="w-full flex flex-col items-center md:items-start">
-          {/* 🔥 Burned Number & Text in 2 Lines */}
-          <motion.div className="text-3xl md:text-5xl font-bold text-pink-400 text-center md:text-left">
-            {burnedAmount.toLocaleString()} PINK Burned
-          </motion.div>
-          <p className="text-gray-400 text-sm md:text-base mt-1 text-center md:text-left">
-            🔥 {burnPercentage}% of the total supply has been burned.
-          </p>
+      <div className="absolute -top-20 -right-20 w-80 h-80 bg-pink-600/10 rounded-full blur-[100px]"></div>
+      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-600/10 rounded-full blur-[100px]"></div>
 
-          {/* 🔥 Progress Bar (Aligned Below) */}
-          <div className="w-full bg-gray-800 rounded-full h-4 overflow-hidden mt-3">
-            <motion.div
-              className="h-4 bg-pink-500"
-              initial={{ width: "40%" }}
-              animate={{ width: `${burnPercentage}%` }}
-              transition={{ duration: 2, ease: "easeOut" }}
-            />
-          </div>
-        </div>
-      </div>
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
 
-      {/* 📊 Supply Information */}
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl relative">
-        {[
-          { label: "Total Supply", value: "2,300,001,221 PINK", color: "text-pink-400" },
-          { label: "Circulating Supply", value: "1.58B PINK", color: "text-blue-400" },
-        ].map((item, index) => (
+        <div className="text-center mb-16 relative">
           <motion.div
-            key={index}
-            className="p-6 bg-transparent backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 text-center relative overflow-visible"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="inline-block relative"
           >
-            {index === 0 && (
-             <motion.img
-               src={PinkBowtie}
-               alt="Pink Bow-tie"
-               className="absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-auto z-10"
-               animate={{
-                 rotate: [0, 15, -15, 0]
-               }}
-               transition={{
-                 duration: 6,
-                 ease: "easeInOut",
-                 repeat: Infinity,
-               }}
-             />
-            )}
-            {index === 1 && (
-             <motion.img
-               src={PinkBowtie}
-               alt="Pink Bow-tie"
-               className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-auto z-10"
-               animate={{
-                 rotate: [0, -15, 15, 0]
-               }}
-               transition={{
-                 duration: 6,
-                 ease: "easeInOut",
-                 repeat: Infinity,
-               }}
-             />
-            )}
-            <div className="bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-900/80 absolute inset-0 rounded-xl z-0" />
-            <div className="relative z-1">
-              <p className="text-lg md:text-xl font-semibold text-gray-300">{item.label}</p>
-              <motion.p
-                className={`text-2xl md:text-4xl font-bold ${item.color}`}
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                {item.value}
-              </motion.p>
-           </div>
+            <HiSparkles className="absolute -top-6 -left-8 text-pink-500 text-3xl opacity-70" />
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight">
+              PINK<span className="text-pink-500">onomics</span>
+            </h2>
+            <div className="h-1 w-1/3 bg-pink-500 mx-auto"></div>
           </motion.div>
-        ))}
-      </div>
+        </div>
 
-      {/* 📜 Contract Addresses */}
-      <motion.div className="mt-12 w-full max-w-3xl space-y-4 px-4 md:px-0">
-        {contractAddresses.map((contract, index) => (
-          <div
-            key={index}
-            className="flex flex-col md:flex-row md:items-center justify-between bg-white/10 p-4 rounded-lg shadow-md border border-gray-700"
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <motion.div
+            className="bg-gray-900/80 backdrop-blur-sm rounded-xl p-6 border border-pink-500/10 hover:border-pink-500/30 transition-all hover:shadow-lg hover:shadow-pink-500/10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -5 }}
           >
-            {/* 🏷 Contract Name (Left) */}
-            <div className="flex justify-between items-center w-full md:w-auto">
-              <p className="text-white font-medium">{contract.name}</p>
-
-              {/* 📌 Icons - **Moved to Right for Mobile** */}
-              <div className="flex space-x-4 md:hidden"> {/* Increased space */}
-                <motion.button
-                  className="text-pink-400 hover:text-pink-500"
-                  onClick={() => copyToClipboard(contract.address)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={`Copy ${contract.name} address to clipboard`}
-                  title={`Copy ${contract.name} address to clipboard`}
-                >
-                  {copied === contract.address ? <FaCheck size={18} /> : <FaCopy size={18} />}
-                </motion.button>
-                <a
-                  href={contract.explorer}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gray-200"
-                  aria-label={`View ${contract.name} on block explorer`}
-                  title={`View ${contract.name} on block explorer`}
-                >
-                  <FaExternalLinkAlt size={18} />
-                </a>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-pink-900/50 flex items-center justify-center">
+                <FaCoins className="text-pink-400" />
               </div>
+              <div className="text-gray-400">Total Supply</div>
             </div>
+            <div className="text-3xl font-bold text-white">2,300,001,221</div>
+            <div className="text-pink-400 text-sm mt-1">PINK</div>
+          </motion.div>
 
-            {/* 🔗 Address (Below on Mobile, Inline on Desktop) */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between w-full md:w-auto mt-2 md:mt-0 space-y-2 md:space-y-0 md:space-x-4"> {/* Increased space */}
-              <span className="text-gray-400 font-mono text-sm truncate">{contract.address}</span>
-
-              {/* Desktop Icons - Stays Below for Larger Screens */}
-              <div className="hidden md:flex space-x-4"> {/* Increased space */}
-                <motion.button
-                  className="text-pink-400 hover:text-pink-500"
-                  onClick={() => copyToClipboard(contract.address)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label={`Copy ${contract.name} address to clipboard`}
-                  title={`Copy ${contract.name} address to clipboard`}
-                >
-                  {copied === contract.address ? <FaCheck size={18} /> : <FaCopy size={18} />}
-                </motion.button>
-                <a
-                  href={contract.explorer}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gray-200"
-                  aria-label={`View ${contract.name} on block explorer`}
-                  title={`View ${contract.name} on block explorer`}
-                >
-                  <FaExternalLinkAlt size={18} />
-                </a>
+          <motion.div
+            className="bg-gray-900/80 backdrop-blur-sm rounded-xl p-6 border border-pink-500/10 hover:border-pink-500/30 transition-all hover:shadow-lg hover:shadow-pink-500/10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ y: -5 }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-purple-900/50 flex items-center justify-center">
+                <FaChartLine className="text-purple-400" />
               </div>
+              <div className="text-gray-400">Circulating Supply</div>
             </div>
+            <div className="text-3xl font-bold text-white">1.58B</div>
+            <div className="text-purple-400 text-sm mt-1">PINK</div>
+          </motion.div>
+
+          <motion.div
+            className="bg-gray-900/80 backdrop-blur-sm rounded-xl p-6 border border-pink-500/10 hover:border-pink-500/30 transition-all hover:shadow-lg hover:shadow-pink-500/10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ y: -5 }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg bg-red-900/50 flex items-center justify-center">
+                <FaFire className="text-red-400" />
+              </div>
+              <div className="text-gray-400">Burned</div>
+            </div>
+            <div className="text-3xl font-bold text-white">{burnedAmount.toLocaleString()}</div>
+            <div className="text-red-400 text-sm mt-1">PINK ({burnPercentage}%)</div>
+
+            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
+              <motion.div
+                className="h-2 bg-pink-500"
+                initial={{ width: 0 }}
+                whileInView={{ width: `${burnPercentage}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
+            </div>
+          </motion.div>
+        </div>
+
+
+        <motion.div
+          className="mb-16 bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-pink-500/20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="flex items-center mb-6">
+            <div className="w-10 h-10 rounded-full bg-pink-900/40 flex items-center justify-center mr-3">
+              <FaExclamationCircle className="text-pink-400" />
+            </div>
+            <h3 className="text-2xl font-bold text-pink-400">Contract Addresses</h3>
           </div>
-        ))}
-      </motion.div>
-      {/* 🚀 External Buttons */}
-      <div className="mt-16 w-full flex flex-col md:flex-row md:justify-center gap-4 md:gap-6 px-4">
-        {[
-          { label: "CoinMarketCap", url: "https://coinmarketcap.com/currencies/pink/", bg: "bg-blue-600", bgHover: "hover:bg-blue-800" },
-          { label: "Dex Screener", url: "https://dexscreener.com/search?q=pink", bg: "bg-gray-600", bgHover: "hover:bg-gray-800" },
-          { label: "Burn Tracker", url: "https://moonscan.io/token/0xffffffff30478fafbe935e466da114e14fb3563d?a=0x000000000000000000000000000000000000dead", bg: "bg-red-600", bgHover: "hover:bg-red-800" },
-        ].map((btn, index) => (
-          <motion.a
-            key={index}
-            href={btn.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`w-full md:w-auto px-6 py-3 text-center rounded-lg text-lg font-semibold ${btn.bg} text-white ${btn.bgHover} hover:shadow-xl transition-all flex items-center justify-center space-x-2`}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label={`Visit ${btn.label}`}
-            title={`Visit ${btn.label}`}
-          >
-            <span>{btn.label}</span>
-          </motion.a>
-        ))}
-      </div>
 
+          <div className="space-y-4">
+            {contractAddresses.map((contract, index) => (
+              <motion.div
+                key={index}
+                className="bg-black/50 rounded-lg p-4 border border-gray-800 hover:border-pink-500/30 transition-all"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ x: 5 }}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="font-medium text-white">{contract.name}</div>
+
+                  <div className="flex items-center gap-2 flex-1 sm:justify-end">
+                    <code className="bg-black/70 px-3 py-2 rounded text-gray-400 text-sm truncate max-w-xs sm:max-w-sm md:max-w-md">
+                      {contract.address}
+                    </code>
+
+                    <div className="flex gap-2 flex-shrink-0">
+                      <motion.button
+                        onClick={() => copyToClipboard(contract.address)}
+                        className="p-2 rounded-lg bg-gray-800 hover:bg-pink-900/60 text-pink-400 transition-all"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        aria-label="Copy address"
+                      >
+                        {copied === contract.address ? <FaCheck size={16} /> : <FaCopy size={16} />}
+                      </motion.button>
+
+                      <motion.a
+                        href={contract.explorer}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg bg-gray-800 hover:bg-purple-900/60 text-gray-400 hover:text-white transition-all"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        aria-label="View on explorer"
+                      >
+                        <FaExternalLinkAlt size={16} />
+                      </motion.a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+
+        <div className="flex flex-wrap justify-center gap-4">
+          {externalLinks.map((link, index) => (
+            <motion.a
+              key={index}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-3 px-6 bg-gray-800 border border-transparent hover:border-pink-500/30 rounded-full text-white shadow-lg hover:shadow-pink-500/20 transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 * index }}
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              {link.label}
+            </motion.a>
+          ))}
+        </div>
+
+        <motion.div
+          className="mt-16 text-center text-xs text-gray-500"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+        >
+          Always verify contract addresses before interacting with them.
+        </motion.div>
+      </div>
     </section>
   );
 });
