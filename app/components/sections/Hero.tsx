@@ -215,14 +215,12 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
                 className="w-[300px] h-[300px] md:w-[380px] md:h-[380px] flex items-center justify-center relative z-10"
                 style={{ transformStyle: "preserve-3d" }}
               >
-
                 <div className="relative w-full h-full">
                   <img
                     src={PinkLogoCircular}
                     alt="PINK Logo"
                     className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(236,72,153,0.6)]"
                   />
-
 
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent rounded-full pointer-events-none"
@@ -238,19 +236,6 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
                   />
                 </div>
               </motion.div>
-
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={`ring-${i}`}
-                  className={`absolute rounded-full border ${i === 0 ? 'border-pink-500/40' : i === 1 ? 'border-purple-500/30' : 'border-blue-500/20'}`}
-                  style={{
-                    inset: `${15 + i * 20}%`,
-                    filter: `blur(${i === 0 ? 0 : 1}px)`
-                  }}
-                  animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
-                  transition={{ duration: 30 + i * 10, repeat: Infinity, ease: "linear" }}
-                />
-              ))}
 
               <motion.div
                 className="absolute text-pink-500 font-bold text-sm z-30"
@@ -282,7 +267,6 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
                   HODL
                 </motion.div>
               </motion.div>
-
             </div>
 
             <div className="absolute -inset-10 -z-10 opacity-40">
