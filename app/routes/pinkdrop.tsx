@@ -50,6 +50,7 @@ const PinkDrop = forwardRef<HTMLDivElement>((props, ref) => {
 
           <Link
             to="/pinkiverse"
+            aria-label="All Games"
             className="flex items-center gap-2 px-3 py-2 rounded-full bg-black/60 border border-pink-500/30 text-white hover:bg-black/80 hover:border-pink-500/50 transition-all"
           >
             <FaGamepad size={16} />
