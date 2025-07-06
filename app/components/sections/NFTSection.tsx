@@ -50,9 +50,7 @@ const NFTSection = forwardRef<HTMLDivElement>((props, ref) => (
     className="relative py-24 overflow-hidden bg-black"
   >
 
-    <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] bg-repeat opacity-5 -z-10"></div>
     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-pink-900/10 via-transparent to-black -z-5"></div>
-
 
     <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-pink-500/10 blur-[120px]"></div>
     <div className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-purple-500/10 blur-[100px]"></div>

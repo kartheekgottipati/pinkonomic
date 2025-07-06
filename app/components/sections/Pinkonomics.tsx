@@ -50,9 +50,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
       className="relative py-24 bg-black overflow-hidden"
     >
 
-      <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] bg-repeat opacity-5 -z-10"></div>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-pink-900/10 via-transparent to-black -z-5"></div>
-
 
       <div className="absolute -top-20 -right-20 w-80 h-80 bg-pink-600/10 rounded-full blur-[100px]"></div>
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-600/10 rounded-full blur-[100px]"></div>
@@ -141,7 +139,6 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
           </motion.div>
         </div>
-
 
         <motion.div
           className="mb-16 bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-pink-500/20"

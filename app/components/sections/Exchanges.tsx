@@ -34,10 +34,7 @@ const Exchanges = forwardRef<HTMLDivElement>((props, ref) => (
     ref={ref}
     className="relative py-28 bg-black overflow-hidden"
   >
-
-    <div className="absolute inset-0 bg-[url('/images/dot-pattern.png')] bg-repeat opacity-5 -z-10"></div>
     <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-black -z-5"></div>
-
 
     <div className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full bg-pink-600/5 blur-[120px] -z-5"></div>
     <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-purple-600/5 blur-[120px] -z-5"></div>
@@ -112,22 +109,8 @@ const ExchangeCard = ({ exchange, index }: { exchange: Exchange; index: number }
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-
       <div className="relative h-full group">
         <div className="relative h-full rounded-xl border border-gray-800 hover:border-pink-500/20 transition-all duration-300 overflow-hidden">
-
-          <div className="absolute inset-0 opacity-5">
-            {index % 3 === 0 && (
-              <div className="absolute inset-0 bg-[url('/images/patterns/pattern1.svg')] bg-repeat"></div>
-            )}
-            {index % 3 === 1 && (
-              <div className="absolute inset-0 bg-[url('/images/patterns/pattern2.svg')] bg-repeat"></div>
-            )}
-            {index % 3 === 2 && (
-              <div className="absolute inset-0 bg-[url('/images/patterns/pattern3.svg')] bg-repeat"></div>
-            )}
-          </div>
-
 
           <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black"></div>
 
