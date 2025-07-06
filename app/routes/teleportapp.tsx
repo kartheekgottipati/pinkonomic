@@ -40,15 +40,16 @@ const TeleportApp = forwardRef<HTMLDivElement>((props, ref) => {
       <div className="fixed top-0 left-0 right-0 h-16 flex items-center justify-between px-6 sm:px-8 z-40 bg-gradient-to-b from-gray-900/90 to-transparent backdrop-blur-sm">
         <Link
           to="/"
+          aria-label="Home"
           className="flex items-center gap-2 px-3 py-2 rounded-full bg-black/60 border border-pink-500/30 text-white hover:bg-black/80 hover:border-pink-500/50 transition-all"
         >
           <FaHome size={16} />
           <span className="text-sm font-medium hidden sm:inline">Home</span>
         </Link>
 
-        <div className="font-bold text-xl bg-gradient-to-r from-pink-400 to-pink-600 text-transparent bg-clip-text">
+        <h1 className="font-bold text-xl bg-gradient-to-r from-pink-400 to-pink-600 text-transparent bg-clip-text">
           PINK Teleport
-        </div>
+        </h1>
 
         <div className="w-[70px]"></div>
       </div>

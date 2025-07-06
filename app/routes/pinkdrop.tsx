@@ -49,7 +49,7 @@ const PinkDrop = forwardRef<HTMLDivElement>((props, ref) => {
           </Link>
 
           <Link
-            to="/pinkiverse/home"
+            to="/pinkiverse"
             className="flex items-center gap-2 px-3 py-2 rounded-full bg-black/60 border border-pink-500/30 text-white hover:bg-black/80 hover:border-pink-500/50 transition-all"
           >
             <FaGamepad size={16} />
@@ -57,9 +57,9 @@ const PinkDrop = forwardRef<HTMLDivElement>((props, ref) => {
           </Link>
         </div>
 
-        <div className="font-bold text-xl bg-gradient-to-r from-pink-400 to-pink-600 text-transparent bg-clip-text">
+        <h1 className="font-bold text-xl bg-gradient-to-r from-pink-400 to-pink-600 text-transparent bg-clip-text">
           PinkDrop
-        </div>
+        </h1>
 
         <Link
           to="/pinkiverse/pinkdrop"

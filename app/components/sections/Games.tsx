@@ -33,7 +33,6 @@ const Games = forwardRef<HTMLDivElement>((props, ref) => (
     className="relative py-24 bg-black overflow-hidden"
   >
 
-    <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] bg-repeat opacity-5 -z-10"></div>
     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-pink-900/10 via-transparent to-black -z-5"></div>
 
 

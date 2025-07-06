@@ -294,11 +294,8 @@ const GamePage = ({ title, description, image, platforms, playLinks, tournaments
         </div>
       </div>
 
-
       <div className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black to-pink-950/20" />
-        <div className="absolute inset-0 bg-[url('/path/to/pattern.png')] opacity-10" />
-
         <div className="container max-w-5xl mx-auto px-4 relative z-10">
           <div className="text-center">
             <motion.div
