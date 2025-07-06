@@ -2,7 +2,7 @@ import { type RouteConfig, index, prefix, route } from "@react-router/dev/routes
 
 export default [
     index("routes/home.tsx"),
-    route("pinkdrop", "routes/pinkdrop.tsx"),
+    route("game", "routes/pinkdrop.tsx"),
     route("teleportapp", "routes/teleportapp.tsx"),
     route("pinkpaper", "routes/pinkpaper.tsx"),
     ...prefix("pinkiverse", [

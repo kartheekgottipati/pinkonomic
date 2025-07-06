@@ -72,7 +72,7 @@ const PinkDropPage = () => {
 					label: "Play Pink Drop on Telegram",
 					href: "https://t.me/pinkdrop_bot",
 				},
-				{ icon: <FaGlobe />, label: "Play Pink Drop in Browser", href: "/pinkdrop" },
+				{ icon: <FaGlobe />, label: "Play Pink Drop in Browser", href: "/game" },
 			]}
 			tournaments={tournamentData}
 		/>

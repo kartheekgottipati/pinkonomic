@@ -28,7 +28,7 @@ const games: Game[] = [
 		image: pinkDropPreview,
 		link: "/pinkiverse/pinkdrop",
 		featured: true,
-		playLink: "/pinkdrop",
+		playLink: "/game",
 		platform: "browser"
 	},
 	{

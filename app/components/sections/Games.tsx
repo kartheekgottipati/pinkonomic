@@ -106,7 +106,7 @@ const Games = forwardRef<HTMLDivElement>((props, ref) => (
                 <div className="flex flex-wrap gap-4">
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Link
-                      to="/pinkdrop"
+                      to="/game"
                       className="flex items-center gap-2 px-6 py-3 bg-pink-500 rounded-lg text-white font-medium"
                     >
                       <FaPlay size={14} /> Play Now
