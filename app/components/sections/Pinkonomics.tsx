@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaCopy, FaExternalLinkAlt, FaCheck, FaFire, FaChartLine, FaCoins, FaExclamationCircle } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
@@ -34,8 +34,26 @@ const externalLinks = [
 
 const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
   const [copied, setCopied] = useState<string | null>(null);
-  const burnedAmount = 87460279.08;
-  const burnPercentage = ((burnedAmount / TOTAL_SUPPLY) * 100).toFixed(2);
+  const [burnedAmount, setBurnedAmount] = useState<number>(0);
+  const [burnPercentage, setBurnPercentage] = useState<string>("0.00");
+
+  useEffect(() => {
+    const fetchBurnedData = async () => {
+      try {
+        const response = await fetch("https://pink-utils.kargo-dev.workers.dev/burn");
+        if (!response.ok) {
+          throw new Error("Failed to fetch burn data");
+        }
+        const data = await response.json();
+        setBurnedAmount(data.totalBurn);
+        setBurnPercentage(((data.totalBurn / TOTAL_SUPPLY) * 100).toFixed(2));
+      } catch (error) {
+        console.error("Error fetching burn data:", error);
+      }
+    };
+
+    fetchBurnedData();
+  }, []);
 
   const copyToClipboard = (address: string) => {
     navigator.clipboard.writeText(address);
