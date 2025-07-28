@@ -34,8 +34,8 @@ const externalLinks = [
 
 const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
   const [copied, setCopied] = useState<string | null>(null);
-  const [burnedAmount, setBurnedAmount] = useState<number>(0);
-  const [burnPercentage, setBurnPercentage] = useState<string>("0.00");
+  const [burnedAmount, setBurnedAmount] = useState<number>(87460279.08);
+  const [burnPercentage, setBurnPercentage] = useState<string>(((burnedAmount / TOTAL_SUPPLY) * 100).toFixed(2));
 
   useEffect(() => {
     const fetchBurnedData = async () => {
@@ -49,8 +49,6 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
         setBurnPercentage(((data.totalBurn / TOTAL_SUPPLY) * 100).toFixed(2));
       } catch (error) {
         console.error("Error fetching burn data:", error);
-        setBurnedAmount(0); // Default value
-        setBurnPercentage("0.00"); // Default percentage
       }
     };
 
