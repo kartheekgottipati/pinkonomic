@@ -49,6 +49,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
         setBurnPercentage(((data.totalBurn / TOTAL_SUPPLY) * 100).toFixed(2));
       } catch (error) {
         console.error("Error fetching burn data:", error);
+        setBurnedAmount(0); // Default value
+        setBurnPercentage("0.00"); // Default percentage
       }
     };
 
