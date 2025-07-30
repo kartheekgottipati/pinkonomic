@@ -8,6 +8,7 @@ import pinknessOverdrivePreview from "~/images/games/pinkness-overdrive-preview.
 import pinkBulletPreview from "~/images/games/pink-bullet-preview.jpg";
 import pinkamolePreview from "~/images/games/pink-a-mole-preview.jpg";
 import HomeButton from "~/components/buttons/HomeButton";
+import Footer from "~/components/Footer";
 
 
 interface Game {
@@ -84,7 +85,8 @@ const regularGames = games.filter((game) => !game.featured);
 
 const Pinkiverse = () => {
 	return (
-		<section className="relative min-h-screen flex flex-col items-center text-white py-12 px-4 md:px-8 lg:px-12 bg-black overflow-hidden">
+		<section className="relative min-h-screen flex flex-col items-center justify-between text-white pt-12 px-4 md:px-8 lg:px-12 bg-black overflow-hidden">
+			{/* Background elements */}
 			<div className="absolute inset-0 bg-gradient-to-b from-black via-pink-950/30 to-black -z-10"></div>
 			<motion.div
 				className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[1200px] h-[1200px] bg-pink-500 rounded-full blur-[300px] opacity-20 -z-10"
@@ -174,6 +176,11 @@ const Pinkiverse = () => {
 						<GameCard key={index} game={game} />
 					))}
 				</div>
+			</div>
+
+			{/* Footer with proper spacing */}
+			<div className="w-full mt-auto pt-16">
+				<Footer />
 			</div>
 		</section>
 	);

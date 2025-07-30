@@ -7,6 +7,7 @@ import {
   FaPlay
 } from "react-icons/fa";
 import { Link } from "react-router";
+import Footer from "~/components/Footer";
 
 interface Tournament {
   name: string;
@@ -330,19 +331,13 @@ const GamePage = ({ title, description, image, platforms, playLinks, tournaments
         </div>
       </div>
 
-
-      <footer className="bg-black py-8 border-t border-gray-900">
-        <div className="container max-w-7xl mx-auto px-4">
-          <div className="text-center text-gray-500 text-sm">
-            <p>&copy; 2024 Pinkonomic. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* Footer */}
+      <div className="w-full">
+        <Footer />
+      </div>
     </div>
   );
 };
-
-
 
 
 const OverviewSection = ({ description }: { description: string }) => (
@@ -646,8 +641,8 @@ const TournamentsSection = ({ tournaments }: { tournaments: Tournament[] }) => {
                           target="_blank"
                           rel="noopener noreferrer"
                           className={`inline-flex items-center px-5 py-2 rounded-lg font-medium whitespace-nowrap ${isActive
-                              ? "bg-gradient-to-r from-green-600 to-green-500 text-white"
-                              : "bg-gradient-to-r from-blue-600 to-blue-500 text-white"
+                            ? "bg-gradient-to-r from-green-600 to-green-500 text-white"
+                            : "bg-gradient-to-r from-blue-600 to-blue-500 text-white"
                             }`}
                         >
                           {isActive ? "Join Now" : "Register"}
@@ -738,8 +733,8 @@ const HeroPlayButton = ({ href }: { href: string }) => (
 const TabButton = ({ label, icon, isActive, onClick }: { label: string; icon: JSX.Element; isActive: boolean; onClick: () => void }) => (
   <motion.button
     className={`px-4 py-3 rounded-lg flex items-center space-x-2 transition-colors ${isActive
-        ? "bg-pink-600 text-white"
-        : "text-gray-400 hover:text-white hover:bg-gray-800"
+      ? "bg-pink-600 text-white"
+      : "text-gray-400 hover:text-white hover:bg-gray-800"
       }`}
     onClick={onClick}
     whileHover={{ scale: isActive ? 1 : 1.05 }}
@@ -754,8 +749,8 @@ const TabButton = ({ label, icon, isActive, onClick }: { label: string; icon: JS
 const FilterButton = ({ label, isActive, onClick }: { label: string; isActive: boolean; onClick: () => void }) => (
   <button
     className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${isActive
-        ? "bg-pink-600 text-white"
-        : "text-gray-400 hover:text-white"
+      ? "bg-pink-600 text-white"
+      : "text-gray-400 hover:text-white"
       }`}
     onClick={onClick}
   >
@@ -778,8 +773,8 @@ const PlatformBadge = ({ type, isActive }: { type: string; isActive: boolean }) 
   return (
     <div
       className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 ${isActive
-          ? "bg-pink-500/20 text-pink-300 border-pink-500/30"
-          : "bg-gray-800/50 text-gray-500 border-gray-700"
+        ? "bg-pink-500/20 text-pink-300 border-pink-500/30"
+        : "bg-gray-800/50 text-gray-500 border-gray-700"
         }`}
     >
       {getIcon()}

@@ -19,6 +19,7 @@ import Socials from "~/components/sections/Socials";
 import Pinkonomics from "~/components/sections/Pinkonomics";
 import Exchanges from "~/components/sections/Exchanges";
 import NFTSection from "~/components/sections/NFTSection";
+import Footer from "~/components/Footer";
 import type { SectionItem } from "~/types";
 
 
@@ -84,6 +85,9 @@ export default function Home() {
 
             {/* 8. Socials Section */}
             <Socials ref={sectionRefs[7]} />
+
+            {/* Footer */}
+            <Footer />
           </div>
         </div>
       )}
