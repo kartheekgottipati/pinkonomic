@@ -10,7 +10,6 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import SwapButton from "./components/buttons/SwapButton";
-import PolkaDotBackground from "./components/ParallaxDots";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -51,14 +50,12 @@ export default function App() {
   return (
     <div className="relative min-h-screen">
       <div className="fixed inset-0 bg-black z-[0]"></div>
-      
-      <PolkaDotBackground/>
-      
+
       {/* Content with positive z-index */}
       <div className="relative z-[1]">
         <Outlet />
       </div>
-      
+
       <SwapButton />
     </div>
   )
