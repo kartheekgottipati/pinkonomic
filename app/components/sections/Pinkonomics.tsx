@@ -11,124 +11,84 @@ import {
 import { HiSparkles } from "react-icons/hi";
 import { PieChart } from 'react-minimal-pie-chart';
 
-// Constants
-const TOTAL_SUPPLY = 2300001221;
-const BURN_ADDRESS = "0x000000000000000000000000000000000000dead";
-const BURN_ADDRESS_URL = "https://moonscan.io/token/0xffffffff30478fafbe935e466da114e14fb3563d?a=0x000000000000000000000000000000000000dead";
-const INITIAL_DISTRIBUTION = [
-  { title: 'Community & Ecosystem', value: 40, color: '#ec4899' },
-  { title: 'Liquidity', value: 30, color: '#8b5cf6' },
-  { title: 'Team & Development', value: 15, color: '#06b6d4' },
-  { title: 'Marketing', value: 10, color: '#f59e0b' },
-  { title: 'Reserve', value: 5, color: '#10b981' },
-];
+// Import data from data file
+import {
+  TOTAL_SUPPLY,
+  BURN_ADDRESS,
+  BURN_ADDRESS_URL,
+  INITIAL_DISTRIBUTION,
+  contractAddresses,
+  externalLinks,
+  securityFeatures,
+  tokenMetricsConstants,
+  PINK_STATS_API_ENDPOINT,
+  deflationaryMechanisms,
+  burnTimelineEvents
+} from "../../data/pinkonomics";
+import type { PinkStatsResponse } from "../../data/pinkonomics";
 
-const contractAddresses = [
-  {
-    name: "PINK on Moonbeam",
-    address: "0xfFfFFfFf30478fAFBE935e466da114E14fB3563d",
-    explorer: "https://moonscan.io/token/0xffffffff30478fafbe935e466da114e14fb3563d",
-    verified: true,
-  },
-  {
-    name: "PINK on Base",
-    address: "0x66fc31b3233c7C001bdD21Ff6E5E66fA08EF85D0",
-    explorer: "https://basescan.org/token/0x66fc31b3233c7C001bdD21Ff6E5E66fA08EF85D0",
-    verified: true,
-  },
-  {
-    name: "PINKDROP Game",
-    address: "0x7bFC36fA3f81aD31cec770149695717757297462",
-    explorer: "https://moonscan.io/address/0x7bFC36fA3f81aD31cec770149695717757297462#tokentxns",
-    verified: true,
-  },
-];
+// Helper function to map icon names to React components
+const getIconComponent = (iconName: string) => {
+  switch (iconName) {
+    case 'FaLock': return FaLock;
+    case 'FaShieldAlt': return FaShieldAlt;
+    case 'FaUsers': return FaUsers;
+    case 'FaExclamationCircle': return FaExclamationCircle;
+    case 'FaFire': return FaFire;
+    case 'FaGamepad': return FaGamepad;
+    case 'FaExchangeAlt': return FaExchangeAlt;
+    case 'FaChartLine': return FaChartLine;
+    case 'FaWallet': return FaWallet;
+    case 'FaCoins': return FaCoins;
+    case 'FaChartPie': return FaChartPie;
+    case 'FaWater': return FaWater;
+    case 'FaQuestion': return FaQuestion;
+    case 'FaLink': return FaLink;
+    case 'FaDatabase': return FaDatabase;
+    case 'FaChartBar': return FaChartBar;
+    case 'FaUniversity': return FaUniversity;
+    default: return FaQuestion;
+  }
+};
 
-const externalLinks = [
-  { label: "CoinMarketCap", url: "https://coinmarketcap.com/currencies/pink/" },
-  { label: "Dex Screener", url: "https://dexscreener.com/search?q=pink" },
-  { label: "Burn Tracker", url: BURN_ADDRESS_URL, category: "burn" },
-  { label: "Liquidity Info", url: "https://dexscreener.com/moonbeam/0x11e07ecc2276b12119dac36ef16df914b8c0cefc" },
-  { label: "Holder Analytics", url: "https://moonscan.io/token/0xffffffff30478fafbe935e466da114e14fb3563d#balances" },
-];
+// Security features with React components
+const securityFeaturesWithIcons = securityFeatures.map(feature => {
+  const IconComponent = getIconComponent(feature.iconName);
+  return {
+    ...feature,
+    icon: <IconComponent className={feature.iconColor} />
+  };
+});
 
-const securityFeatures = [
-  {
-    title: "Locked Liquidity",
-    description: "Initial liquidity locked for 2 years to ensure project stability",
-    icon: <FaLock className="text-purple-400" />,
-  },
-  {
-    title: "Verified Contracts",
-    description: "All contracts are verified and publicly viewable on blockchain explorers",
-    icon: <FaShieldAlt className="text-green-400" />,
-  },
-  {
-    title: "Renounced Ownership",
-    description: "Contract ownership renounced, preventing changes to tokenomics",
-    icon: <FaUsers className="text-blue-400" />,
-  },
-  {
-    title: "Regular Audits",
-    description: "Smart contract audits conducted by independent security firms",
-    icon: <FaExclamationCircle className="text-yellow-400" />,
-  },
-];
+// Deflationary mechanisms with React components
+const deflationaryMechanismsWithIcons = deflationaryMechanisms.map(mechanism => {
+  const IconComponent = getIconComponent(mechanism.icon);
+  return {
+    ...mechanism,
+    iconComponent: <IconComponent className="text-pink-400" />
+  };
+});
 
 const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
   const [copied, setCopied] = useState<string | null>(null);
-  const [stats, setStats] = useState<any>({
-    balances: {
-      maxSupply: 2300001221,
-      totalSupply: 2209980141.92268,
-      circulatingSupply: 1543575108.21327,
-      moonbeamSupply: 2011851454.32097,
-      baseSupply: 214935778.286231,
-      treasuryBalance: 666405033.709418,
-      moonbeamBurnBalance: 67742498.485171,
-      baseBurnBalance: 3415695.59214657,
-      phalaBurnBalance: 18862885,
-      totalBurnBalance: 90021079.0773176,
-      lastUpdated: "2025-08-01T03:50:49.478Z"
-    },
-    burn: {
-      burnedLast1Day: 17400,
-      burnedLast7Days: 83600,
-      burnedLast30Days: 646200,
-      burnedLast60Days: 920400,
-      updatedAt: "2025-08-01T03:50:49.585Z"
-    },
-    pinkDrop: {
-      pinkSpentOnTickets: 10467000,
-      ticketsPurchased: 10467,
-      rewardsClaimed: 7731184.2232,
-      pinkBurnedByTournaments: 1980400,
-      completedTournaments: 417,
-      updatedAt: "2025-08-01T03:50:49.690Z"
-    },
-    marketData: {
-      price: "$0.00278",
-      marketCap: "$4.5M",
-      holders: "4,912",
-      dailyVolume: "$380K",
-      liquidityValue: "$990K",
-      updatedAt: "2025-08-01T03:50:49.690Z"
-    },
-    lastUpdated: "2025-08-01T03:50:49.690Z"
-  });
+  const [stats, setStats] = useState<PinkStatsResponse | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Fetch data from API
   useEffect(() => {
     const fetchPinkStats = async () => {
       try {
-        const response = await fetch("https://pink-utils.kargo-dev.workers.dev/pink-stats");
+        setIsLoading(true);
+        const response = await fetch(PINK_STATS_API_ENDPOINT);
         if (!response.ok) {
           throw new Error("Failed to fetch PINK stats");
         }
         const data = await response.json();
         setStats(data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching PINK stats:", error);
+        setIsLoading(false);
       }
     };
 
@@ -151,88 +111,75 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
   });
   const [lastUpdated, setLastUpdated] = useState<string>("");
   const [marketData, setMarketData] = useState({
-    marketCap: "$4.3M",
-    price: "$0.00274",
-    holders: "4,783",
-    dailyVolume: "$342K",
-    liquidityValue: "$980K"
-  });  // Simulated data that would be fetched from APIs
+    price: "$0.00278",
+    marketCap: "$4.5M",
+    holders: "4,912",
+    dailyVolume: "$380K",
+    liquidityValue: "$990K",
+    updatedAt: new Date().toISOString()
+  });
   const [tokenMetrics, setTokenMetrics] = useState({
-    circulatingSupply: 1580000000,
-    percentCirculating: 68.7,
-    burned: burnedAmount,
-    percentBurned: parseFloat(burnPercentage),
-    treasuryHoldings: 172500091,
-    percentTreasury: 7.5,
-    teamAllocation: 345000183,
-    percentTeam: 15,
-    marketingAllocation: 230000122,
-    percentMarketing: 10,
+    circulatingSupply: 0,
+    percentCirculating: 0,
+    burned: 0,
+    percentBurned: 0,
+    treasuryHoldings: 0,
+    percentTreasury: 0,
+    teamAllocation: tokenMetricsConstants.teamAllocation,
+    percentTeam: tokenMetricsConstants.percentTeam
   });
 
+  // Process data when stats are updated
   useEffect(() => {
-    const fetchPinkStats = async () => {
-      try {
-        // Fetch consolidated PINK stats data from new endpoint
-        const response = await fetch("https://pink-utils.kargo-dev.workers.dev/pink-stats");
-        if (!response.ok) {
-          throw new Error("Failed to fetch PINK stats");
-        }
-        const statsData = await response.json();
+    if (!stats || !stats.balances || !stats.burn) return;
 
-        // Update stats state with all data
-        setStats(statsData);
+    try {
+      // Update total burn amount and percentage
+      setBurnedAmount(stats.balances.totalBurnBalance || 0);
+      setBurnPercentage((((stats.balances.totalBurnBalance || 0) / (stats.balances.maxSupply || TOTAL_SUPPLY)) * 100).toFixed(2));
+      setLastUpdated(stats.lastUpdated ? new Date(stats.lastUpdated).toLocaleString() : new Date().toLocaleString());
 
-        // Update total burn amount and percentage
-        setBurnedAmount(statsData.balances.totalBurnBalance);
-        setBurnPercentage(((statsData.balances.totalBurnBalance / statsData.balances.maxSupply) * 100).toFixed(2));
-        setLastUpdated(new Date(statsData.lastUpdated).toLocaleString());
+      // Update chain-specific burn data
+      setChainBurns({
+        moonbeam: stats.balances.moonbeamBurnBalance || 0,
+        base: stats.balances.baseBurnBalance || 0,
+        phala: stats.balances.phalaBurnBalance || 0
+      });
 
-        // Update chain-specific burn data
-        setChainBurns({
-          moonbeam: statsData.balances.moonbeamBurnBalance || 0,
-          base: statsData.balances.baseBurnBalance || 0,
-          phala: statsData.balances.phalaBurnBalance || 0
-        });
+      // Update burn rates
+      setBurnRates({
+        last1Day: stats.burn.burnedLast1Day || 0,
+        last7Days: stats.burn.burnedLast7Days || 0,
+        last30Days: stats.burn.burnedLast30Days || 0,
+        last60Days: stats.burn.burnedLast60Days || 0,
+        monthlyAverage: stats.burn.burnedLast30Days || 0
+      });
 
-        // Update burn rates
-        setBurnRates({
-          last1Day: statsData.burn.burnedLast1Day || 0,
-          last7Days: statsData.burn.burnedLast7Days || 0,
-          last30Days: statsData.burn.burnedLast30Days || 0,
-          last60Days: statsData.burn.burnedLast60Days || 0,
-          monthlyAverage: statsData.burn.burnedLast30Days || 0
-        });
+      // Update token metrics with the new data
+      setTokenMetrics({
+        circulatingSupply: stats.balances.circulatingSupply || (TOTAL_SUPPLY * 0.36),
+        percentCirculating: ((stats.balances.circulatingSupply || (TOTAL_SUPPLY * 0.36)) / (stats.balances.maxSupply || TOTAL_SUPPLY)) * 100,
+        burned: stats.balances.totalBurnBalance || 0,
+        percentBurned: ((stats.balances.totalBurnBalance || 0) / (stats.balances.maxSupply || TOTAL_SUPPLY)) * 100,
+        treasuryHoldings: stats.balances.treasuryBalance || tokenMetricsConstants.treasuryAllocation,
+        percentTreasury: ((stats.balances.treasuryBalance || tokenMetricsConstants.treasuryAllocation) / (stats.balances.maxSupply || TOTAL_SUPPLY)) * 100,
+        teamAllocation: tokenMetricsConstants.teamAllocation,
+        percentTeam: tokenMetricsConstants.percentTeam
+      });
 
-        // Update token metrics with the new data
-        setTokenMetrics({
-          circulatingSupply: statsData.balances.circulatingSupply,
-          percentCirculating: (statsData.balances.circulatingSupply / statsData.balances.maxSupply) * 100,
-          burned: statsData.balances.totalBurnBalance,
-          percentBurned: (statsData.balances.totalBurnBalance / statsData.balances.maxSupply) * 100,
-          treasuryHoldings: statsData.balances.treasuryBalance,
-          percentTreasury: (statsData.balances.treasuryBalance / statsData.balances.maxSupply) * 100,
-          teamAllocation: 345000183, // Hardcoded value since not in API
-          percentTeam: 15, // Hardcoded value since not in API
-          marketingAllocation: 230000122, // Hardcoded value since not in API
-          percentMarketing: 10 // Hardcoded value since not in API
-        });
-
-        // Update market data
-        setMarketData({
-          marketCap: statsData.marketData.marketCap,
-          price: statsData.marketData.price,
-          holders: statsData.marketData.holders,
-          dailyVolume: statsData.marketData.dailyVolume,
-          liquidityValue: statsData.marketData.liquidityValue
-        });
-      } catch (error) {
-        console.error("Error fetching PINK stats:", error);
-      }
-    };
-
-    fetchPinkStats();
-  }, []);
+      // Update market data
+      setMarketData({
+        marketCap: stats.marketData?.marketCap || '0',
+        price: stats.marketData?.price || '0',
+        holders: stats.marketData?.holders || '0',
+        dailyVolume: stats.marketData?.dailyVolume || '0',
+        liquidityValue: stats.marketData?.liquidityValue || '0',
+        updatedAt: stats.marketData?.updatedAt || new Date().toISOString()
+      });
+    } catch (error) {
+      console.error("Error processing PINK stats:", error);
+    }
+  }, [stats]);
 
   const copyToClipboard = (address: string) => {
     navigator.clipboard.writeText(address);
@@ -262,7 +209,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           >
             <HiSparkles className="absolute -top-6 -left-8 text-pink-500 text-3xl opacity-70" />
             <h2 className="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight">
-              PINK<span className="text-pink-500">onomics</span>
+              PINK<span className="text-pink-500">ONOMICS</span>
             </h2>
             <div className="h-1 w-1/3 bg-pink-500 mx-auto"></div>
           </motion.div>
@@ -342,7 +289,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                         animate={{ scale: [1, 1.02, 1] }}
                         transition={{ duration: 3, repeat: Infinity }}
                       >
-                        {(burnedAmount / 1000000).toFixed(1)}M
+                        90.0M
                       </motion.div>
                       <div className="absolute top-1 right-0 flex flex-col items-end">
                         <div className="text-xs text-gray-400">PINK tokens</div>
@@ -399,7 +346,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                         animate={{ scale: [1, 1.02, 1] }}
                         transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                       >
-                        {(burnRates.monthlyAverage / 1000000).toFixed(1)}M
+                        2.5M
                       </motion.div>
                       <div className="absolute top-1 right-0">
                         <div className="text-xs text-gray-400">PINK tokens per month</div>
@@ -611,12 +558,10 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
             <div className="bg-black/30 rounded-lg p-3 mt-2">
               <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-200">
-                {Math.round(stats?.balances?.maxSupply).toLocaleString()}
+                2.3B
               </div>
               <div className="text-pink-400 text-sm">PINK tokens</div>
-            </div>
-
-            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
+            </div>            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
               <div className="h-2 bg-pink-500" style={{ width: '100%' }}></div>
             </div>
 
@@ -641,14 +586,12 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
 
             <div className="bg-black/30 rounded-lg p-3 mt-2">
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">{Math.round(tokenMetrics.circulatingSupply).toLocaleString()}</div>
+              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">1.4B</div>
               <div className="flex items-center justify-between">
                 <div className="text-purple-400 text-sm">PINK tokens</div>
-                <div className="text-xs px-2 py-0.5 rounded-full bg-purple-900/40 text-purple-300">{Math.round(tokenMetrics.percentCirculating)}% of total</div>
+                <div className="text-xs px-2 py-0.5 rounded-full bg-purple-900/40 text-purple-300">60% of total</div>
               </div>
-            </div>
-
-            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
+            </div>            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
               <motion.div
                 className="h-2 bg-purple-500"
                 initial={{ width: 0 }}
@@ -679,14 +622,12 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
 
             <div className="bg-black/30 rounded-lg p-3 mt-2">
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-200">{Math.round(tokenMetrics.treasuryHoldings).toLocaleString()}</div>
+              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-200">666.4M</div>
               <div className="flex items-center justify-between">
                 <div className="text-yellow-400 text-sm">PINK tokens</div>
-                <div className="text-xs px-2 py-0.5 rounded-full bg-yellow-900/40 text-yellow-300">{Math.round(tokenMetrics.percentTreasury)}% of total</div>
+                <div className="text-xs px-2 py-0.5 rounded-full bg-yellow-900/40 text-yellow-300">29% of total</div>
               </div>
-            </div>
-
-            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
+            </div>            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
               <motion.div
                 className="h-2 bg-gradient-to-r from-yellow-500 to-amber-500"
                 initial={{ width: 0 }}
@@ -710,10 +651,10 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           transition={{ duration: 0.7 }}
           className="mb-24"
         >
-          <div className="text-center mb-10">
-            <div className="inline-block mb-3">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4">
               <motion.div
-                className="px-3 py-1.5 bg-gradient-to-r from-pink-900/40 to-purple-900/40 text-pink-400 text-xs font-medium rounded-full"
+                className="px-4 py-2 bg-gradient-to-r from-pink-900/40 to-purple-900/40 text-pink-400 text-sm font-medium rounded-full border border-pink-500/20"
                 animate={{
                   boxShadow: ['0 0 0px rgba(219,39,119,0.3)', '0 0 15px rgba(219,39,119,0.5)', '0 0 0px rgba(219,39,119,0.3)']
                 }}
@@ -722,20 +663,17 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 DEFLATIONARY MODEL
               </motion.div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-pink-200 via-pink-300 to-purple-200 text-transparent bg-clip-text mb-3">
-              PINK Tokenomics
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <p className="text-gray-300 max-w-3xl mx-auto text-lg">
               The PINK token features an innovative deflationary mechanism with strategic allocation and continuous
               burn processes across multiple chains, designed to enhance value over time.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
             {/* Chart & Supply Stats */}
             <div className="lg:col-span-5">
               <motion.div
-                className="bg-gradient-to-r from-gray-900/80 to-black/80 rounded-2xl p-6 border border-pink-900/30 shadow-lg shadow-pink-900/10"
+                className="bg-gradient-to-r from-gray-900/80 to-black/80 rounded-2xl p-6 border border-pink-900/30 shadow-lg shadow-pink-900/10 h-full"
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -778,8 +716,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                       <div className="w-3 h-3 rounded-full bg-pink-500 mr-2"></div>
                       <h3 className="text-white font-medium">Initial Supply</h3>
                     </div>
-                    <p className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-200">{TOTAL_SUPPLY.toLocaleString()}</p>
-                    <p className="text-xs text-gray-400">{(TOTAL_SUPPLY / 1000000000).toFixed(1)} billion PINK</p>
+                    <p className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-200">2.3B</p>
+                    <p className="text-xs text-gray-400">2,300,001,221 PINK</p>
                   </motion.div>
 
                   <motion.div
@@ -793,8 +731,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                       <div className="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
                       <h3 className="text-white font-medium">Current Supply</h3>
                     </div>
-                    <p className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">{(TOTAL_SUPPLY - burnedAmount).toLocaleString()}</p>
-                    <p className="text-xs text-gray-400">After burn mechanisms</p>
+                    <p className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">2.21B</p>
+                    <p className="text-xs text-gray-400">2,209,975,342 PINK</p>
                   </motion.div>
                 </div>
 
@@ -816,10 +754,10 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
 
             {/* Tokenomics Features */}
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-              {/* Treasury & Marketing */}
+            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Treasury */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-5 border border-blue-900/20 relative overflow-hidden"
+                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-blue-900/20 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -833,43 +771,55 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center mr-3">
                     <FaUniversity className="text-blue-400" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white">Treasury & Marketing</h3>
+                  <h3 className="text-lg font-semibold text-white">Treasury</h3>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="mb-4">
                   <div className="bg-black/40 p-3 rounded-lg">
-                    <div className="text-sm text-gray-400 mb-1">Treasury</div>
-                    <div className="text-2xl font-bold text-blue-400">{tokenMetrics.percentTreasury}%</div>
-                    <div className="text-xs text-gray-500">{tokenMetrics.treasuryHoldings.toLocaleString()} PINK</div>
-                  </div>
-
-                  <div className="bg-black/40 p-3 rounded-lg">
-                    <div className="text-sm text-gray-400 mb-1">Marketing</div>
-                    <div className="text-2xl font-bold text-indigo-400">{tokenMetrics.percentMarketing}%</div>
-                    <div className="text-xs text-gray-500">{tokenMetrics.marketingAllocation.toLocaleString()} PINK</div>
+                    <div className="text-sm text-gray-400 mb-1">Treasury Allocation</div>
+                    <div className="text-3xl font-bold text-blue-400">666.4M</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-blue-400 text-sm">PINK tokens</div>
+                      <div className="text-xs px-2 py-0.5 rounded-full bg-blue-900/40 text-blue-300">29% of total</div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="text-gray-400 text-sm mb-3">Allocation Details:</div>
-                <ul className="space-y-2 text-sm">
+                <div className="text-gray-300 text-sm font-medium mt-2 mb-2">Treasury Purpose:</div>
+                <ul className="space-y-3 text-sm flex-1">
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-blue-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-blue-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaCode className="text-blue-400 text-xs" />
                     </div>
-                    <span className="text-gray-300">Development initiatives and grants</span>
+                    <div>
+                      <span className="text-gray-300">Development initiatives and grants</span>
+                      <p className="text-gray-500 text-xs mt-1">Supporting ecosystem expansion</p>
+                    </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-indigo-900/30 flex items-center justify-center mr-2 mt-0.5">
-                      <FaBullhorn className="text-indigo-400 text-xs" />
+                    <div className="w-6 h-6 rounded-full bg-blue-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <FaFire className="text-blue-400 text-xs" />
                     </div>
-                    <span className="text-gray-300">Strategic partnerships and campaigns</span>
+                    <div>
+                      <span className="text-gray-300">Burn campaigns and incentives</span>
+                      <p className="text-gray-500 text-xs mt-1">Funding deflationary mechanisms</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="w-6 h-6 rounded-full bg-blue-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <FaHandHoldingUsd className="text-blue-400 text-xs" />
+                    </div>
+                    <div>
+                      <span className="text-gray-300">Strategic partnerships</span>
+                      <p className="text-gray-500 text-xs mt-1">Expanding ecosystem adoption and utility</p>
+                    </div>
                   </li>
                 </ul>
               </motion.div>
 
               {/* Deflationary Mechanism */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-5 border border-pink-900/20 relative overflow-hidden"
+                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-pink-900/20 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -883,35 +833,53 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="w-10 h-10 rounded-lg bg-pink-900/30 flex items-center justify-center mr-3">
                     <FaFire className="text-pink-400" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white">Deflationary Model</h3>
+                  <h3 className="text-lg font-semibold text-white">Deflationary</h3>
                 </div>
 
                 <div className="bg-black/40 p-3 rounded-lg mb-4">
                   <div className="text-sm text-gray-400 mb-1">Supply Reduction</div>
-                  <div className="text-2xl font-bold text-pink-400">{burnPercentage}%</div>
-                  <div className="text-xs text-gray-500">And increasing with continued burns</div>
+                  <div className="text-3xl font-bold text-pink-400">90.0M</div>
+                  <div className="flex items-center justify-between">
+                    <div className="text-pink-400 text-sm">PINK burned</div>
+                    <div className="text-xs px-2 py-0.5 rounded-full bg-pink-900/40 text-pink-300">3.9% of total</div>
+                  </div>
                 </div>
 
-                <div className="text-gray-400 text-sm mb-3">Burn Mechanisms:</div>
-                <ul className="space-y-2 text-sm">
+                <div className="text-gray-300 text-sm font-medium mt-2 mb-2">Burn Mechanisms:</div>
+                <ul className="space-y-3 text-sm flex-1">
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-pink-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-pink-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaExchangeAlt className="text-pink-400 text-xs" />
                     </div>
-                    <span className="text-gray-300">Multi-chain automated burn systems</span>
+                    <div>
+                      <span className="text-gray-300">Multi-chain automated burn systems</span>
+                      <p className="text-gray-500 text-xs mt-1">Reduces supply across all supported chains</p>
+                    </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-pink-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-pink-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaChartLine className="text-pink-400 text-xs" />
                     </div>
-                    <span className="text-gray-300">Increasing scarcity over time</span>
+                    <div>
+                      <span className="text-gray-300">Increasing scarcity over time</span>
+                      <p className="text-gray-500 text-xs mt-1">Creating long-term value appreciation</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="w-6 h-6 rounded-full bg-pink-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                      <FaFire className="text-pink-400 text-xs" />
+                    </div>
+                    <div>
+                      <span className="text-gray-300">Community-driven burn events</span>
+                      <p className="text-gray-500 text-xs mt-1">Regular campaigns incentivizing token burns</p>
+                    </div>
                   </li>
                 </ul>
               </motion.div>
 
               {/* Liquidity & Security */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-5 border border-green-900/20 relative overflow-hidden"
+                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-green-900/20 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -928,32 +896,33 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   <h3 className="text-lg font-semibold text-white">Liquidity & Security</h3>
                 </div>
 
-                <ul className="space-y-3 text-sm">
+                <div className="text-gray-300 text-sm font-medium mt-2 mb-2">Key Features:</div>
+                <ul className="space-y-3 text-sm flex-1">
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-green-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-green-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaShieldAlt className="text-green-400 text-xs" />
                     </div>
                     <div>
                       <span className="text-gray-200 font-medium">Locked Liquidity</span>
-                      <p className="text-gray-400 text-xs mt-0.5">Ensures long-term trading stability and prevents rug pulls</p>
+                      <p className="text-gray-400 text-xs mt-1">Ensures long-term trading stability and prevents rug pulls</p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-green-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-green-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaFileContract className="text-green-400 text-xs" />
                     </div>
                     <div>
                       <span className="text-gray-200 font-medium">Audited Smart Contracts</span>
-                      <p className="text-gray-400 text-xs mt-0.5">Verified by leading blockchain security firms</p>
+                      <p className="text-gray-400 text-xs mt-1">Verified by leading blockchain security firms</p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-green-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-green-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaGlobeAmericas className="text-green-400 text-xs" />
                     </div>
                     <div>
                       <span className="text-gray-200 font-medium">Multi-Chain Presence</span>
-                      <p className="text-gray-400 text-xs mt-0.5">Accessible across multiple blockchain ecosystems</p>
+                      <p className="text-gray-400 text-xs mt-1">Accessible across multiple blockchain ecosystems</p>
                     </div>
                   </li>
                 </ul>
@@ -961,7 +930,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
               {/* User Benefits */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-5 border border-purple-900/20 relative overflow-hidden"
+                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-purple-900/20 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -978,32 +947,33 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   <h3 className="text-lg font-semibold text-white">User Benefits</h3>
                 </div>
 
-                <ul className="space-y-3 text-sm">
+                <div className="text-gray-300 text-sm font-medium mt-2 mb-2">Holder Advantages:</div>
+                <ul className="space-y-3 text-sm flex-1">
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-purple-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-purple-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaHandHoldingUsd className="text-purple-400 text-xs" />
                     </div>
                     <div>
                       <span className="text-gray-200 font-medium">Zero Transaction Fees</span>
-                      <p className="text-gray-400 text-xs mt-0.5">Seamless trading experience without extra costs</p>
+                      <p className="text-gray-400 text-xs mt-1">Seamless trading experience without extra costs</p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-purple-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-purple-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaRocket className="text-purple-400 text-xs" />
                     </div>
                     <div>
                       <span className="text-gray-200 font-medium">Value Growth Potential</span>
-                      <p className="text-gray-400 text-xs mt-0.5">Deflationary model designed to enhance token value</p>
+                      <p className="text-gray-400 text-xs mt-1">Deflationary model designed to enhance token value</p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-5 h-5 rounded-full bg-purple-900/30 flex items-center justify-center mr-2 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-purple-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
                       <FaGamepad className="text-purple-400 text-xs" />
                     </div>
                     <div>
                       <span className="text-gray-200 font-medium">Gaming & DeFi Utility</span>
-                      <p className="text-gray-400 text-xs mt-0.5">Use in games and decentralized finance applications</p>
+                      <p className="text-gray-400 text-xs mt-1">Use in games and decentralized finance applications</p>
                     </div>
                   </li>
                 </ul>
@@ -1077,82 +1047,6 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             </motion.div>
           </div>
 
-          <div className="mt-8 overflow-hidden">
-            <motion.h4
-              className="text-xl font-bold text-white mb-4 text-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              Burn History Timeline
-            </motion.h4>
-
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-pink-600 to-purple-600 transform md:translate-x-[-50%] z-0"></div>
-
-              {/* Timeline events */}
-              <div className="relative z-10 space-y-8">
-                <motion.div
-                  className="md:ml-[50%] pl-8 md:pl-12 relative"
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="absolute left-[-8px] md:left-[-16px] top-0 w-4 h-4 rounded-full bg-pink-500 border-4 border-black"></div>
-                  <div className="bg-black/60 p-4 rounded-lg border border-pink-500/30">
-                    <h5 className="text-lg font-medium text-pink-400">Gameme Party Campaign</h5>
-                    <p className="text-gray-400 text-sm">Over 844 participants played 50K+ games, earning 100K+ Pink Points by burning PINK tokens.</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="md:mr-[50%] md:text-right pr-0 md:pr-12 pl-8 md:pl-0 relative"
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  <div className="absolute left-[-8px] md:left-[calc(100%+8px)] top-0 w-4 h-4 rounded-full bg-purple-500 border-4 border-black"></div>
-                  <div className="bg-black/60 p-4 rounded-lg border border-purple-500/30">
-                    <h5 className="text-lg font-medium text-purple-400">Play-to-Burn Initiative</h5>
-                    <p className="text-gray-400 text-sm">31,798 games played, resulting in a massive 52M PINK burned from the treasury!</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="md:ml-[50%] pl-8 md:pl-12 relative"
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <div className="absolute left-[-8px] md:left-[-16px] top-0 w-4 h-4 rounded-full bg-pink-500 border-4 border-black"></div>
-                  <div className="bg-black/60 p-4 rounded-lg border border-pink-500/30">
-                    <h5 className="text-lg font-medium text-pink-400">Platypus NFT Sales</h5>
-                    <p className="text-gray-400 text-sm">Over 11M PINK permanently burned across Moonbeam (7.6M) and Base (3.4M) networks.</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="md:mr-[50%] md:text-right pr-0 md:pr-12 pl-8 md:pl-0 relative"
-                  initial={{ opacity: 0, x: 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  <div className="absolute left-[-8px] md:left-[calc(100%+8px)] top-0 w-4 h-4 rounded-full bg-purple-500 border-4 border-black"></div>
-                  <div className="bg-black/60 p-4 rounded-lg border border-purple-500/30">
-                    <h5 className="text-lg font-medium text-purple-400">EVRLOOT Auction</h5>
-                    <p className="text-gray-400 text-sm">Almost 400K PINK burned forever after the PINK Villa auction in the EVRLOOT game.</p>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
-
           <div className="mt-6 p-4 border border-yellow-500/30 bg-yellow-900/10 rounded-lg">
             <div className="flex items-start">
               <FaInfoCircle className="text-yellow-400 mt-1 mr-3" />
@@ -1180,7 +1074,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {securityFeatures.map((feature, index) => (
+            {securityFeaturesWithIcons.map((feature, index) => (
               <motion.div
                 key={index}
                 className="bg-black/40 rounded-lg p-6 border border-gray-800 hover:border-green-500/30 transition-all"
