@@ -60,7 +60,7 @@ export const contractAddresses = [
         name: "PINK on Asset Hub (Origin)",
         address: "Asset ID: 23",
         explorer: "https://assethub-polkadot.subscan.io/asset/23",
-        verified: true,
+        verified: false,
         note: "Available on Hydration DEX"
     },
     {

@@ -9,14 +9,11 @@ import {
   FaTint as FaWater, FaQuestion, FaLink, FaDatabase, FaTicketAlt,
   FaHome, FaImage
 } from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi";
 import { PieChart } from 'react-minimal-pie-chart';
 
 // Import data from data file
 import {
   TOTAL_SUPPLY,
-  BURN_ADDRESS,
-  BURN_ADDRESS_URL,
   INITIAL_DISTRIBUTION,
   contractAddresses,
   externalLinks,
