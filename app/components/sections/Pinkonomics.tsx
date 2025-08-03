@@ -6,7 +6,8 @@ import {
   FaWallet, FaUsers, FaExchangeAlt, FaChartPie, FaInfoCircle,
   FaUniversity, FaCode, FaBullhorn, FaFileContract, FaGlobeAmericas,
   FaUserCheck, FaHandHoldingUsd, FaRocket, FaGamepad, FaChartBar,
-  FaTint as FaWater, FaQuestion, FaLink, FaDatabase
+  FaTint as FaWater, FaQuestion, FaLink, FaDatabase, FaTicketAlt,
+  FaHome, FaCalendarAlt, FaImage
 } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import { PieChart } from 'react-minimal-pie-chart';
@@ -984,78 +985,152 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
         {/* Deflationary Mechanisms */}
         <motion.div
-          className="mb-20 bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-pink-500/20"
+          className="mb-20 bg-gradient-to-br from-gray-900/50 to-black/60 backdrop-blur-sm p-8 rounded-xl border border-pink-500/20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="flex items-center mb-6">
-            <div className="w-10 h-10 rounded-full bg-pink-900/40 flex items-center justify-center mr-3">
-              <FaFire className="text-pink-400" />
+          <div className="flex items-center mb-8">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-900/50 to-pink-700/30 flex items-center justify-center mr-4 shadow-lg shadow-pink-500/10">
+              <FaFire className="text-pink-400 text-lg" />
             </div>
-            <h3 className="text-2xl font-bold text-pink-400">Deflationary Mechanisms</h3>
+            <div>
+              <h3 className="text-2xl font-bold text-pink-400">Deflationary Mechanisms</h3>
+              <p className="text-gray-400 text-sm mt-1">Continuous burn processes reduce supply and increase scarcity over time</p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Card 1 - Pink Ticket Burns */}
             <motion.div
-              className="bg-black/40 rounded-lg p-6 border border-gray-800 hover:border-pink-500/30 transition-all"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              whileHover={{ x: 5 }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <h4 className="text-xl font-medium text-white mb-2">PinkDrop Tickets</h4>
-              <p className="text-gray-400">20% of all PinkDrop ticket sales (1,000 PINK per ticket) are automatically burned, creating constant deflationary pressure with each game played.</p>
-            </motion.div>
-
-            <motion.div
-              className="bg-black/40 rounded-lg p-6 border border-gray-800 hover:border-pink-500/30 transition-all"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ x: 5 }}
-            >
-              <h4 className="text-xl font-medium text-white mb-2">Play-to-Burn Games</h4>
-              <p className="text-gray-400">Treasury burns 1,000 PINK for every game played in our ecosystem. Our Play-to-Burn campaigns have already burned over 52M PINK tokens!</p>
-            </motion.div>
-
-            <motion.div
-              className="bg-black/40 rounded-lg p-6 border border-gray-800 hover:border-pink-500/30 transition-all"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ x: 5 }}
-            >
-              <h4 className="text-xl font-medium text-white mb-2">NFT & Gaming Integrations</h4>
-              <p className="text-gray-400">Over 11M PINK burned from Platypus NFT sales. Strategic integrations with EVRLOOT and other games continuously remove PINK from circulation.</p>
-            </motion.div>
-
-            <motion.div
-              className="bg-black/40 rounded-lg p-6 border border-gray-800 hover:border-pink-500/30 transition-all"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{ x: 5 }}
-            >
-              <h4 className="text-xl font-medium text-white mb-2">Community Burn Events</h4>
-              <p className="text-gray-400">Special burn events like the Platypus NFT giveaway saw the community burn 445K PINK in just 48 hours. Users burn PINK to earn Pink Points in limited-time campaigns.</p>
-            </motion.div>
-          </div>
-
-          <div className="mt-6 p-4 border border-yellow-500/30 bg-yellow-900/10 rounded-lg">
-            <div className="flex items-start">
-              <FaInfoCircle className="text-yellow-400 mt-1 mr-3" />
-              <p className="text-gray-300 text-sm">
-                <span className="font-medium text-yellow-300">Next Burn Event:</span> Get ready for the next community burn event on August 15th, 2025.
-                An estimated 5 million PINK will be permanently removed from circulation. Stay tuned for special participation rewards!
+              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
+                  <FaTicketAlt className="text-pink-300" />
+                </div>
+                <h4 className="text-xl font-semibold text-pink-200">PinkDrop Tournament Burns</h4>
+              </div>
+              <p className="text-gray-300">
+                <span className="text-pink-400 font-semibold">20%</span> of all PINK from tournament tickets are permanently burned.
+                <span className="text-pink-400 font-semibold"> 1,000 PINK</span> per ticket.
               </p>
-            </div>
+              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+                <div className="flex items-center">
+                  <FaFire className="text-pink-400 mr-2 animate-pulse" />
+                  <span className="text-sm text-pink-200">Tournament-driven Burn Mechanism</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 2 - NFT Integration Burns */}
+            <motion.div
+              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
+                  <FaImage className="text-pink-300" />
+                </div>
+                <h4 className="text-xl font-semibold text-pink-200">Platypus NFT Burns</h4>
+              </div>
+              <p className="text-gray-300">
+                Platypus NFT sales funded a one-time purchase of PINK tokens for burning, enhancing scarcity.
+              </p>
+              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+                <div className="flex items-center">
+                  <FaFire className="text-pink-400 mr-2 animate-pulse" />
+                  <span className="text-sm text-pink-200">One-time NFT Sale Burn</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3 - Pink Villa Sales */}
+            <motion.div
+              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
+                  <FaHome className="text-pink-300" />
+                </div>
+                <h4 className="text-xl font-semibold text-pink-200">EVRLOOT Pink Villa Sales</h4>
+              </div>
+              <p className="text-gray-300">
+                PINK tokens from EVRLOOT Pink Villa sales are burned, reducing supply through virtual real estate transactions.
+              </p>
+              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+                <div className="flex items-center">
+                  <FaFire className="text-pink-400 mr-2 animate-pulse" />
+                  <span className="text-sm text-pink-200">Virtual Real Estate Burn</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 4 - Gememe Party */}
+            <motion.div
+              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
+                  <FaGamepad className="text-pink-300" />
+                </div>
+                <h4 className="text-xl font-semibold text-pink-200">Gememe Party Burns</h4>
+              </div>
+              <p className="text-gray-300">
+                Gememe Party burns PINK tokens during gameplay, with each transaction reducing supply.
+              </p>
+              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+                <div className="flex items-center">
+                  <FaFire className="text-pink-400 mr-2 animate-pulse" />
+                  <span className="text-sm text-pink-200">Gaming Integration Burn</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
+
+          <motion.div
+            className="mt-8 bg-gradient-to-br from-pink-900/20 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 relative overflow-hidden shadow-lg"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
+          >
+            <div className="absolute -right-20 -bottom-20 w-40 h-40 rounded-full bg-pink-500/10 blur-3xl"></div>
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-600 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/30">
+                <FaFire className="text-pink-300" />
+              </div>
+              <h4 className="text-xl font-semibold text-pink-200">Play-to-Burn Mechanism</h4>
+            </div>
+            <p className="text-gray-300 max-w-3xl">
+              More gameplay = more burns. More activity directly reduces supply and increases scarcity.
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Security Features */}
