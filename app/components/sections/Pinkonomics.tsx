@@ -4,10 +4,10 @@ import {
   FaCopy, FaExternalLinkAlt, FaCheck, FaFire, FaChartLine,
   FaCoins, FaExclamationCircle, FaShieldAlt, FaLock,
   FaWallet, FaUsers, FaExchangeAlt, FaChartPie, FaInfoCircle,
-  FaUniversity, FaCode, FaBullhorn, FaFileContract, FaGlobeAmericas,
+  FaUniversity, FaCode, FaFileContract, FaGlobeAmericas,
   FaUserCheck, FaHandHoldingUsd, FaRocket, FaGamepad, FaChartBar,
   FaTint as FaWater, FaQuestion, FaLink, FaDatabase, FaTicketAlt,
-  FaHome, FaCalendarAlt, FaImage
+  FaHome, FaImage
 } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi";
 import { PieChart } from 'react-minimal-pie-chart';
@@ -22,9 +22,7 @@ import {
   externalLinks,
   securityFeatures,
   tokenMetricsConstants,
-  PINK_STATS_API_ENDPOINT,
-  deflationaryMechanisms,
-  burnTimelineEvents
+  PINK_STATS_API_ENDPOINT
 } from "../../data/pinkonomics";
 import type { PinkStatsResponse } from "../../data/pinkonomics";
 
@@ -58,15 +56,6 @@ const securityFeaturesWithIcons = securityFeatures.map(feature => {
   return {
     ...feature,
     icon: <IconComponent className={feature.iconColor} />
-  };
-});
-
-// Deflationary mechanisms with React components
-const deflationaryMechanismsWithIcons = deflationaryMechanisms.map(mechanism => {
-  const IconComponent = getIconComponent(mechanism.icon);
-  return {
-    ...mechanism,
-    iconComponent: <IconComponent className="text-pink-400" />
   };
 });
 
@@ -587,23 +576,29 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
 
             <div className="bg-black/30 rounded-lg p-3 mt-2">
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">1.4B</div>
+              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">
+                {isLoading ? "..." : `${(stats?.balances?.circulatingSupply ? (stats.balances.circulatingSupply / 1000000000).toFixed(1) : "1.4")}B`}
+              </div>
               <div className="flex items-center justify-between">
                 <div className="text-purple-400 text-sm">PINK tokens</div>
-                <div className="text-xs px-2 py-0.5 rounded-full bg-purple-900/40 text-purple-300">60% of total</div>
+                <div className="text-xs px-2 py-0.5 rounded-full bg-purple-900/40 text-purple-300">
+                  {isLoading ? "..." : `${Math.round((stats?.balances?.circulatingSupply || 0) / (stats?.balances?.maxSupply || TOTAL_SUPPLY) * 100)}% of total`}
+                </div>
               </div>
             </div>            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
               <motion.div
                 className="h-2 bg-purple-500"
                 initial={{ width: 0 }}
-                whileInView={{ width: `${tokenMetrics.percentCirculating}%` }}
+                whileInView={{
+                  width: `${isLoading ? 0 : tokenMetrics.percentCirculating}%`
+                }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.5 }}
               />
             </div>
 
             <div className="mt-3 text-gray-400 text-sm">
-              <p>Tokens available for trading on DEXs and CEXs.</p>
+              <p>Tokens available for trading across multiple exchanges and DEXs.</p>
             </div>
           </motion.div>
 
@@ -904,8 +899,8 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                       <FaShieldAlt className="text-green-400 text-xs" />
                     </div>
                     <div>
-                      <span className="text-gray-200 font-medium">Locked Liquidity</span>
-                      <p className="text-gray-400 text-xs mt-1">Ensures long-term trading stability and prevents rug pulls</p>
+                      <span className="text-gray-200 font-medium">Multi-Chain Liquidity</span>
+                      <p className="text-gray-400 text-xs mt-1">Available across multiple chains for seamless cross-chain trading</p>
                     </div>
                   </li>
                   <li className="flex items-start">
@@ -1229,7 +1224,10 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center">
-                        <FaShieldAlt className="text-pink-400" />
+                        {contract.name.includes("Asset Hub") ?
+                          <FaLink className="text-pink-400" /> :
+                          <FaShieldAlt className="text-pink-400" />
+                        }
                       </div>
                       <h4 className="text-xl font-bold text-white">{contract.name}</h4>
                     </div>
@@ -1241,12 +1239,20 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   </div>
 
                   <div className="mb-5 flex-grow">
-                    <p className="text-xs text-gray-500 mb-1 ml-1">Contract Address:</p>
+                    <p className="text-xs text-gray-500 mb-1 ml-1">{contract.name.includes("Asset Hub") ? "Asset ID:" : "Contract Address:"}</p>
                     <div className="bg-black/50 rounded-lg p-4 border border-gray-800 hover:border-pink-500/30 transition-all">
                       <code className="text-gray-100 text-sm md:text-base font-mono break-all">
                         {contract.address}
                       </code>
                     </div>
+                    {contract.note && (
+                      <div className="mt-2 px-3 py-1.5 bg-blue-900/20 border border-blue-500/20 rounded-lg">
+                        <div className="flex items-center">
+                          <FaExchangeAlt className="text-blue-400 mr-2 text-xs" />
+                          <span className="text-blue-300 text-xs">{contract.note}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex gap-3">
@@ -1298,9 +1304,9 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 </div>
               </div>
               <div className="md:col-span-10">
-                <h4 className="text-2xl font-bold text-white mb-3">Cross-Chain Ecosystem</h4>
+                <h4 className="text-2xl font-bold text-white mb-3">Multi-Chain Presence</h4>
                 <p className="text-gray-300 leading-relaxed">
-                  PINK has expanded beyond Moonbeam to multiple chains including Base Network.
+                  Born on Polkadot, PINK has expanded its reach to multiple blockchain networks.
                   We've integrated LayerZero and Squid Router for seamless cross-chain transfers,
                   with strategic listings on StellaSwap, Beamswap, and Uniswap (Base).
                 </p>

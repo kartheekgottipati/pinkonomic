@@ -57,6 +57,13 @@ export const INITIAL_DISTRIBUTION = [
 // Contract addresses
 export const contractAddresses = [
     {
+        name: "PINK on Asset Hub (Origin)",
+        address: "Asset ID: 23",
+        explorer: "https://assethub-polkadot.subscan.io/asset/23",
+        verified: true,
+        note: "Available on Hydration DEX"
+    },
+    {
         name: "PINK on Moonbeam",
         address: "0xfFfFFfFf30478fAFBE935e466da114E14fB3563d",
         explorer: "https://moonscan.io/token/0xffffffff30478fafbe935e466da114e14fb3563d",
@@ -90,9 +97,9 @@ export const SECURITY = {
     // Core security features
     features: [
         {
-            title: "Locked Liquidity",
-            description: "Initial liquidity locked for 2 years to ensure project stability",
-            iconName: "FaLock",
+            title: "Multi-Chain Liquidity",
+            description: "Liquidity available across multiple chains for seamless cross-chain trading",
+            iconName: "FaExchangeAlt",
             iconColor: "text-purple-400",
             category: "liquidity"
         },
@@ -195,79 +202,3 @@ export const tokenMetricsConstants = {
 
 // API endpoint
 export const PINK_STATS_API_ENDPOINT = "https://pink-utils.kargo-dev.workers.dev/pink-stats";
-
-// Deflationary mechanism data - consolidated for consistency
-export const BURN_MECHANISMS = {
-    // Core mechanism types
-    mechanisms: [
-        {
-            title: "Manual Burns",
-            description: "Strategic burns conducted by the team from treasury holdings to decrease total supply",
-            icon: "FaFire",
-            color: TOKEN_COLORS.TREASURY
-        },
-        {
-            title: "Game Mechanics",
-            description: "PINKDROP game burns tokens through gameplay and tournament activities",
-            icon: "FaGamepad",
-            color: TOKEN_COLORS.COMMUNITY_ECOSYSTEM
-        },
-        {
-            title: "Buy & Burn",
-            description: "Regular token buybacks from market and permanent removal from supply",
-            icon: "FaExchangeAlt",
-            color: TOKEN_COLORS.LIQUIDITY
-        },
-        {
-            title: "Community Initiatives",
-            description: "Community-driven burn events and campaigns",
-            icon: "FaUsers",
-            color: TOKEN_COLORS.TEAM_DEVELOPMENT
-        }
-    ],
-
-    // Key burn events timeline (historical data)
-    timelineEvents: [
-        {
-            title: "Gameme Party Campaign",
-            description: "Over 844 participants played 50K+ games, earning 100K+ Pink Points by burning PINK tokens.",
-            color: "pink",
-            position: "left",
-            tokensBurned: 100000
-        },
-        {
-            title: "Play-to-Burn Initiative",
-            description: "31,798 games played, resulting in a massive 52M PINK burned from the treasury!",
-            color: "purple",
-            position: "right",
-            tokensBurned: 52000000
-        },
-        {
-            title: "Platypus NFT Sales",
-            description: "Over 11M PINK permanently burned across Moonbeam (7.6M) and Base (3.4M) networks.",
-            color: "pink",
-            position: "left",
-            tokensBurned: 11000000,
-            networks: {
-                moonbeam: 7600000,
-                base: 3400000
-            }
-        },
-        {
-            title: "EVRLOOT Auction",
-            description: "Almost 400K PINK burned forever after the PINK Villa auction in the EVRLOOT game.",
-            color: "purple",
-            position: "right",
-            tokensBurned: 400000
-        }
-    ],
-
-    // Total historical burn from events (for quick access)
-    get totalHistoricalBurn() {
-        return this.timelineEvents.reduce((sum, event) => sum + event.tokensBurned, 0);
-    }
-};
-
-// For backward compatibility (can be gradually phased out)
-export const deflationaryMechanisms = BURN_MECHANISMS.mechanisms;
-export const burnTimelineEvents = BURN_MECHANISMS.timelineEvents;
