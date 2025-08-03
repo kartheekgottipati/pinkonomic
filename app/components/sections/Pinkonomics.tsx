@@ -1315,6 +1315,16 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           </motion.div>
 
           <motion.div
+            className="mt-4 text-center text-xs text-gray-500"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+          >
+            Always verify contract addresses before interacting with them. • Last updated: July 31, 2025
+          </motion.div>
+
+          <motion.div
             className="absolute -top-20 -right-20 w-64 h-64 bg-pink-600/10 rounded-full blur-[100px] -z-10"
             animate={{
               scale: [1, 1.2, 1],
@@ -1376,7 +1386,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {externalLinks
-                  // Filter out the burn tracker link as it's already included in the "Join the Burn Movement" section
+                  // Filter out burn tracker links as they're not needed in this section
                   .filter(link => !link.category || link.category !== "burn")
                   .map((link, index) => {
                     // Determine icon based on link label
@@ -1434,204 +1444,6 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
               </div>
             </div>
           </motion.div>
-        </motion.div>
-
-        {/* Join the Burn Movement - Redesigned Call to Action */}
-        <motion.div
-          className="mb-16 overflow-visible"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          <div className="relative">
-            {/* Animated background elements */}
-            <motion.div
-              className="absolute -top-10 -left-10 w-40 h-40 bg-pink-600/20 rounded-full blur-[80px]"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{ duration: 7, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-600/20 rounded-full blur-[80px]"
-              animate={{
-                scale: [1.2, 1, 1.2],
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{ duration: 8, repeat: Infinity, delay: 2 }}
-            />
-
-            {/* Main content with fiery border effect */}
-            <div className="relative z-10 p-1 rounded-2xl bg-gradient-to-r from-pink-600/50 via-red-500/50 to-amber-500/50 overflow-hidden shadow-lg shadow-pink-900/30">
-              <div className="absolute inset-0 overflow-hidden">
-                {[...Array(20)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute rounded-full bg-orange-500/40"
-                    style={{
-                      width: Math.random() * 120 + 30,
-                      height: Math.random() * 120 + 30,
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                    }}
-                    animate={{
-                      y: [0, -100],
-                      opacity: [0.7, 0],
-                      scale: [1, 1.5]
-                    }}
-                    transition={{
-                      duration: Math.random() * 3 + 2,
-                      repeat: Infinity,
-                      delay: Math.random() * 5,
-                      ease: "easeOut"
-                    }}
-                  />
-                ))}
-              </div>
-
-              <div className="bg-gray-900/95 backdrop-blur-md rounded-xl p-8 md:p-10 relative overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                  {/* Left content area */}
-                  <div className="lg:col-span-7">
-                    <div className="mb-2 inline-block">
-                      <motion.div
-                        className="px-3 py-1 bg-gradient-to-r from-pink-900/60 to-amber-900/60 rounded-full"
-                        animate={{
-                          boxShadow: ['0 0 0px rgba(249,115,22,0.0)', '0 0 15px rgba(249,115,22,0.4)', '0 0 0px rgba(249,115,22,0.0)']
-                        }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <span className="text-amber-400 text-xs font-medium uppercase tracking-wide flex items-center">
-                          <FaFire className="mr-1.5" size={14} /> Community-Driven Deflation
-                        </span>
-                      </motion.div>
-                    </div>
-
-                    <h3 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-amber-300 mb-4">
-                      Join the Burn Movement
-                    </h3>
-
-                    <div className="text-gray-300 mb-6 space-y-4">
-                      <p>
-                        Be part of PINK's deflationary ecosystem by participating in our burn events and games.
-                        Every PINK token burned increases the scarcity and potential value of the remaining supply.
-                      </p>
-
-                      <div className="grid grid-cols-2 gap-4 bg-black/50 p-4 rounded-xl border border-pink-600/20">
-                        <div className="text-center">
-                          <div className="text-xs text-gray-500">Total Burned</div>
-                          <div className="text-xl font-bold text-amber-400">{(burnedAmount / 1000000).toFixed(1)}M</div>
-                          <div className="text-xs text-pink-400">{burnPercentage}% of supply</div>
-                        </div>
-                        <div className="text-center">
-                          <div className="text-xs text-gray-500">Monthly Rate</div>
-                          <div className="text-xl font-bold text-amber-400">{(burnRates.monthlyAverage / 1000).toFixed(0)}K</div>
-                          <div className="text-xs text-pink-400">Tokens removed</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-4">
-                      <motion.a
-                        href="/pinkdrop"
-                        className="px-6 py-3 bg-gradient-to-r from-pink-600 to-amber-600 hover:from-pink-500 hover:to-amber-500 text-white font-bold rounded-xl flex items-center shadow-lg shadow-pink-900/30"
-                        whileHover={{
-                          scale: 1.03,
-                          boxShadow: "0 10px 25px -5px rgba(249,115,22,0.4)"
-                        }}
-                        whileTap={{ scale: 0.97 }}
-                      >
-                        <FaGamepad className="mr-2" /> Play to Burn
-                      </motion.a>
-
-                      <motion.a
-                        href={BURN_ADDRESS_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-3 bg-black/50 border border-pink-500 text-white font-medium rounded-xl flex items-center hover:bg-black/80"
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                      >
-                        <FaExternalLinkAlt className="mr-2" /> View on Explorer
-                      </motion.a>
-                    </div>
-                  </div>
-
-                  {/* Right content area - Burn Address Card */}
-                  <div className="lg:col-span-5 relative">
-                    <motion.div
-                      className="absolute -top-4 -right-4 w-12 h-12 flex items-center justify-center z-10"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        rotate: [0, 10, 0, -10, 0],
-                      }}
-                      transition={{ duration: 5, repeat: Infinity }}
-                    >
-                      <span className="text-4xl">🔥</span>
-                    </motion.div>
-
-                    <div className="bg-gradient-to-br from-pink-900/40 via-pink-800/30 to-amber-900/40 p-0.5 rounded-xl shadow-xl shadow-pink-900/20">
-                      <div className="bg-black/90 backdrop-blur-sm rounded-xl p-5 border border-pink-500/10">
-                        <h4 className="text-xl font-medium text-white mb-4 flex items-center">
-                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-600 to-amber-600 flex items-center justify-center mr-2.5 shadow-md shadow-pink-900/30">
-                            <FaFire className="text-white" />
-                          </div>
-                          Official Burn Address
-                        </h4>
-
-                        <div className="bg-gray-900/90 p-3 rounded-lg flex items-center justify-between mb-4 border border-pink-800/20">
-                          <code className="text-amber-300 text-sm font-mono truncate">{BURN_ADDRESS}</code>
-                          <motion.button
-                            onClick={() => copyToClipboard(BURN_ADDRESS)}
-                            className="p-2.5 rounded-lg bg-pink-900/30 hover:bg-pink-800/50 text-pink-400 transition-all ml-2 flex-shrink-0"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            aria-label="Copy burn address"
-                          >
-                            {copied === BURN_ADDRESS ? (
-                              <FaCheck className="text-green-400" size={16} />
-                            ) : (
-                              <FaCopy className="text-pink-400" size={16} />
-                            )}
-                          </motion.button>
-                        </div>
-
-                        <div className="space-y-3">
-                          <div className="flex items-start p-3 bg-pink-900/10 rounded-lg border border-pink-900/20">
-                            <div className="mt-0.5 mr-3">
-                              <FaExclamationCircle className="text-pink-400" />
-                            </div>
-                            <div className="text-sm text-gray-300">
-                              <strong className="text-pink-400">Important:</strong> Tokens sent to this address are permanently removed from circulation and cannot be recovered.
-                            </div>
-                          </div>
-
-                          <div className="p-3 bg-amber-900/10 rounded-lg border border-amber-900/20">
-                            <div className="text-sm text-gray-300 flex items-center">
-                              <FaInfoCircle className="text-amber-400 mr-2" />
-                              Manual burns contribute to PINK's deflationary tokenomics and may earn rewards during burn events.
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="mt-8 text-center text-xs text-gray-500"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-        >
-          Always verify contract addresses before interacting with them. • Last updated: July 31, 2025
         </motion.div>
       </div>
     </section>
