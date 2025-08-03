@@ -331,7 +331,9 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                         animate={{ scale: [1, 1.02, 1] }}
                         transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                       >
-                        2.5M
+                        {burnRates && burnRates.monthlyAverage
+                          ? formatBurnRate(burnRates.monthlyAverage)
+                          : "N/A"}
                       </motion.div>
                       <div className="absolute top-1 right-0">
                         <div className="text-xs text-gray-400">PINK tokens per month</div>
