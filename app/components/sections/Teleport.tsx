@@ -86,77 +86,62 @@ const Teleport = forwardRef<HTMLDivElement>((props, ref) => (
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
+          className="h-full"
         >
-          <div className="relative">
-
-            <div className="absolute -inset-1 bg-pink-500/30 rounded-2xl blur-sm"></div>
-
-            <div className="relative bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 overflow-hidden">
-              <h3 className="text-xl font-medium text-white mb-8 text-center">Transfer Between Networks</h3>
-
-
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4">
-
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 flex items-center justify-center bg-gray-800 rounded-full p-4 mb-3">
-                    <img src={moonbeamLight} alt="Moonbeam" className="w-full h-full object-contain" />
-                  </div>
-                  <h4 className="text-lg font-medium text-white">Moonbeam</h4>
-                  <p className="text-sm text-gray-400">Polkadot Parachain</p>
+          {/* Transfer Networks Card */}
+          <div className="h-full">
+            {/* Main card content */}
+            <div className="relative flex flex-col bg-gray-900/30 border border-gray-800/50 hover:border-pink-500/30 rounded-2xl p-6 md:p-8 overflow-hidden transition-all duration-300 h-full">
+              {/* Header with badge */}
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">
+                  <FaExchangeAlt className="text-pink-400 mr-2" size={12} />
+                  <span className="text-xs text-pink-300 font-medium">CROSS-CHAIN</span>
                 </div>
+                <h3 className="text-2xl font-semibold text-white mb-8">Transfer Between Networks</h3>
+              </div>
 
-
-                <div className="relative">
-                  <div className="w-full h-0.5 bg-pink-500 my-2"></div>
-
-                  <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center z-10 border border-gray-700 shadow-lg"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  >
-                    <FaExchangeAlt className="text-pink-400" />
-                  </motion.div>
-
-
-                  <motion.div
-                    className="absolute top-1/2 left-0 w-2 h-2 rounded-full bg-pink-500"
-                    animate={{
-                      x: ["0%", "100%"],
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  />
-
-                  <motion.div
-                    className="absolute top-1/2 right-0 w-2 h-2 rounded-full bg-purple-500"
-                    animate={{
-                      x: ["0%", "-100%"],
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: 1,
-                      ease: "easeInOut"
-                    }}
-                  />
-                </div>
-
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 flex items-center justify-center bg-gray-800 rounded-full p-4 mb-3">
-                    <img src={baseLight} alt="Base" className="w-full h-full object-contain" />
+              {/* Network transfer visualization - flexbox with proper flex-grow */}
+              <div className="flex-grow flex flex-col justify-center items-center py-6">
+                <div className="flex flex-col md:flex-row items-center justify-center w-full gap-4 md:gap-3 lg:gap-6">
+                  {/* Moonbeam Network */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="flex-shrink-0 h-16 w-16 rounded-xl bg-gray-800/70 flex items-center justify-center p-2.5 border border-gray-700/30 mb-3">
+                      <img src={moonbeamLight} alt="Moonbeam" className="h-full w-full object-contain" />
+                    </div>
+                    <h4 className="text-white font-medium">Moonbeam</h4>
+                    <p className="text-sm text-gray-400">Polkadot Parachain</p>
                   </div>
-                  <h4 className="text-lg font-medium text-white">Base</h4>
-                  <p className="text-sm text-gray-400">Ethereum L2</p>
+
+                  {/* Transfer connection visualization */}
+                  <div className="flex items-center justify-center w-full max-w-[100px] my-4 md:my-0">
+                    <div className="h-[40px] flex items-center justify-center relative w-full">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-pink-500 to-transparent"></div>
+                      </div>
+
+                      <div className="relative z-10 w-10 h-10 rounded-xl bg-gray-800/70 backdrop-blur-sm flex items-center justify-center border border-gray-700/30">
+                        <FaExchangeAlt className="text-pink-500" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Base Network */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="flex-shrink-0 h-16 w-16 rounded-xl bg-gray-800/70 flex items-center justify-center p-2.5 border border-gray-700/30 mb-3">
+                      <img src={baseLight} alt="Base" className="h-full w-full object-contain" />
+                    </div>
+                    <h4 className="text-white font-medium">Base</h4>
+                    <p className="text-sm text-gray-400">Ethereum L2</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="mt-10 p-4 bg-gray-800/50 rounded-lg text-center">
-                <p className="text-sm text-gray-400">Bridge your tokens securely between Moonbeam and Base networks with full cross-chain support</p>
+              {/* Info panel */}
+              <div className="bg-gray-800/30 p-4 rounded-lg border border-gray-700/30">
+                <p className="text-sm text-gray-300">
+                  Bridge your tokens securely between Moonbeam and Base networks with full cross-chain support
+                </p>
               </div>
             </div>
           </div>
