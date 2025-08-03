@@ -189,31 +189,27 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-600/10 rounded-full blur-[100px]"></div>
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        <div className="text-center mb-16 relative">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="inline-block relative"
-          >
-            <HiSparkles className="absolute -top-6 -left-8 text-pink-500 text-3xl opacity-70" />
-            <h2 className="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight">
-              PINK<span className="text-pink-500">ONOMICS</span>
-            </h2>
-            <div className="h-1 w-1/3 bg-pink-500 mx-auto"></div>
-          </motion.div>
+        {/* Section header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="inline-flex items-center justify-center mb-4 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">
+            <FaChartPie className="text-pink-400 mr-2" size={14} />
+            <span className="text-sm text-pink-300 font-medium">TOKENOMICS</span>
+          </div>
 
-          <motion.p
-            className="mt-6 text-gray-300 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            PINK<span className="text-pink-500">onomics</span>
+          </h2>
+
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
             PINK operates with a transparent tokenomics model designed for long-term sustainability and community benefit. The deflationary mechanism helps increase scarcity over time.
-          </motion.p>
-        </div>
+          </p>
+        </motion.div>
 
         {/* Burn Dashboard - Fresh Design */}
         <motion.div
@@ -351,7 +347,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
                   {/* Burn Metrics */}
                   <motion.div
-                    className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-2xl p-5 h-full"
+                    className="bg-gray-900/30 border border-gray-800/50 hover:border-blue-500/30 rounded-2xl p-5 h-full"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -406,7 +402,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
                   {/* Cross-Chain Burns */}
                   <motion.div
-                    className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-2xl p-3"
+                    className="bg-gray-900/30 border border-gray-800/50 hover:border-green-500/30 rounded-2xl p-3"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -532,51 +528,53 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
         {/* Core Token Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           <motion.div
-            className="bg-gray-900/80 backdrop-blur-sm rounded-xl p-5 border border-pink-500/10 hover:border-pink-500/30 transition-all hover:shadow-lg hover:shadow-pink-500/10 flex flex-col h-full"
+            className="bg-gray-900/30 border border-gray-800/50 hover:border-pink-500/30 rounded-xl p-6 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            whileHover={{ y: -5 }}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
           >
-            <div className="flex items-center mb-3">
-              <div className="w-10 h-10 rounded-lg bg-pink-900/50 flex items-center justify-center mr-3">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-pink-500/30">
                 <FaCoins className="text-pink-400" />
               </div>
               <h3 className="text-lg font-medium text-white">Total Supply</h3>
             </div>
 
-            <div className="bg-black/30 rounded-lg p-3 mt-2">
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-pink-200">
+            <div className="bg-black/30 rounded-lg p-4 mt-2">
+              <div className="text-3xl font-bold text-white">
                 2.3B
               </div>
               <div className="text-pink-400 text-sm">PINK tokens</div>
-            </div>            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
+            </div>
+
+            <div className="mt-4 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
               <div className="h-2 bg-pink-500" style={{ width: '100%' }}></div>
             </div>
 
-            <div className="mt-3 text-gray-400 text-sm">
+            <div className="mt-4 text-gray-400 text-sm leading-relaxed">
               <p>Initial token distribution across all chains at launch.</p>
             </div>
           </motion.div>
 
           <motion.div
-            className="bg-gray-900/80 backdrop-blur-sm rounded-xl p-5 border border-pink-500/10 hover:border-pink-500/30 transition-all hover:shadow-lg hover:shadow-pink-500/10 flex flex-col h-full"
+            className="bg-gray-900/30 border border-gray-800/50 hover:border-purple-500/30 rounded-xl p-6 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            whileHover={{ y: -5 }}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
           >
-            <div className="flex items-center mb-3">
-              <div className="w-10 h-10 rounded-lg bg-purple-900/50 flex items-center justify-center mr-3">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-purple-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-purple-500/30">
                 <FaChartLine className="text-purple-400" />
               </div>
               <h3 className="text-lg font-medium text-white">Circulating Supply</h3>
             </div>
 
-            <div className="bg-black/30 rounded-lg p-3 mt-2">
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-200">
+            <div className="bg-black/30 rounded-lg p-4 mt-2">
+              <div className="text-3xl font-bold text-white">
                 {isLoading ? "..." : `${(stats?.balances?.circulatingSupply ? (stats.balances.circulatingSupply / 1000000000).toFixed(1) : "1.4")}B`}
               </div>
               <div className="flex items-center justify-between">
@@ -585,7 +583,9 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   {isLoading ? "..." : `${Math.round((stats?.balances?.circulatingSupply || 0) / (stats?.balances?.maxSupply || TOTAL_SUPPLY) * 100)}% of total`}
                 </div>
               </div>
-            </div>            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
+            </div>
+
+            <div className="mt-4 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
               <motion.div
                 className="h-2 bg-purple-500"
                 initial={{ width: 0 }}
@@ -597,33 +597,35 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
               />
             </div>
 
-            <div className="mt-3 text-gray-400 text-sm">
+            <div className="mt-4 text-gray-400 text-sm leading-relaxed">
               <p>Tokens available for trading across multiple exchanges and DEXs.</p>
             </div>
           </motion.div>
 
           <motion.div
-            className="bg-gray-900/80 backdrop-blur-sm rounded-xl p-5 border border-pink-500/10 hover:border-pink-500/30 transition-all hover:shadow-lg hover:shadow-pink-500/10 flex flex-col h-full"
+            className="bg-gray-900/30 border border-gray-800/50 hover:border-yellow-500/30 rounded-xl p-6 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ y: -5 }}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
           >
-            <div className="flex items-center mb-3">
-              <div className="w-10 h-10 rounded-lg bg-yellow-900/50 flex items-center justify-center mr-3">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-yellow-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-yellow-500/30">
                 <FaWallet className="text-yellow-400" />
               </div>
               <h3 className="text-lg font-medium text-white">Treasury Holdings</h3>
             </div>
 
-            <div className="bg-black/30 rounded-lg p-3 mt-2">
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-200">666.4M</div>
+            <div className="bg-black/30 rounded-lg p-4 mt-2">
+              <div className="text-3xl font-bold text-white">666.4M</div>
               <div className="flex items-center justify-between">
                 <div className="text-yellow-400 text-sm">PINK tokens</div>
                 <div className="text-xs px-2 py-0.5 rounded-full bg-yellow-900/40 text-yellow-300">29% of total</div>
               </div>
-            </div>            <div className="mt-3 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
+            </div>
+
+            <div className="mt-4 w-full bg-gray-800/80 rounded-full h-2 overflow-hidden">
               <motion.div
                 className="h-2 bg-gradient-to-r from-yellow-500 to-amber-500"
                 initial={{ width: 0 }}
@@ -633,7 +635,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
               />
             </div>
 
-            <div className="mt-3 text-gray-400 text-sm">
+            <div className="mt-4 text-gray-400 text-sm leading-relaxed">
               <p>Treasury funds support ecosystem growth, development, and burn campaigns.</p>
             </div>
           </motion.div>
@@ -669,7 +671,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             {/* Chart & Supply Stats */}
             <div className="lg:col-span-5">
               <motion.div
-                className="bg-gradient-to-r from-gray-900/80 to-black/80 rounded-2xl p-6 border border-pink-900/30 shadow-lg shadow-pink-900/10 h-full"
+                className="bg-gray-900/30 rounded-2xl p-6 border border-gray-800/50 h-full"
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -702,7 +704,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
                 <div className="grid grid-cols-2 gap-4 mt-8">
                   <motion.div
-                    className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-xl p-4 border border-gray-700/30"
+                    className="bg-gray-900/30 rounded-xl p-4 border border-gray-800/50"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -717,7 +719,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   </motion.div>
 
                   <motion.div
-                    className="bg-gradient-to-br from-gray-800/70 to-gray-900/70 rounded-xl p-4 border border-gray-700/30"
+                    className="bg-gray-900/30 rounded-xl p-4 border border-gray-800/50"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -753,7 +755,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Treasury */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-blue-900/20 relative overflow-hidden h-full flex flex-col"
+                className="bg-gray-900/30 rounded-2xl p-6 border border-gray-800/50 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -764,7 +766,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 />
 
                 <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center mr-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-blue-500/30">
                     <FaUniversity className="text-blue-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">Treasury</h3>
@@ -802,7 +804,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-blue-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-blue-500/30">
                       <FaHandHoldingUsd className="text-blue-400 text-xs" />
                     </div>
                     <div>
@@ -815,7 +817,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
               {/* Deflationary Mechanism */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-pink-900/20 relative overflow-hidden h-full flex flex-col"
+                className="bg-gray-900/30 rounded-2xl p-6 border border-gray-800/50 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -826,7 +828,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 />
 
                 <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-pink-900/30 flex items-center justify-center mr-3">
+                  <div className="w-10 h-10 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-pink-500/30">
                     <FaFire className="text-pink-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">Deflationary</h3>
@@ -844,7 +846,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 <div className="text-gray-300 text-sm font-medium mt-2 mb-2">Burn Mechanisms:</div>
                 <ul className="space-y-3 text-sm flex-1">
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-pink-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-pink-500/30">
                       <FaExchangeAlt className="text-pink-400 text-xs" />
                     </div>
                     <div>
@@ -853,7 +855,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-pink-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-pink-500/30">
                       <FaChartLine className="text-pink-400 text-xs" />
                     </div>
                     <div>
@@ -862,7 +864,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-pink-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-pink-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-pink-500/30">
                       <FaFire className="text-pink-400 text-xs" />
                     </div>
                     <div>
@@ -875,7 +877,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
               {/* Liquidity & Security */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-green-900/20 relative overflow-hidden h-full flex flex-col"
+                className="bg-gray-900/30 rounded-2xl p-6 border border-gray-800/50 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -886,7 +888,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 />
 
                 <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-green-900/30 flex items-center justify-center mr-3">
+                  <div className="w-10 h-10 rounded-full bg-green-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-green-500/30">
                     <FaLock className="text-green-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">Liquidity & Security</h3>
@@ -895,7 +897,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 <div className="text-gray-300 text-sm font-medium mt-2 mb-2">Key Features:</div>
                 <ul className="space-y-3 text-sm flex-1">
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-green-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-green-500/30">
                       <FaShieldAlt className="text-green-400 text-xs" />
                     </div>
                     <div>
@@ -904,7 +906,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-green-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-green-500/30">
                       <FaFileContract className="text-green-400 text-xs" />
                     </div>
                     <div>
@@ -913,7 +915,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-green-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-green-500/30">
                       <FaGlobeAmericas className="text-green-400 text-xs" />
                     </div>
                     <div>
@@ -926,7 +928,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
               {/* User Benefits */}
               <motion.div
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-2xl p-6 border border-purple-900/20 relative overflow-hidden h-full flex flex-col"
+                className="bg-gray-900/30 rounded-2xl p-6 border border-gray-800/50 relative overflow-hidden h-full flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -937,7 +939,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 />
 
                 <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-purple-900/30 flex items-center justify-center mr-3">
+                  <div className="w-10 h-10 rounded-full bg-purple-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-purple-500/30">
                     <FaUserCheck className="text-purple-400" />
                   </div>
                   <h3 className="text-lg font-semibold text-white">User Benefits</h3>
@@ -946,7 +948,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                 <div className="text-gray-300 text-sm font-medium mt-2 mb-2">Holder Advantages:</div>
                 <ul className="space-y-3 text-sm flex-1">
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-purple-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-purple-500/30">
                       <FaHandHoldingUsd className="text-purple-400 text-xs" />
                     </div>
                     <div>
@@ -955,7 +957,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-purple-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-purple-500/30">
                       <FaRocket className="text-purple-400 text-xs" />
                     </div>
                     <div>
@@ -964,7 +966,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="w-6 h-6 rounded-full bg-purple-900/30 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-purple-500/20 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 border border-purple-500/30">
                       <FaGamepad className="text-purple-400 text-xs" />
                     </div>
                     <div>
@@ -980,18 +982,18 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
         {/* Deflationary Mechanisms */}
         <motion.div
-          className="mb-20 bg-gradient-to-br from-gray-900/50 to-black/60 backdrop-blur-sm p-8 rounded-xl border border-pink-500/20"
+          className="mb-20 bg-gray-900/30 p-8 rounded-xl border border-gray-800/50"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
           <div className="flex items-center mb-8">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-900/50 to-pink-700/30 flex items-center justify-center mr-4 shadow-lg shadow-pink-500/10">
+            <div className="w-12 h-12 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-4 border border-pink-500/30">
               <FaFire className="text-pink-400 text-lg" />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-pink-400">Deflationary Mechanisms</h3>
+              <h3 className="text-2xl font-bold text-white">Deflationary <span className="text-pink-400">Mechanisms</span></h3>
               <p className="text-gray-400 text-sm mt-1">Continuous burn processes reduce supply and increase scarcity over time</p>
             </div>
           </div>
@@ -999,25 +1001,24 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Card 1 - Pink Ticket Burns */}
             <motion.div
-              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              className="bg-gray-900/30 border border-gray-800/50 hover:border-pink-500/30 p-6 rounded-lg transition-all duration-300 overflow-hidden"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
-                  <FaTicketAlt className="text-pink-300" />
+                <div className="w-10 h-10 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-pink-500/30">
+                  <FaTicketAlt className="text-pink-400" />
                 </div>
-                <h4 className="text-xl font-semibold text-pink-200">PinkDrop Tournament Burns</h4>
+                <h4 className="text-xl font-semibold text-white">PinkDrop Tournament Burns</h4>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 leading-relaxed">
                 <span className="text-pink-400 font-semibold">20%</span> of all PINK from tournament tickets are permanently burned.
                 <span className="text-pink-400 font-semibold"> 1,000 PINK</span> per ticket.
               </p>
-              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+              <div className="mt-4 bg-black/30 rounded-md p-3 border border-pink-500/20">
                 <div className="flex items-center">
                   <FaFire className="text-pink-400 mr-2 animate-pulse" />
                   <span className="text-sm text-pink-200">Tournament-driven Burn Mechanism</span>
@@ -1027,24 +1028,23 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
             {/* Card 2 - NFT Integration Burns */}
             <motion.div
-              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              className="bg-gray-900/30 border border-gray-800/50 hover:border-pink-500/30 p-6 rounded-lg transition-all duration-300 overflow-hidden"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
-                  <FaImage className="text-pink-300" />
+                <div className="w-10 h-10 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-pink-500/30">
+                  <FaImage className="text-pink-400" />
                 </div>
-                <h4 className="text-xl font-semibold text-pink-200">Platypus NFT Burns</h4>
+                <h4 className="text-xl font-semibold text-white">Platypus NFT Burns</h4>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 leading-relaxed">
                 Platypus NFT sales funded a one-time purchase of PINK tokens for burning, enhancing scarcity.
               </p>
-              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+              <div className="mt-4 bg-black/30 rounded-md p-3 border border-pink-500/20">
                 <div className="flex items-center">
                   <FaFire className="text-pink-400 mr-2 animate-pulse" />
                   <span className="text-sm text-pink-200">One-time NFT Sale Burn</span>
@@ -1054,24 +1054,23 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
             {/* Card 3 - Pink Villa Sales */}
             <motion.div
-              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              className="bg-gray-900/30 border border-gray-800/50 hover:border-pink-500/30 p-6 rounded-lg transition-all duration-300 overflow-hidden"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
-                  <FaHome className="text-pink-300" />
+                <div className="w-10 h-10 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-pink-500/30">
+                  <FaHome className="text-pink-400" />
                 </div>
-                <h4 className="text-xl font-semibold text-pink-200">EVRLOOT Pink Villa Sales</h4>
+                <h4 className="text-xl font-semibold text-white">EVRLOOT Pink Villa Sales</h4>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 leading-relaxed">
                 PINK tokens from EVRLOOT Pink Villa sales are burned, reducing supply through virtual real estate transactions.
               </p>
-              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+              <div className="mt-4 bg-black/30 rounded-md p-3 border border-pink-500/20">
                 <div className="flex items-center">
                   <FaFire className="text-pink-400 mr-2 animate-pulse" />
                   <span className="text-sm text-pink-200">Virtual Real Estate Burn</span>
@@ -1081,24 +1080,23 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
             {/* Card 4 - Gememe Party */}
             <motion.div
-              className="bg-gradient-to-br from-gray-800/60 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 hover:border-pink-500/40 transition-all overflow-hidden relative shadow-lg"
+              className="bg-gray-900/30 border border-gray-800/50 hover:border-pink-500/30 p-6 rounded-lg transition-all duration-300 overflow-hidden"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-pink-500/10 blur-xl"></div>
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-700 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/20">
-                  <FaGamepad className="text-pink-300" />
+                <div className="w-10 h-10 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-pink-500/30">
+                  <FaGamepad className="text-pink-400" />
                 </div>
-                <h4 className="text-xl font-semibold text-pink-200">Gememe Party Burns</h4>
+                <h4 className="text-xl font-semibold text-white">Gememe Party Burns</h4>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 leading-relaxed">
                 Gememe Party burns PINK tokens during gameplay, with each transaction reducing supply.
               </p>
-              <div className="mt-4 bg-pink-900/20 rounded-md p-2 border border-pink-500/20">
+              <div className="mt-4 bg-black/30 rounded-md p-3 border border-pink-500/20">
                 <div className="flex items-center">
                   <FaFire className="text-pink-400 mr-2 animate-pulse" />
                   <span className="text-sm text-pink-200">Gaming Integration Burn</span>
@@ -1108,7 +1106,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
 
           <motion.div
-            className="mt-8 bg-gradient-to-br from-pink-900/20 to-gray-900/70 p-6 rounded-lg border border-pink-500/20 relative overflow-hidden shadow-lg"
+            className="mt-8 bg-black/30 p-6 rounded-lg border border-pink-500/20 relative overflow-hidden"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -1117,12 +1115,12 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           >
             <div className="absolute -right-20 -bottom-20 w-40 h-40 rounded-full bg-pink-500/10 blur-3xl"></div>
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-600 to-pink-900 flex items-center justify-center mr-3 shadow-lg shadow-pink-500/30">
-                <FaFire className="text-pink-300" />
+              <div className="w-10 h-10 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-pink-500/30">
+                <FaFire className="text-pink-400" />
               </div>
-              <h4 className="text-xl font-semibold text-pink-200">Play-to-Burn Mechanism</h4>
+              <h4 className="text-xl font-semibold text-white">Play-to-Burn Mechanism</h4>
             </div>
-            <p className="text-gray-300 max-w-3xl">
+            <p className="text-gray-300 max-w-3xl leading-relaxed">
               More gameplay = more burns. More activity directly reduces supply and increases scarcity.
             </p>
           </motion.div>
@@ -1130,53 +1128,50 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
         {/* Security Features */}
         <motion.div
-          className="mb-20 bg-gray-900/50 backdrop-blur-sm p-8 rounded-xl border border-pink-500/20"
+          className="mb-20 bg-gray-900/30 p-8 rounded-xl border border-gray-800/50"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
           <div className="flex items-center mb-6">
-            <div className="w-10 h-10 rounded-full bg-green-900/40 flex items-center justify-center mr-3">
+            <div className="w-10 h-10 rounded-full bg-green-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-green-500/30">
               <FaShieldAlt className="text-green-400" />
             </div>
-            <h3 className="text-2xl font-bold text-green-400">Security & Trust</h3>
+            <h3 className="text-2xl font-bold text-white">Security & <span className="text-green-400">Trust</span></h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {securityFeaturesWithIcons.map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-black/40 rounded-lg p-6 border border-gray-800 hover:border-green-500/30 transition-all"
+                className="bg-gray-900/30 border border-gray-800/50 hover:border-green-500/30 rounded-lg p-6 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.15)"
-                }}
+                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               >
                 <div className="flex items-center mb-3">
-                  <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <div className="w-10 h-10 rounded-full bg-green-500/20 backdrop-blur-sm flex items-center justify-center mr-3 border border-green-500/30">
                     {feature.icon}
                   </div>
                   <h4 className="text-lg font-medium text-white">{feature.title}</h4>
                 </div>
-                <p className="text-gray-400 text-sm pl-12">{feature.description}</p>
+                <p className="text-gray-400 text-sm pl-14 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
 
           <motion.div
-            className="mt-8 p-4 bg-black/40 rounded-lg border border-green-500/20"
+            className="mt-8 p-4 bg-black/30 rounded-lg border border-gray-800/50"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <div className="flex items-start">
-              <div className="bg-green-900/40 p-2 rounded-full mr-3">
+              <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center mr-3 border border-green-500/30">
                 <FaShieldAlt className="text-green-400" />
               </div>
               <div>
@@ -1198,35 +1193,42 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
+          {/* Section header */}
           <motion.div
+            className="text-center mb-8"
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 mb-8">
-            <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-pink-500/70"></div>
-            <h3 className="text-3xl font-bold text-center text-white">Verified Contracts</h3>
-            <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-pink-500/70"></div>
+            transition={{ duration: 0.7 }}
+          >
+            <div className="inline-flex items-center justify-center mb-4 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
+              <FaFileContract className="text-purple-400 mr-2" size={14} />
+              <span className="text-sm text-purple-300 font-medium">BLOCKCHAIN</span>
+            </div>
+
+            <h3 className="text-3xl font-bold text-white">
+              Verified <span className="text-purple-500">Contracts</span>
+            </h3>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {contractAddresses.map((contract, index) => (
               <motion.div
                 key={index}
-                className="rounded-xl overflow-hidden bg-gradient-to-br from-pink-900/20 via-purple-900/20 to-pink-900/20 p-0.5"
+                className="bg-gray-900/30 border border-gray-800/50 hover:border-purple-500/30 rounded-xl p-6 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5, boxShadow: "0 15px 30px -10px rgba(219, 39, 119, 0.2)" }}
+                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               >
-                <div className="bg-gray-900/80 backdrop-blur-sm p-6 rounded-lg h-full flex flex-col">
+                <div className="h-full flex flex-col">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-purple-500/20 backdrop-blur-sm flex items-center justify-center border border-purple-500/30">
                         {contract.name.includes("Asset Hub") ?
-                          <FaLink className="text-pink-400" /> :
-                          <FaShieldAlt className="text-pink-400" />
+                          <FaLink className="text-purple-400" /> :
+                          <FaShieldAlt className="text-purple-400" />
                         }
                       </div>
                       <h4 className="text-xl font-bold text-white">{contract.name}</h4>
@@ -1258,7 +1260,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="flex gap-3">
                     <motion.button
                       onClick={() => copyToClipboard(contract.address)}
-                      className="flex-1 py-2 px-4 rounded-lg bg-pink-900/20 hover:bg-pink-900/40 text-pink-400 transition-all flex items-center justify-center gap-2 border border-pink-500/20"
+                      className="flex-1 py-2 px-4 rounded-lg bg-black/30 hover:bg-black/50 text-pink-400 transition-all flex items-center justify-center gap-2 border border-pink-500/20"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -1277,7 +1279,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                       href={contract.explorer}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-2 px-4 rounded-lg bg-purple-900/20 hover:bg-purple-900/40 text-purple-400 transition-all flex items-center justify-center gap-2 border border-purple-500/20"
+                      className="flex-1 py-2 px-4 rounded-lg bg-black/30 hover:bg-black/50 text-purple-400 transition-all flex items-center justify-center gap-2 border border-purple-500/20"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -1290,16 +1292,16 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           </div>
 
           <motion.div
-            className="mt-10 p-6 rounded-xl overflow-hidden bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/10"
+            className="mt-10 p-6 rounded-xl overflow-hidden bg-gray-900/30 border border-gray-800/50 hover:border-purple-500/30"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            whileHover={{ boxShadow: "0 15px 30px -10px rgba(139, 92, 246, 0.15)" }}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
           >
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
               <div className="md:col-span-2 flex justify-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-600/20 to-blue-600/20 flex items-center justify-center flex-shrink-0">
+                <div className="w-20 h-20 rounded-full bg-purple-500/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 border border-purple-500/30">
                   <FaExchangeAlt className="text-purple-400 text-3xl" />
                 </div>
               </div>
@@ -1342,7 +1344,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           />
         </motion.div>
 
-        {/* Analytics & Resources - Redesigned */}
+        {/* Analytics & Resources */}
         <motion.div
           className="mb-20 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
@@ -1350,31 +1352,33 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="text-center mb-10">
-            <div className="inline-block mb-3">
-              <motion.div
-                className="px-3 py-1.5 bg-gradient-to-r from-blue-900/40 to-indigo-900/40 text-blue-400 text-xs font-medium rounded-full"
-                animate={{
-                  boxShadow: ['0 0 0px rgba(59,130,246,0.3)', '0 0 15px rgba(59,130,246,0.5)', '0 0 0px rgba(59,130,246,0.3)']
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                TRANSPARENCY
-              </motion.div>
+          {/* Section header */}
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="inline-flex items-center justify-center mb-4 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
+              <FaChartBar className="text-blue-400 mr-2" size={14} />
+              <span className="text-sm text-blue-300 font-medium">TRANSPARENCY</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-200 via-blue-300 to-indigo-300 text-transparent bg-clip-text mb-3">
-              Analytics & Resources
+
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Analytics & <span className="text-blue-500">Resources</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
               Our transparency commitment includes providing access to real-time analytics and third-party data sources to offer deeper insights into PINK tokenomics and market conditions.
             </p>
-          </div>
+          </motion.div>
 
           <motion.div
-            className="bg-gradient-to-br from-gray-900/80 to-black/90 p-0.5 rounded-2xl overflow-hidden shadow-lg shadow-blue-900/10"
-            whileHover={{ boxShadow: "0 0 30px rgba(59, 130, 246, 0.2)" }}
+            className="bg-gray-900/30 border border-gray-800/50 hover:border-blue-500/30 rounded-2xl overflow-hidden transition-all duration-300"
+            whileHover={{ scale: 1.01, transition: { duration: 0.3 } }}
           >
-            <div className="bg-black/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 relative">
+            <div className="rounded-2xl p-6 md:p-8 relative">
               <motion.div
                 className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] -z-10"
                 animate={{
@@ -1414,15 +1418,14 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.15 * index }}
-                        whileHover={{ y: -5, scale: 1.03 }}
+                        whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                       >
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 transform -z-10"></div>
-                        <div className="bg-gray-900/90 border border-gray-800 group-hover:border-blue-500/50 p-5 rounded-xl transition-all duration-300 h-full flex flex-col items-center justify-center text-center">
-                          <div className="w-14 h-14 rounded-xl bg-gray-800/80 group-hover:bg-blue-900/50 flex items-center justify-center mb-3 transition-all duration-300 shadow-lg shadow-blue-900/5 group-hover:shadow-blue-500/20">
+                        <div className="bg-gray-900/30 border border-gray-800/50 group-hover:border-blue-500/30 p-5 rounded-xl transition-all duration-300 h-full flex flex-col items-center justify-center text-center">
+                          <div className="w-14 h-14 rounded-full bg-blue-500/20 backdrop-blur-sm flex items-center justify-center mb-3 transition-all duration-300 border border-blue-500/30">
                             {icon}
                           </div>
-                          <h4 className="text-gray-200 font-medium group-hover:text-white transition-colors">{link.label}</h4>
-                          <div className="mt-2 px-3 py-1 bg-gray-800/50 group-hover:bg-blue-900/50 rounded-full text-xs text-gray-400 group-hover:text-blue-200 transition-all">
+                          <h4 className="text-white font-medium transition-colors">{link.label}</h4>
+                          <div className="mt-2 px-3 py-1 bg-black/30 border border-blue-500/20 rounded-full text-xs text-blue-300 transition-all">
                             Explore Data
                           </div>
                         </div>
@@ -1432,9 +1435,9 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
               </div>
 
               {/* Resource description with icon */}
-              <div className="mt-8 p-4 border border-blue-900/20 bg-blue-900/5 rounded-xl flex items-start">
+              <div className="mt-8 p-4 border border-gray-800/50 bg-black/30 rounded-xl flex items-start">
                 <div className="flex-shrink-0 mr-3 mt-1">
-                  <div className="w-8 h-8 rounded-full bg-blue-900/30 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30">
                     <FaInfoCircle className="text-blue-400" />
                   </div>
                 </div>
