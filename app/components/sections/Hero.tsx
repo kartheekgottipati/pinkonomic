@@ -71,7 +71,7 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/teleportapp"
-                className="px-6 py-3 bg-pink-500 rounded-full text-white font-medium shadow-lg shadow-pink-500/20 hover:shadow-pink-500/40 transition-all flex items-center gap-2"
+                className="px-6 py-3 bg-pink-500 hover:bg-pink-600 rounded-full text-white font-medium shadow-md shadow-pink-500/10 hover:shadow-pink-500/30 transition-all flex items-center gap-2"
               >
                 <FaRocket size={16} /> Bridge Tokens
               </Link>
@@ -79,7 +79,7 @@ const Hero = forwardRef<HTMLDivElement>((props, ref) => (
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/pinkiverse"
-                className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-full text-white font-medium border border-gray-700 transition-colors flex items-center gap-2"
+                className="px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-full text-white font-medium border border-gray-700 transition-all flex items-center gap-2"
               >
                 <FaGamepad size={16} /> Play Games
               </Link>
