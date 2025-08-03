@@ -837,7 +837,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
 
                 <div className="bg-black/40 p-3 rounded-lg mb-4">
                   <div className="text-sm text-gray-400 mb-1">Supply Reduction</div>
-                  <div className="text-3xl font-bold text-pink-400">90.0M</div>
+                  <div className="text-3xl font-bold text-pink-400">{formatBurnedAmount(burnedAmount)}</div>
                   <div className="flex items-center justify-between">
                     <div className="text-pink-400 text-sm">PINK burned</div>
                     <div className="text-xs px-2 py-0.5 rounded-full bg-pink-900/40 text-pink-300">3.9% of total</div>
