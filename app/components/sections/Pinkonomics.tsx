@@ -272,7 +272,7 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                         animate={{ scale: [1, 1.02, 1] }}
                         transition={{ duration: 3, repeat: Infinity }}
                       >
-                        90.0M
+                        {(burnedAmount / 1_000_000).toFixed(1)}M
                       </motion.div>
                       <div className="absolute top-1 right-0 flex flex-col items-end">
                         <div className="text-xs text-gray-400">PINK tokens</div>
