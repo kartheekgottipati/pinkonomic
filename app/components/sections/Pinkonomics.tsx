@@ -276,7 +276,9 @@ const Pinkonomics = forwardRef<HTMLDivElement>((props, ref) => {
                       </motion.div>
                       <div className="absolute top-1 right-0 flex flex-col items-end">
                         <div className="text-xs text-gray-400">PINK tokens</div>
-                        <div className="text-xs text-pink-500 font-medium mt-0.5 bg-pink-900/20 px-2 py-0.5 rounded-md">≈ ${((burnedAmount / 1000000) * 0.00274).toFixed(1)}M value</div>
+                        <div className="text-xs text-pink-500 font-medium mt-0.5 bg-pink-900/20 px-2 py-0.5 rounded-md">
+                          ≈ ${((burnedAmount / 1000000) * (marketData?.price ?? 0)).toFixed(1)}M value
+                        </div>
                       </div>
                     </div>
 
