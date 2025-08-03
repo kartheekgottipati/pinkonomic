@@ -1,54 +1,160 @@
 import { forwardRef } from "react";
-import { FaTelegram, FaTwitter, FaReddit, FaDiscord } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaTelegram, FaTwitter, FaReddit, FaDiscord, FaUsers } from "react-icons/fa";
 import { PiWaveSquareBold } from "react-icons/pi";
 
+interface SocialPlatform {
+  name: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  url: string;
+  color: string;
+}
 
-const socials = [
-  { name: "Telegram", icon: FaTelegram, url: "https://t.me/PINKonomic" },
-  { name: "Twitter", icon: FaTwitter, url: "https://x.com/pinkonomic" },
-  { name: "Reddit", icon: FaReddit, url: "https://www.reddit.com/r/pinkonomic/" },
-  { name: "Warpcast", icon: PiWaveSquareBold, url: "https://warpcast.com/pinkonomic" },
-  { name: "Discord", icon: FaDiscord, url: "https://discord.com/invite/Hn7xKSxZPb" }
+const socials: SocialPlatform[] = [
+  {
+    name: "Telegram",
+    icon: FaTelegram,
+    url: "https://t.me/PINKonomic",
+    color: "from-blue-500/80 to-blue-600/80"
+  },
+  {
+    name: "Twitter",
+    icon: FaTwitter,
+    url: "https://x.com/pinkonomic",
+    color: "from-sky-500/80 to-sky-600/80"
+  },
+  {
+    name: "Reddit",
+    icon: FaReddit,
+    url: "https://www.reddit.com/r/pinkonomic/",
+    color: "from-orange-500/80 to-orange-600/80"
+  },
+  {
+    name: "Warpcast",
+    icon: PiWaveSquareBold,
+    url: "https://warpcast.com/pinkonomic",
+    color: "from-purple-500/80 to-purple-600/80"
+  },
+  {
+    name: "Discord",
+    icon: FaDiscord,
+    url: "https://discord.com/invite/Hn7xKSxZPb",
+    color: "from-indigo-500/80 to-indigo-600/80"
+  }
 ];
 
 const Socials = forwardRef<HTMLDivElement>((props, ref) => (
   <section
     id="socials"
     ref={ref}
-    className="relative py-24 bg-black"
+    className="relative py-24 bg-black overflow-hidden"
   >
-
+    {/* Background gradients */}
     <div className="absolute inset-0 bg-gradient-to-b from-gray-950 to-black -z-10"></div>
 
-    <div className="container mx-auto px-4">
+    {/* Subtle glow effects */}
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-pink-500/5 blur-[150px] -z-5"></div>
 
-      <div className="mb-16">
-        <h2 className="text-4xl font-bold text-white text-center">
-          Social <span className="text-pink-500">Media</span>
+    {/* Animated background particles */}
+    {[...Array(8)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute w-1 h-1 rounded-full bg-pink-500/20"
+        style={{
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+        }}
+        animate={{
+          y: [0, -40, 0],
+          opacity: [0.2, 0.5, 0.2],
+        }}
+        transition={{
+          duration: 5 + Math.random() * 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: Math.random() * 2,
+        }}
+      />
+    ))}
+
+    <div className="container mx-auto px-4 max-w-6xl">
+      {/* Section header */}
+      <motion.div
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+      >
+        <div className="inline-flex items-center justify-center mb-4 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">
+          <FaUsers className="text-pink-400 mr-2" size={14} />
+          <span className="text-sm text-pink-300 font-medium">COMMUNITY</span>
+        </div>
+
+        <h2 className="text-4xl md:text-5xl font-bold text-white">
+          Connect with <span className="text-pink-500">Us</span>
         </h2>
-      </div>
 
-      <div className="flex flex-wrap justify-center gap-10 md:gap-16">
+        <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+          Join our growing community across these platforms
+        </p>
+      </motion.div>
+
+      {/* Social platforms grid */}
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
         {socials.map((social, index) => {
           const Icon = social.icon;
           return (
-            <a
+            <motion.a
               key={index}
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col items-center"
+              className="group relative overflow-hidden rounded-2xl flex flex-col items-center justify-center py-8 px-4 backdrop-blur-sm border border-gray-800/50 hover:border-pink-500/30 transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{
+                scale: 1.03,
+                transition: { duration: 0.2 }
+              }}
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-gradient-to-b from-gray-800 to-gray-900 border border-gray-700 group-hover:border-pink-500 transition-colors duration-300">
-                <Icon className="text-3xl md:text-4xl text-gray-300 group-hover:text-pink-400 transition-colors duration-300" />
+              {/* Background gradient for each social platform */}
+              <div className={`absolute inset-0 bg-gradient-to-b ${social.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+
+              <div className="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-to-b from-gray-800/80 to-gray-900/80 backdrop-filter backdrop-blur-sm border border-gray-700/50 shadow-lg group-hover:border-white/20 transition-all duration-300 mb-4">
+                <Icon className="text-4xl text-white/80 group-hover:text-white transition-all duration-300" />
               </div>
-              <span className="mt-3 text-gray-400 group-hover:text-pink-400 transition-colors duration-300 font-medium">
+
+              <h3 className="text-xl font-semibold text-white">
                 {social.name}
-              </span>
-            </a>
+              </h3>
+
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </motion.a>
           );
         })}
-      </div>
+      </motion.div>
+
+      {/* Engagement prompt */}
+      <motion.div
+        className="mt-16 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.3 }}
+      >
+        <p className="text-gray-400 italic">
+          "Stay connected for exclusive updates, events, and community contests"
+        </p>
+      </motion.div>
     </div>
   </section>
 ));
