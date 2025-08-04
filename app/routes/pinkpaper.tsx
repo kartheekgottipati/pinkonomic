@@ -93,7 +93,6 @@ const PinkPaper = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    console.log(`Scrolling to section: ${sectionId}`);
     const ref = sectionRefs.current[sectionId];
 
     if (ref && ref.current) {
