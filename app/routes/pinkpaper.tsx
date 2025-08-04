@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, type RefObject } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PinkonomicsChart from "~/components/PinkonomicsChart";
 import ParachainPointsTable from "~/components/ParachainPointsTable";
 import { FaDiscord, FaTelegram, FaTwitter, FaBook } from "react-icons/fa";
 import { Link } from "react-router";
+import pinkLogo from "~/images/brandassets/pink_transparent.svg";
 
 const sections = [
   { id: "intro", title: "Introduction", icon: "📌" },
@@ -23,16 +24,15 @@ const PinkPaper = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-
-  // Using createRef for section elements
-  const sectionRefs = useRef<Record<string, React.RefObject<HTMLElement | null>>>({});
+  // Using useRef with an object initialized with section ids
+  const sectionRefs = useRef<Record<string, React.RefObject<HTMLElement | null>>>(
+    sections.reduce((acc, section) => {
+      acc[section.id] = React.createRef<HTMLElement>();
+      return acc;
+    }, {} as Record<string, React.RefObject<HTMLElement | null>>)
+  );
 
   useEffect(() => {
-    // Initialize section refs on component mount
-    sections.forEach((section) => {
-      sectionRefs.current[section.id] = React.createRef<HTMLElement>();
-    });
-
     // Set initial active section after a brief delay
     setTimeout(() => {
       handleScroll();
@@ -97,7 +97,7 @@ const PinkPaper = () => {
 
     if (ref && ref.current) {
       const element = ref.current;
-      const offset = 100; // Adjust for header
+      const offset = 120; // Increased offset to account for header and some padding
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
 
       window.scrollTo({
@@ -109,9 +109,8 @@ const PinkPaper = () => {
       setActiveSection(sectionId);
       // Close mobile nav if open
       setShowMobileNav(false);
-    } else {
-      console.warn(`Could not find ref for section: ${sectionId}`);
     }
+    // Removed console.warn - silently fail or implement proper error handling if needed
   };
 
   return (
@@ -151,12 +150,12 @@ const PinkPaper = () => {
 
         <div className="container mx-auto px-6 py-4 flex justify-between items-center relative">
 
-          <Link to="/" className="text-2xl font-bold hover:text-pink-400 transition-all relative z-10">
-            <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent font-extrabold">PINK</span>
+          <Link to="/" className="text-2xl font-bold text-pink-500 hover:text-pink-400 transition-all relative z-10">
+            <span className="font-extrabold">PINK</span>
           </Link>
 
           <button
-            className="lg:hidden relative z-10 bg-gradient-to-br from-white/10 to-pink-50/10 p-3 rounded-lg text-pink-400 backdrop-blur-md border border-white/20"
+            className="lg:hidden relative z-10 bg-black/50 p-3 rounded-lg text-pink-500 backdrop-blur-md border border-white/20"
             onClick={() => setShowMobileNav(!showMobileNav)}
           >
             <motion.div
@@ -197,7 +196,7 @@ const PinkPaper = () => {
 
             <div className="relative z-10 flex flex-col h-full">
               <div className="flex justify-between items-center p-6 border-b border-white/10">
-                <div className="text-2xl font-bold bg-gradient-to-r from-pink-300 to-purple-300 bg-clip-text text-transparent">
+                <div className="text-2xl font-bold text-pink-500">
                   Pink Paper
                 </div>
                 <motion.button
@@ -205,7 +204,7 @@ const PinkPaper = () => {
                   onClick={() => setShowMobileNav(false)}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <div className="bg-gradient-to-br from-black/40 to-black/60 hover:from-black/50 hover:to-black/70 p-3 rounded-full text-pink-300">
+                  <div className="bg-black/50 hover:bg-black/70 p-3 rounded-full text-pink-500">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -225,13 +224,13 @@ const PinkPaper = () => {
                       <motion.button
                         onClick={() => scrollToSection(section.id)}
                         className={`flex items-center w-full p-4 rounded-xl text-left transition-all ${activeSection === section.id
-                          ? 'bg-gradient-to-br from-white/10 to-pink-200/5 backdrop-blur-md text-pink-200 border border-white/20'
+                          ? 'bg-black/50 text-pink-500 border border-pink-500/30'
                           : 'text-gray-300 hover:bg-white/5 hover:border-white/10 hover:border hover:text-white'
                           }`}
                         whileHover={{ x: 5 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        <span className={`text-2xl mr-4 ${activeSection === section.id ? 'text-pink-300' : 'text-gray-400'}`}>{section.icon}</span>
+                        <span className={`text-2xl mr-4 ${activeSection === section.id ? 'text-pink-500' : 'text-gray-400'}`}>{section.icon}</span>
                         <span className="text-xl font-medium">{section.title}</span>
                       </motion.button>
                     </motion.li>
@@ -249,7 +248,7 @@ const PinkPaper = () => {
                     whileHover={{ y: -5, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <div className="bg-gradient-to-br from-black/30 to-black/50 hover:from-pink-500/20 hover:to-pink-500/40 p-4 rounded-full text-pink-300">
+                    <div className="bg-black/50 hover:bg-pink-900/50 p-4 rounded-full text-pink-500">
                       <FaDiscord size={24} />
                     </div>
                   </motion.a>
@@ -261,7 +260,7 @@ const PinkPaper = () => {
                     whileHover={{ y: -5, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <div className="bg-gradient-to-br from-black/30 to-black/50 hover:from-pink-500/20 hover:to-pink-500/40 p-4 rounded-full text-pink-300">
+                    <div className="bg-black/50 hover:bg-pink-900/50 p-4 rounded-full text-pink-500">
                       <FaTelegram size={24} />
                     </div>
                   </motion.a>
@@ -273,7 +272,7 @@ const PinkPaper = () => {
                     whileHover={{ y: -5, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <div className="bg-gradient-to-br from-black/30 to-black/50 hover:from-pink-500/20 hover:to-pink-500/40 p-4 rounded-full text-pink-300">
+                    <div className="bg-black/50 hover:bg-pink-900/50 p-4 rounded-full text-pink-500">
                       <FaTwitter size={24} />
                     </div>
                   </motion.a>
@@ -287,26 +286,32 @@ const PinkPaper = () => {
 
       <main className="relative z-10 pt-20 w-full">
         <div className="container mx-auto pb-20">
-          <div className="lg:flex lg:gap-8 lg:min-h-screen relative">
+          <div className="lg:flex lg:gap-8 relative">
 
-            <div className="hidden lg:block lg:sticky lg:top-0 w-72 xl:w-80 h-screen overflow-y-auto z-30">
-              {/* Sticky sidebar that properly aligns with content */}
-              <div className="h-full pt-24 pb-6 flex flex-col"
+            <div className="hidden lg:block lg:relative w-72 xl:w-80 z-30">
+              {/* Fixed sidebar with absolute positioning */}
+              <div className="fixed py-6 flex flex-col"
                 style={{
-                  filter: 'drop-shadow(0px 0px 20px rgba(0,0,0,0.2))'
+                  filter: 'drop-shadow(0px 0px 20px rgba(0,0,0,0.2))',
+                  width: 'inherit',
+                  maxWidth: '20rem',
+                  top: '80px'
                 }}>
 
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="relative flex-1 flex flex-col"
+                  className="relative flex flex-col"
+                  style={{
+                    height: 'calc(100vh - 120px)'
+                  }}
                 >
                   {/* Animated glow effect */}
                   {/* Removed animated glow effect */}
 
                   <div className="bg-gradient-to-br from-white/10 to-white/5 p-[2px] rounded-2xl backdrop-blur-xl border border-white/10 flex-1 flex flex-col">
-                    <div className="bg-gradient-to-b from-black/30 to-black/40 backdrop-blur-xl rounded-2xl p-5 overflow-hidden relative flex-1 flex flex-col">
+                    <div className="bg-gradient-to-b from-black/30 to-black/40 backdrop-blur-xl rounded-2xl p-5 relative flex-1 flex flex-col overflow-hidden">
                       {/* Decorative background patterns */}
                       <div className="absolute inset-0 opacity-10">
                         <div className="absolute inset-0"
@@ -317,40 +322,26 @@ const PinkPaper = () => {
                         ></div>
                       </div>
 
-                      <div className="relative z-10 flex-1 flex flex-col">
+                      <div className="relative z-10 flex flex-col h-full">
                         <div className="flex items-center mb-4">
-                          <div className="w-7 h-7 bg-gradient-to-br from-pink-300 to-purple-400 rounded-full p-[2px] mr-2 border border-white/10">
-                            <div className="bg-black/40 backdrop-blur-md w-full h-full rounded-full flex items-center justify-center">
-                              <div
-                                className="w-2 h-2 bg-pink-300 rounded-full opacity-80"
-                              ></div>
-                            </div>
+                          <div className="w-7 h-7 bg-pink-500 rounded-full mr-2 border border-white/10 flex items-center justify-center">
+                            <div className="w-3 h-3 bg-white rounded-full opacity-80"></div>
                           </div>
-                          <h3 className="text-lg font-bold bg-gradient-to-r from-pink-200 to-purple-200 bg-clip-text text-transparent">
+                          <h3 className="text-lg font-bold text-pink-500">
                             Table of Contents
                           </h3>
                         </div>
 
-                        <nav className="space-y-1.5 relative flex-1">
-                          {/* Animated highlight line */}
-                          <motion.div
-                            className="absolute left-0 w-1.5 bg-gradient-to-b from-pink-300 to-purple-400 rounded-full"
-                            animate={{
-                              top: sections.findIndex(s => s.id === activeSection) * 36, // Adjusted for smaller buttons
-                              height: 36,
-                              opacity: 1
-                            }}
-                            initial={{ opacity: 0 }}
-                            transition={{ duration: 0.4, ease: "easeOut" }}
-                          />
+                        <nav className="flex flex-col gap-1.5 relative flex-1 overflow-y-auto pr-2" style={{ maxHeight: 'calc(100vh - 240px)' }}>
+                          {/* Removed animated highlight line */}
 
                           {sections.map((section, index) => (
                             <motion.button
                               key={section.id}
                               onClick={() => scrollToSection(section.id)}
-                              className={`flex items-center w-full py-2 px-3 rounded-xl text-left transition-all ${activeSection === section.id
-                                ? 'bg-gradient-to-r from-white/5 to-pink-500/10 text-pink-200 border border-white/10 pl-4'
-                                : 'text-gray-200 hover:bg-white/5 hover:text-pink-100 hover:pl-4 hover:border hover:border-white/5'
+                              className={`flex items-center w-full h-9 py-2 px-3 rounded-xl text-left transition-all ${activeSection === section.id
+                                ? 'bg-pink-500/10 text-pink-500 border border-pink-500/30 pl-4'
+                                : 'text-gray-200 hover:bg-white/5 hover:text-pink-500 hover:pl-4 hover:border hover:border-white/5'
                                 }`}
                               whileHover={{ x: 3 }}
                               whileTap={{ scale: 0.98 }}
@@ -367,7 +358,7 @@ const PinkPaper = () => {
                               transition={{ delay: index * 0.05 + 0.5 }}
                             >
                               <motion.span
-                                className={`text-xl mr-2 ${activeSection === section.id ? 'text-pink-300' : 'text-gray-300'}`}
+                                className={`text-xl mr-2 ${activeSection === section.id ? 'text-pink-500' : 'text-gray-300'}`}
                                 animate={activeSection === section.id ? {
                                   scale: 1.1,
                                   y: [0, -1, 0]
@@ -399,7 +390,7 @@ const PinkPaper = () => {
                             className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-pink-500/40 to-transparent"
                           />
 
-                          <h3 className="text-sm font-medium bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mb-3">Join the Community</h3>
+                          <h3 className="text-sm font-medium text-pink-500 mb-3">Join the Community</h3>
                           <div className="flex space-x-3 justify-center">
                             <motion.a
                               href="https://discord.gg/pink"
@@ -409,7 +400,7 @@ const PinkPaper = () => {
                               whileHover={{ y: -3, scale: 1.1 }}
                               whileTap={{ scale: 0.95 }}
                             >
-                              <div className="bg-gray-900 hover:bg-gray-800 p-2 rounded-full text-pink-400">
+                              <div className="bg-gray-900 hover:bg-gray-800 p-2 rounded-full text-pink-500">
                                 <FaDiscord size={18} />
                               </div>
                             </motion.a>
@@ -421,7 +412,7 @@ const PinkPaper = () => {
                               whileHover={{ y: -3, scale: 1.1 }}
                               whileTap={{ scale: 0.95 }}
                             >
-                              <div className="bg-gray-900 hover:bg-gray-800 p-2 rounded-full text-pink-400">
+                              <div className="bg-gray-900 hover:bg-gray-800 p-2 rounded-full text-pink-500">
                                 <FaTelegram size={18} />
                               </div>
                             </motion.a>
@@ -433,7 +424,7 @@ const PinkPaper = () => {
                               whileHover={{ y: -3, scale: 1.1 }}
                               whileTap={{ scale: 0.95 }}
                             >
-                              <div className="bg-gray-900 hover:bg-gray-800 p-2 rounded-full text-pink-400">
+                              <div className="bg-gray-900 hover:bg-gray-800 p-2 rounded-full text-pink-500">
                                 <FaTwitter size={18} />
                               </div>
                             </motion.a>
@@ -484,7 +475,7 @@ const PinkPaper = () => {
                     </div>
 
                     <motion.h1
-                      className="text-6xl sm:text-7xl md:text-9xl font-black bg-gradient-to-r from-pink-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent pb-4 tracking-tighter mt-16 relative z-10"
+                      className="text-6xl sm:text-7xl md:text-9xl font-black bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent pb-4 tracking-tighter mt-16 relative z-10"
                       initial={{ opacity: 0, y: -30, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
@@ -508,7 +499,7 @@ const PinkPaper = () => {
                     />
 
                     <motion.p
-                      className="text-2xl md:text-3xl text-pink-100 w-full mx-auto mt-8 leading-relaxed font-light"
+                      className="text-2xl md:text-3xl text-gray-200 w-full mx-auto mt-8 leading-relaxed font-light"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8, duration: 0.8 }}
@@ -546,19 +537,19 @@ const PinkPaper = () => {
                                 </div>
                               </div>
 
-                              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-pink-200 to-purple-200 bg-clip-text text-transparent">
+                              <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                                 Welcome to PINK
                               </h2>
                             </div>
 
-                            <p className="text-pink-100 leading-relaxed text-xl mb-6">
+                            <p className="text-gray-200 leading-relaxed text-xl mb-6">
                               This document outlines the vision, tokenomics, and roadmap of $PINK - the meme community
                               for the Polkadot ecosystem.
                             </p>
 
                             <div className="bg-gradient-to-br from-white/5 to-pink-500/10 p-6 rounded-xl border border-white/10 text-gray-200 text-lg backdrop-blur-sm">
                               Before diving into the details, remember that $PINK is for
-                              <span className="text-pink-300 font-medium"> entertainment purposes only</span>, with no formal team or roadmap - just an open community of
+                              <span className="text-pink-500 font-medium"> entertainment purposes only</span>, with no formal team or roadmap - just an open community of
                               volunteers spreading <span className="text-pink-200 font-medium">PINK vibes</span> across the ecosystem.
                             </div>
 
@@ -575,7 +566,7 @@ const PinkPaper = () => {
               <section
                 id="wtf-is-pink"
                 ref={sectionRefs.current["wtf-is-pink"]}
-                className="py-16 scroll-mt-20 relative"
+                className="py-16 scroll-mt-32 relative"
               >
                 {/* Decorative blur elements removed */}
 
@@ -592,7 +583,7 @@ const PinkPaper = () => {
                           🔍
                         </div>
                       </div>
-                      <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-pink-200 to-purple-300 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         WTF is PINK?
                       </h2>
                     </div>
@@ -605,7 +596,7 @@ const PinkPaper = () => {
                         </p>
 
                         <div className="my-6 border-l-4 border-pink-300/40 pl-6 py-2 bg-gradient-to-r from-pink-500/5 to-transparent rounded-r-lg">
-                          <p className="text-lg text-pink-100 italic">
+                          <p className="text-lg text-pink-200 italic">
                             PINK captures new mindshare by reinforcing the image that Polkadot is Pink, a color of positivity and
                             laughter. Once we capture mindshare around a simple ecosystem narrative, it becomes easier to discuss
                             Polkadot's compelling tech narratives.
@@ -616,18 +607,6 @@ const PinkPaper = () => {
                           Polkadot - and crypto more generally - needs simpler, more engaging narratives. Our space also
                           needs simple tech to allow for experimentation and fun to increase adoption.
                         </p>
-
-                        {/* Decorative pixel art */}
-                        <div className="absolute bottom-4 right-4 opacity-30">
-                          <div className="w-8 h-8 grid grid-cols-4">
-                            {[...Array(16)].map((_, i) => (
-                              <div
-                                key={i}
-                                className={`${Math.random() > 0.5 ? 'bg-pink-500' : 'bg-purple-500'} opacity-${Math.floor(Math.random() * 80) + 20}`}
-                              ></div>
-                            ))}
-                          </div>
-                        </div>
                       </div>
                     </div>
 
@@ -640,7 +619,7 @@ const PinkPaper = () => {
                         <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg text-xl mb-3 border border-white/5">
                           ✨
                         </div>
-                        <h3 className="text-xl font-medium text-pink-300 mb-2">Community</h3>
+                        <h3 className="text-xl font-medium text-pink-500 mb-2">Community</h3>
                         <p className="text-gray-400">Bringing together enthusiasts from across the Polkadot ecosystem</p>
                       </motion.div>
 
@@ -652,7 +631,7 @@ const PinkPaper = () => {
                         <div className="w-10 h-10 flex items-center justify-center bg-pink-900/40 rounded-lg text-xl mb-3">
                           🎮
                         </div>
-                        <h3 className="text-xl font-medium text-pink-300 mb-2">Games</h3>
+                        <h3 className="text-xl font-medium text-pink-500 mb-2">Games</h3>
                         <p className="text-gray-400">Fun, accessible games introducing new users to the ecosystem</p>
                       </motion.div>
 
@@ -664,7 +643,7 @@ const PinkPaper = () => {
                         <div className="w-10 h-10 flex items-center justify-center bg-pink-900/40 rounded-lg text-xl mb-3">
                           📈
                         </div>
-                        <h3 className="text-xl font-medium text-pink-300 mb-2">Growth</h3>
+                        <h3 className="text-xl font-medium text-pink-500 mb-2">Growth</h3>
                         <p className="text-gray-400">Creating narratives that expand Polkadot's reach and accessibility</p>
                       </motion.div>
                     </div>
@@ -675,7 +654,8 @@ const PinkPaper = () => {
 
               <section
                 id="pinkonomics"
-                className="py-16 scroll-mt-20 relative"
+                ref={sectionRefs.current["pinkonomics"]}
+                className="py-16 scroll-mt-32 relative"
               >
                 {/* Static decorative pattern - no animation */}
                 <div
@@ -702,7 +682,7 @@ const PinkPaper = () => {
                           📊
                         </div>
                       </motion.div>
-                      <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         $PINKonomics
                       </h2>
                     </div>
@@ -741,7 +721,7 @@ const PinkPaper = () => {
                           💎
                         </div>
                         <div>
-                          <h3 className="text-2xl font-medium text-pink-300">Total Supply</h3>
+                          <h3 className="text-2xl font-medium text-pink-500">Total Supply</h3>
                           <p className="text-3xl font-bold text-white mt-1">2,300,001,221 $PINK</p>
                         </div>
                       </div>
@@ -753,7 +733,8 @@ const PinkPaper = () => {
 
               <section
                 id="airdrop-tranches"
-                className="py-16 scroll-mt-20 relative"
+                ref={sectionRefs.current["airdrop-tranches"]}
+                className="py-16 scroll-mt-32 relative"
               >
                 {/* Background glow removed */}
 
@@ -777,14 +758,14 @@ const PinkPaper = () => {
                           🪂
                         </div>
                       </motion.div>
-                      <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-pink-400 via-fuchsia-400 to-purple-400 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         Airdrop Tranches
                       </h2>
                     </div>
 
                     <div className="bg-gradient-to-br from-pink-500/20 to-purple-500/20 p-[1px] rounded-2xl mb-10 overflow-hidden">
                       <div className="bg-gray-900/60 backdrop-blur-sm p-6 rounded-xl">
-                        <h3 className="text-2xl font-bold text-pink-300 mb-2">50% Airdrops</h3>
+                        <h3 className="text-2xl font-bold text-pink-500 mb-2">50% Airdrops</h3>
                         <p className="text-gray-300">
                           This is by far the largest category and supports PINK's core mission of sharing $PINK to as many
                           participants as possible across ecosystems.
@@ -800,7 +781,7 @@ const PinkPaper = () => {
                             1
                           </div>
                           <div className="pl-16 -mt-12">
-                            <h4 className="text-xl font-semibold text-pink-300 mb-3">
+                            <h4 className="text-xl font-semibold text-pink-500 mb-3">
                               Tranche 1: 15% Total Supply - PINKdrop [The Game]
                             </h4>
                             <div className="prose prose-lg prose-invert">
@@ -828,7 +809,7 @@ const PinkPaper = () => {
                           2
                         </div>
                         <div className="pl-16 -mt-12">
-                          <h4 className="text-xl font-semibold text-pink-300 mb-3">
+                          <h4 className="text-xl font-semibold text-pink-500 mb-3">
                             Tranche 2: 12.5% Total Supply - Parachain teams
                           </h4>
                           <div className="prose prose-lg prose-invert">
@@ -858,7 +839,8 @@ const PinkPaper = () => {
 
               <section
                 id="future-tranches"
-                className="py-16 scroll-mt-20 relative"
+                ref={sectionRefs.current["future-tranches"]}
+                className="py-16 scroll-mt-32 relative"
               >
                 {/* Decorative blur elements removed */}
 
@@ -882,7 +864,7 @@ const PinkPaper = () => {
                           🔮
                         </div>
                       </motion.div>
-                      <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         Future Tranches
                       </h2>
                     </div>
@@ -908,7 +890,8 @@ const PinkPaper = () => {
 
               <section
                 id="pools"
-                className="py-16 scroll-mt-20"
+                ref={sectionRefs.current["pools"]}
+                className="py-16 scroll-mt-32"
               >
                 <div className="w-full mx-auto">
                   <motion.div
@@ -921,7 +904,7 @@ const PinkPaper = () => {
                       <div className="w-12 h-12 flex items-center justify-center bg-pink-900/40 rounded-xl text-2xl">
                         💰
                       </div>
-                      <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         Pools & Treasury
                       </h2>
                     </div>
@@ -987,7 +970,8 @@ const PinkPaper = () => {
 
               <section
                 id="future"
-                className="py-16 scroll-mt-20"
+                ref={sectionRefs.current["future"]}
+                className="py-16 scroll-mt-32"
               >
                 <div className="w-full mx-auto">
                   <motion.div
@@ -997,15 +981,15 @@ const PinkPaper = () => {
                     transition={{ duration: 0.8 }}
                   >
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 flex items-center justify-center bg-pink-900/40 rounded-xl text-2xl">
+                      <div className="w-12 h-12 flex items-center justify-center bg-pink-500/20 rounded-xl text-2xl border border-pink-500/10">
                         🚀
                       </div>
-                      <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         The Future is $PINK
                       </h2>
                     </div>
 
-                    <div className="space-y-4 text-gray-300">
+                    <div className="space-y-4 text-gray-200">
                       <p>
                         While all of the above sounds great and has the designs of a potentially successful memecoin, $PINK plans to be
                         much more than that. $PINK aims to develop a sustainable community model, so community participants feel a part
@@ -1020,7 +1004,8 @@ const PinkPaper = () => {
 
               <section
                 id="pinkdrop-wont-stop"
-                className="py-16 scroll-mt-20"
+                ref={sectionRefs.current["pinkdrop-wont-stop"]}
+                className="py-16 scroll-mt-32"
               >
                 <div className="w-full mx-auto">
                   <motion.div
@@ -1030,15 +1015,15 @@ const PinkPaper = () => {
                     transition={{ duration: 0.8 }}
                   >
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 flex items-center justify-center bg-pink-900/40 rounded-xl text-2xl">
+                      <div className="w-12 h-12 flex items-center justify-center bg-pink-500/20 rounded-xl text-2xl border border-pink-500/10">
                         🎮
                       </div>
-                      <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         $PINKdrop Won't Stop
                       </h2>
                     </div>
 
-                    <div className="space-y-4 text-gray-300">
+                    <div className="space-y-4 text-gray-200">
                       <p>
                         The success and enjoyment of PINKdrop has been electric and there is an opportunity to promote even more pinkness
                         and positivity throughout the broader crypto ecosystem.
@@ -1067,7 +1052,8 @@ const PinkPaper = () => {
 
               <section
                 id="final-thoughts"
-                className="py-16 scroll-mt-20"
+                ref={sectionRefs.current["final-thoughts"]}
+                className="py-16 scroll-mt-32"
               >
                 <div className="w-full mx-auto">
                   <motion.div
@@ -1077,15 +1063,15 @@ const PinkPaper = () => {
                     transition={{ duration: 0.8 }}
                   >
                     <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 flex items-center justify-center bg-pink-900/40 rounded-xl text-2xl">
+                      <div className="w-12 h-12 flex items-center justify-center bg-pink-500/20 rounded-xl text-2xl border border-pink-500/10">
                         💭
                       </div>
-                      <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                      <h2 className="text-3xl md:text-4xl font-bold text-pink-500">
                         Final Thoughts
                       </h2>
                     </div>
 
-                    <div className="space-y-4 text-gray-300">
+                    <div className="space-y-4 text-gray-200">
                       <p>
                         What started as a way to try and bring some $PINKness back to Polkadot has fast become a thriving community
                         full of enthusiasts, dreamers, and builders.
@@ -1150,7 +1136,7 @@ const PinkPaper = () => {
                   >
                     <div className="w-full h-full bg-gradient-to-br from-pink-400 to-purple-500 rounded-full p-[3px]">
                       <div className="bg-gray-900 rounded-full w-full h-full flex items-center justify-center">
-                        <span className="text-3xl">🌸</span>
+                        <img src={pinkLogo} alt="Pink Logo" className="w-12 h-12" />
                       </div>
                     </div>
                   </motion.div>
@@ -1196,36 +1182,13 @@ const PinkPaper = () => {
                     </div>
                   </div>
 
-                  <p className="text-gray-400 text-sm">© 2024 Pinkonomic. All rights reserved.</p>
-                  <p className="text-gray-500 text-xs mt-2">Built with 💖 by the PINK community</p>
+                  <p className="text-gray-400 text-sm">© 2025 Pinkonomic. All rights unreserved.</p>
                 </div>
               </footer>
             </div>
           </div>
         </div>
       </main>
-
-      {/* Back to top button */}
-      <AnimatePresence>
-        {hasScrolled && (
-          <motion.button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 right-8 bg-gradient-to-br from-pink-500/80 to-purple-500/80 p-[1px] rounded-full shadow-lg shadow-pink-500/20 z-50"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.2 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <div className="bg-gray-900/90 backdrop-blur-md p-3 rounded-full text-pink-300">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-              </svg>
-            </div>
-          </motion.button>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
