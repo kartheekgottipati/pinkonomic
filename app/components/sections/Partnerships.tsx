@@ -7,6 +7,12 @@ import evrlootIcon from "~/images/partnerships/evrloot-icon-color.svg";
 import playtgeIcon from "~/images/partnerships/playtge-icon.png";
 import polkadotIconPink from "~/images/partnerships/polkadot-icon-pink.svg";
 import moonbeamIconLight from "~/images/teleport/moonbeam-light.svg";
+import darwiniaBlack from "~/images/partnerships/darwinia-black.svg";
+import phalaIconGreen from "~/images/partnerships/phala_icon_grn.png";
+import bifrostIcon from "~/images/partnerships/bifrost.svg";
+import astarColor from "~/images/partnerships/astar_color.png";
+import crustNetwork from "~/images/partnerships/crust.jpg";
+import acalaLogoGradient from "~/images/partnerships/acala_logo_gradient.svg";
 
 interface Partner {
   name: string;
@@ -46,6 +52,42 @@ const partners: Partner[] = [
     link: "https://moonbeam.network",
     description: "Smart contract parachain"
   },
+  {
+    name: "Darwinia",
+    image: darwiniaBlack,
+    link: "https://darwinia.network",
+    description: "Cross-chain bridge and NFT platform"
+  },
+  {
+    name: "Phala Network",
+    image: phalaIconGreen,
+    link: "https://phala.network",
+    description: "Privacy-preserving cloud computing"
+  },
+  {
+    name: "Bifrost",
+    image: bifrostIcon,
+    link: "https://bifrost.io",
+    description: "Liquid staking and DeFi platform"
+  },
+  {
+    name: "Astar Network",
+    image: astarColor,
+    link: "https://astar.network",
+    description: "Multi-chain dApp hub"
+  },
+  {
+    name: "Crust Network",
+    image: crustNetwork,
+    link: "https://crust.network",
+    description: "Decentralized storage network"
+  },
+  {
+    name: "Acala",
+    image: acalaLogoGradient,
+    link: "https://acala.network",
+    description: "DeFi hub and stablecoin platform"
+  }
 ];
 
 const Partnerships = forwardRef<HTMLDivElement>((props, ref) => (
