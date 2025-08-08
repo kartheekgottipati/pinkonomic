@@ -8,7 +8,8 @@ import {
   FaHandshake,
   FaShareAlt,
   FaExchangeAlt,
-  FaImage
+  FaImage,
+  FaWallet
 } from "react-icons/fa";
 import { Sidebar, MobileNav } from "~/components/Navigation";
 import Hero from "~/components/sections/Hero";
@@ -19,6 +20,7 @@ import Socials from "~/components/sections/Socials";
 import Pinkonomics from "~/components/sections/Pinkonomics";
 import Exchanges from "~/components/sections/Exchanges";
 import NFTSection from "~/components/sections/NFTSection";
+import Wallets from "~/components/sections/Wallets";
 import Footer from "~/components/Footer";
 import type { SectionItem } from "~/types";
 
@@ -31,6 +33,7 @@ const sections: SectionItem[] = [
   { id: "nft", label: "NFT", icon: <FaImage size={20} /> },
   { id: "teleport", label: "Teleport", icon: <FaRocket size={20} /> },
   { id: "exchanges", label: "Exchanges", icon: <FaExchangeAlt size={20} /> },
+  { id: "wallets", label: "Wallets", icon: <FaWallet size={20} /> },
   { id: "partnerships", label: "Partnerships", icon: <FaHandshake size={20} /> },
   { id: "socials", label: "Socials", icon: <FaShareAlt size={20} /> },
 ];
@@ -80,11 +83,14 @@ export default function Home() {
             {/* 6. Exchanges Section */}
             <Exchanges ref={sectionRefs[5]} />
 
-            {/* 7. Partnerships Section */}
-            <Partnerships ref={sectionRefs[6]} />
+            {/* 7. Wallets Section */}
+            <Wallets ref={sectionRefs[6]} />
 
-            {/* 8. Socials Section */}
-            <Socials ref={sectionRefs[7]} />
+            {/* 8. Partnerships Section */}
+            <Partnerships ref={sectionRefs[7]} />
+
+            {/* 9. Socials Section */}
+            <Socials ref={sectionRefs[8]} />
 
             {/* Footer */}
             <Footer />
