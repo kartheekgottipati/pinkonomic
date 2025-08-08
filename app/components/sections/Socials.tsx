@@ -7,39 +7,33 @@ interface SocialPlatform {
   name: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   url: string;
-  color: string;
 }
 
 const socials: SocialPlatform[] = [
   {
     name: "Telegram",
     icon: FaTelegram,
-    url: "https://t.me/PINKonomic",
-    color: "from-blue-500/80 to-blue-600/80"
+    url: "https://t.me/PINKonomic"
   },
   {
     name: "Twitter",
     icon: FaTwitter,
-    url: "https://x.com/pinkonomic",
-    color: "from-sky-500/80 to-sky-600/80"
+    url: "https://x.com/pinkonomic"
   },
   {
     name: "Reddit",
     icon: FaReddit,
-    url: "https://www.reddit.com/r/pinkonomic/",
-    color: "from-orange-500/80 to-orange-600/80"
+    url: "https://www.reddit.com/r/pinkonomic/"
   },
   {
     name: "Warpcast",
     icon: PiWaveSquareBold,
-    url: "https://warpcast.com/pinkonomic",
-    color: "from-purple-500/80 to-purple-600/80"
+    url: "https://warpcast.com/pinkonomic"
   },
   {
     name: "Discord",
     icon: FaDiscord,
-    url: "https://discord.com/invite/Hn7xKSxZPb",
-    color: "from-indigo-500/80 to-indigo-600/80"
+    url: "https://discord.com/invite/Hn7xKSxZPb"
   }
 ];
 
@@ -126,8 +120,8 @@ const Socials = forwardRef<HTMLDivElement>((props, ref) => (
                 transition: { duration: 0.2 }
               }}
             >
-              {/* Background gradient for each social platform */}
-              <div className={`absolute inset-0 bg-gradient-to-b ${social.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+              {/* Background gradient for all social platforms */}
+              <div className="absolute inset-0 bg-gradient-to-b from-pink-500/20 to-purple-500/20 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
 
               <div className="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-to-b from-gray-800/80 to-gray-900/80 backdrop-filter backdrop-blur-sm border border-gray-700/50 shadow-lg group-hover:border-white/20 transition-all duration-300 mb-4">
                 <Icon className="text-4xl text-white/80 group-hover:text-white transition-all duration-300" />
